@@ -30,7 +30,7 @@ const TrustSection = () => {
               <span className="text-gradient">Your Control.</span>
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-light">
-              You remain in control at every step. We never touch your funds.
+              You remain in control at every step. We never touch your funds. <br />
               Our algos execute trades on your brokerage account with full transparency and security.
             </p>
           </div>

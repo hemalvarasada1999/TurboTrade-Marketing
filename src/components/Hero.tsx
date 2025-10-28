@@ -23,10 +23,10 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
+        <div className="max-w-5xl mx-auto space-y-8 animate-fade-in-up">
           <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-            Luxury is Time;{" "}
-            <span className="text-gradient glow-accent">Our Algos</span>{" "}
+            Luxury is Time;{" "} <br />
+            <span className="text-gradient">Our Algos</span>{" "}
             Give You Both.
           </h1>
           

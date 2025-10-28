@@ -13,7 +13,7 @@ const FinalCTA = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-            Work Less. Earn More.{" "}
+            Work Smart. Earn More.{" "} <br />
             <span className="text-gradient">Live Free.</span>
           </h2>
 
@@ -22,13 +22,7 @@ const FinalCTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-primary font-semibold px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-[var(--shadow-glow)] transition-all duration-300 group"
-            >
-              Start with a Demo
-              <PlayCircle className="ml-2 h-6 w-6 group-hover:scale-110 transition-transform" />
-            </Button>
+            {/* <Butt/ */}
             <Button
               size="lg"
               variant="outline"
@@ -39,21 +33,6 @@ const FinalCTA = () => {
             </Button>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="pt-12 grid grid-cols-3 gap-8 max-w-3xl mx-auto border-t border-border/50 mt-12">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">10K+</div>
-              <div className="text-sm text-muted-foreground">Active Investors</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">₹500Cr+</div>
-              <div className="text-sm text-muted-foreground">Assets Under Management</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">15%+</div>
-              <div className="text-sm text-muted-foreground">Average Annual Returns</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
