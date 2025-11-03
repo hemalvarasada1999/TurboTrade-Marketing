@@ -34,13 +34,20 @@ const Hero = () => {
             Build wealth the smarter way — without charts, stress, or sleepless nights.
           </p>
 
-          <div className="flex justify-center items-center pt-6">
+          <div className="flex justify-center items-center gap-4 pt-6">
             <Button
               size="lg"
-              className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-105 transition-all duration-300 group"
+              className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-105 transition-all duration-300"
             >
               Start Your Journey
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-primary hover:bg-primary hover:border-accent text-white hover:text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-105 transition-all duration-300"
+            >
+              Login to Dashboard
             </Button>
           </div>
         </div>
