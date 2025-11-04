@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { TrendingUp, Mail, FileText, Shield, ScrollText, RotateCcw, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -69,41 +70,41 @@ const Footer = () => {
 
                 {/* Links Grid */}
                 <div className="flex flex-col gap-2">
-                    <a
-                        href="/contact"
+                    <Link
+                        to="/contact"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <Mail className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Contact</span>
-                    </a>
-                    <a
-                        href="/disclaimer"
+                    </Link>
+                    <Link
+                        to="/disclaimer"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <FileText className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Disclaimer</span>
-                    </a>
-                    <a
-                        href="/privacy"
+                    </Link>
+                    <Link
+                        to="/privacy"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <Shield className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Privacy Policy</span>
-                    </a>
-                    <a
-                        href="/terms"
+                    </Link>
+                    <Link
+                        to="/terms"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <ScrollText className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Terms & Conditions</span>
-                    </a>
-                    <a
-                        href="/refund-policy"
+                    </Link>
+                    <Link
+                        to="/refund-policy"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <RotateCcw className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Refund Policy</span>
-                    </a>
+                    </Link>
                 </div>
 
             </div>
