@@ -1,8 +1,26 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUp } from "lucide-react";
 import heroImage from "@/assets/hero-yacht.jpg";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
+
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -29,7 +47,7 @@ const Hero = () => {
             <span className="text-gradient">Our Algos</span>{" "}
             Give You Both.
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto">
             Build wealth the smarter way — without charts, stress, or sleepless nights.
           </p>
@@ -39,7 +57,9 @@ const Hero = () => {
               size="lg"
               className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-105 transition-all duration-300"
             >
-              Start Your Journey
+              <Link to="/upcoming">
+                Start Your Journey
+              </Link>
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
@@ -47,7 +67,9 @@ const Hero = () => {
               size="lg"
               className="bg-primary hover:bg-primary hover:border-accent text-white hover:text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-105 transition-all duration-300"
             >
-              Login to Dashboard
+              <Link to="/upcoming">
+                Login to Dashboard
+              </Link>
             </Button>
           </div>
         </div>
@@ -59,6 +81,18 @@ const Hero = () => {
           <div className="w-1.5 h-3 bg-accent rounded-full mx-auto animate-pulse" />
         </div>
       </div>
+
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <Button
+          onClick={scrollToTop}
+          size="icon"
+          className="fixed bottom-8 right-8 rounded-full shadow-elegant hover:shadow-glow z-50"
+          aria-label="Back to top"
+        >
+          <ArrowUp className="h-5 w-5" />
+        </Button>
+      )}
     </section>
   );
 };

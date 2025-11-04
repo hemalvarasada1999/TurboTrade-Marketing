@@ -21,7 +21,7 @@ const TrustSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-primary/5">
+    <section className="py-24 bg-gradient-to-b from-background to-primary/5 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 space-y-4">

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FinalCTA = () => {
   return (
@@ -28,7 +29,9 @@ const FinalCTA = () => {
               variant="outline"
               className="border-2 border-primary hover:bg-primary hover:text-white px-10 py-7 text-lg rounded-full transition-all duration-300"
             >
-              Explore Strategies
+              <Link to="/upcoming">
+                Explore Strategies
+              </Link>
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -38,5 +41,6 @@ const FinalCTA = () => {
     </section>
   );
 };
+
 
 export default FinalCTA;
