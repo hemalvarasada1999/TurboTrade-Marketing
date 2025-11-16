@@ -102,8 +102,8 @@ const Footer = () => {
                         to="/refund-policy"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
-                        <RotateCcw className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
-                        <span>Refund Policy</span>
+                        {/* <RotateCcw className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" /> */}
+                        {/* <span>Refund Policy</span> */}
                     </Link>
                 </div>
 

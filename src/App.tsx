@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./components/Contact";
 import Privacy from "./pages/Privacy";
-import Disclaimer from "./pages/Disclaimer";
+import RiskDisclaimer from "./pages/Disclaimer";
 import TermsCondition from "./pages/TermsCondition";
 import RefundPolicy from "./pages/RefundPolicy";
 import Upcoming from "./pages/Upcoming";
@@ -33,10 +33,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="/disclaimer" element={<RiskDisclaimer />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<TermsCondition />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
+            {/* <Route path="/refund-policy" element={<RefundPolicy />} /> */}
             <Route path="/upcoming" element={<Upcoming />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
