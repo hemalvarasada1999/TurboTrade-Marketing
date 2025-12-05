@@ -29,9 +29,9 @@ const FinalCTA = () => {
               variant="outline"
               className="border-2 border-primary hover:bg-primary hover:text-white px-10 py-7 text-lg rounded-full transition-all duration-300"
             >
-              <Link to="/upcoming">
+              <a href="https://staging.turbotrade.ai/marketplace" target="_blank">
                 Explore Strategies
-              </Link>
+              </a>
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
