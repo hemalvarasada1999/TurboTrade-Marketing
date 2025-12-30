@@ -70,41 +70,41 @@ const Footer = () => {
 
                 {/* Links Grid */}
                 <div className="flex flex-col gap-2">
-                    <Link
-                        to="/contact"
+                    <a
+                        href="/contact"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <Mail className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Contact</span>
-                    </Link>
-                    <Link
-                        to="/disclaimer"
+                    </a>
+                    <a
+                        href="/disclaimer"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <FileText className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Disclaimer</span>
-                    </Link>
-                    <Link
-                        to="/privacy"
+                    </a>
+                    <a
+                        href="/privacy"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <Shield className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Privacy Policy</span>
-                    </Link>
-                    <Link
-                        to="/terms"
+                    </a>
+                    <a
+                        href="/terms"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         <ScrollText className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                         <span>Terms & Conditions</span>
-                    </Link>
-                    <Link
-                        to="/refund-policy"
+                    </a>
+                    <a
+                        href="/refund-policy"
                         className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                     >
                         {/* <RotateCcw className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" /> */}
                         {/* <span>Refund Policy</span> */}
-                    </Link>
+                    </a>
                 </div>
 
             </div>
