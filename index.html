@@ -3,27 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TurboTrade - Financial Freedom through Automated Investing</title>
-    <meta name="description" content="Build wealth the smarter way with our expert-built algo trading platform. Automated investing for retail investors seeking financial freedom." />
-    <meta name="author" content="TurboTrade" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <meta property="og:title" content="TurboTrade - Financial Freedom through Automated Investing" />
+    <!-- IMPORTANT: match OAuth app name exactly -->
+    <title>TurboTrade.ai - Financial Freedom through Automated Investing</title>
+    <meta name="application-name" content="TurboTrade.ai" />
+    <meta property="og:title" content="TurboTrade.ai - Financial Freedom through Automated Investing" />
+    <meta property="og:site_name" content="TurboTrade.ai" />
+
+    <meta name="description" content="Build wealth the smarter way with our expert-built algo trading platform. Automated investing for retail investors seeking financial freedom." />
+    <meta name="author" content="TurboTrade.ai" />
+
     <meta property="og:description" content="Build wealth the smarter way with our expert-built algo trading platform." />
     <meta property="og:type" content="website" />
-
     <meta name="twitter:card" content="summary_large_image" />
   </head>
 
   <body>
-    <div id="root"></div>
+    <!-- Static branding (Google can see without running JS) -->
+    <header style="padding:12px 16px;border-bottom:1px solid #e5e7eb;font-family:Poppins,system-ui;">
+      <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;">
+        <a href="https://www.turbotrade.ai/" style="font-weight:700;text-decoration:none;color:#111827;">
+          TurboTrade.ai
+        </a>
+        <nav style="display:flex;gap:16px;">
+          <a href="https://www.turbotrade.ai/privacy" style="text-decoration:none;color:#111827;">Privacy Policy</a>
+          <a href="https://www.turbotrade.ai/terms" style="text-decoration:none;color:#111827;">Terms</a>
+        </nav>
+      </div>
+    </header>
 
-    <!-- Static footer so Google can see it without running JS -->
-    <footer style="padding:16px;text-align:center">
-      <a href="https://www.turbotrade.ai/privacy">Privacy Policy</a>
-    </footer>
+    <div id="root"></div>
 
     <script type="module" src="/src/main.tsx"></script>
   </body>
