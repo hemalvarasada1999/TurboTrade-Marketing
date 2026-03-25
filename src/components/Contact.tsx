@@ -1,10 +1,6 @@
 import LegalPageLayout from "./LegalPageLayout";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const Contact = () => {
     return (
@@ -23,10 +19,10 @@ const Contact = () => {
                             <div>
                                 <h3 className="font-semibold text-foreground mb-1">Email</h3>
                                 <a
-                                    href="mailto:support@algowealth.com"
+                                    href="mailto:info@turbotrade.ai"
                                     className="text-muted-foreground hover:text-accent transition-colors"
                                 >
-                                    support@algowealth.com
+                                    info@turbotrade.ai
                                 </a>
                             </div>
                         </div>
@@ -42,10 +38,10 @@ const Contact = () => {
                             <div>
                                 <h3 className="font-semibold text-foreground mb-1">Phone</h3>
                                 <a
-                                    href="tel:+1234567890"
+                                    href="tel:+919321010161"
                                     className="text-muted-foreground hover:text-accent transition-colors"
                                 >
-                                    +1 (234) 567-890
+                                    +91 9321010161
                                 </a>
                             </div>
                         </div>
@@ -61,8 +57,9 @@ const Contact = () => {
                             <div>
                                 <h3 className="font-semibold text-foreground mb-1">Address</h3>
                                 <p className="text-muted-foreground">
-                                    123 Trading Street, Financial District<br />
-                                    New York, NY 10004, United States
+                                    1st floor, RK Complex, <br />
+                                    KSSIDC Compound, Indra Nagar, <br />
+                                    Electronic City Phase I, Bengaluru, Karnataka 560100
                                 </p>
                             </div>
                         </div>

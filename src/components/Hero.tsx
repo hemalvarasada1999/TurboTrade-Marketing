@@ -56,7 +56,7 @@ const Hero = () => {
               size="lg"
               className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-105 transition-all duration-300"
             >
-              <a href="https://staging.turbotrade.ai/auth/signup" target="_blank">
+              <a href="https://app.turbotrade.ai/auth/signup" target="_blank">
                 Start Your Journey
               </a>
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -66,7 +66,7 @@ const Hero = () => {
               size="lg"
               className="bg-primary hover:bg-primary hover:border-accent text-white hover:text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-[var(--shadow-glow)] hover:scale-105 transition-all duration-300"
             >
-              <a href="https://staging.turbotrade.ai/auth/login" target="_blank">
+              <a href="https://app.turbotrade.ai/auth/login" target="_blank">
                 Login to Dashboard
               </a>
             </Button>
