@@ -93,7 +93,7 @@ const Footer = () => {
                     </div>
 
                 </div>
-                <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4 px-4 md:px-0">
                     <p className="text-xs text-muted-foreground">
                         © 2024 TurboTrade.ai — Algorithmic trading involves risk. Past performance does not guarantee future results.
                     </p>

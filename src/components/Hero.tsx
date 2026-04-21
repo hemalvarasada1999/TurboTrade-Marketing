@@ -39,7 +39,7 @@ const Hero = () => {
   ];
 
   const CircuitChipIllustration = () => (
-    <div className="rounded-3xl bg-card shadow-2xl px-12 py-6 md:px-16 md:py-8 min-w-[380px] md:min-w-[600px]">
+    <div className="rounded-3xl bg-card shadow-2xl px-8 py-6 md:px-16 md:py-8 w-full max-w-[600px] mx-auto">
       <svg viewBox="0 0 600 340" className="w-full min-h-[320px] md:min-h-[400px]" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="goldenGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -127,7 +127,7 @@ const Hero = () => {
   );
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <section className="relative min-h-screen flex items-center justify-center py-20 lg:py-0 overflow-x-clip">
 
       <div className="absolute inset-0 bg-dot-grid opacity-50" />
 
@@ -145,16 +145,17 @@ const Hero = () => {
             No fear, no greed - just disciplined execution.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Button
               size="lg"
-              className="btn-light-trail bg-primary text-primary-foreground font-semibold text-base px-8 h-12"
+              asChild
+              className="btn-light-trail bg-primary text-primary-foreground font-semibold text-base px-8 h-12 w-full sm:w-auto"
             >
               <a href="https://app.turbotrade.ai/auth/signup" target="_blank">
                 Start Your Journey
               </a>
             </Button>
-            <Button variant="outline" size="lg" className="h-12 text-base border-primary text-foreground hover:bg-transparent">
+            <Button asChild variant="outline" size="lg" className="h-12 text-base border-primary text-foreground hover:bg-transparent w-full sm:w-auto">
               <a href="https://app.turbotrade.ai/auth/login" target="_blank">
                 Login to Dashboard
               </a>
