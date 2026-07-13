@@ -1,6 +1,6 @@
 import { TrendingUp, Mail, FileText, Shield, ScrollText, RotateCcw, Linkedin, Twitter, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
-import turbotrade from "/turbotrade-logo.png";
+import turbotrade from "/turbotrade.png";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();

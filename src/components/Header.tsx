@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import turbotrade from "/turbotrade-logo.png";
+import { Link } from "react-router-dom";
+import turbotrade from "/turbotrade.png";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -27,10 +28,10 @@ const Header = () => {
 
 
         <div className="hidden md:flex items-center gap-4">
-          <Button size="sm" className="btn-light-trail bg-primary text-primary-foreground font-semibold">
-            <a href="https://app.turbotrade.ai/auth/login" target="_blank">
+          <Button size="sm" asChild className="btn-light-trail bg-primary text-primary-foreground font-semibold">
+            <Link to="/coming-soon">
               Login
-            </a>
+            </Link>
           </Button>
         </div>
 
@@ -51,7 +52,11 @@ const Header = () => {
 
       {mobileOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-md border-t px-4 py-4 space-y-3">
-          <Button size="sm" className="w-full bg-primary text-primary-foreground">Log in</Button>
+          <Button size="sm" asChild className="w-full bg-primary text-primary-foreground">
+            <Link to="/coming-soon">
+              Log in
+            </Link>
+          </Button>
         </div>
       )}
     </header>

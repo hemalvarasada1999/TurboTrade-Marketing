@@ -38,6 +38,7 @@ const App = () => {
             <Route path="/terms" element={<TermsCondition />} />
             {/* <Route path="/refund-policy" element={<RefundPolicy />} /> */}
             <Route path="/upcoming" element={<Upcoming />} />
+            <Route path="/coming-soon" element={<Upcoming />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

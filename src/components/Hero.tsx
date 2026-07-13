@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUp } from "lucide-react";
-import turbotradeIcon from "/turbotrade.png"
+import { Link } from "react-router-dom";
+import turbotradeIcon from "/turbotrade.png";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -151,14 +152,14 @@ const Hero = () => {
               asChild
               className="btn-light-trail bg-primary text-primary-foreground font-semibold text-base px-8 h-12 w-full sm:w-auto"
             >
-              <a href="https://app.turbotrade.ai/auth/signup" target="_blank">
+              <Link to="/coming-soon">
                 Start Your Journey
-              </a>
+              </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="h-12 text-base border-primary text-foreground hover:bg-transparent w-full sm:w-auto">
-              <a href="https://app.turbotrade.ai/auth/login" target="_blank">
+              <Link to="/coming-soon">
                 Login to Dashboard
-              </a>
+              </Link>
             </Button>
           </div>
 

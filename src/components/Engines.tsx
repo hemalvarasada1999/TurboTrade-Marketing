@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const engines = [
   {
@@ -86,10 +87,10 @@ const Engines = () => (
       </div>
 
       <div className="text-center mt-12">
-        <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base px-8 h-12">
-          <a href="https://app.turbotrade.ai/marketplace">
+        <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base px-8 h-12">
+          <Link to="/coming-soon">
             Explore Strategies
-          </a>
+          </Link>
         </Button>
       </div>
     </div>
