@@ -1,56 +1,21 @@
-import { Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import LegalPageLayout from "@/components/LegalPageLayout";
 import { Card } from "@/components/ui/card";
-import Footer from "@/components/Footer";
 
 const TermsCondition = () => {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 relative">
-            {/* Background Pattern Overlay */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.08),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(30,58,138,0.05),transparent_50%)] pointer-events-none" />
-            <div className="relative z-10">
-                {/* Header */}
-                <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-                    <div className="container mx-auto px-4 py-4">
-                        <Link to="/" className="inline-flex items-center gap-2 text-slate-700 hover:text-amber-600 transition-colors">
-                            <ChevronLeft className="h-4 w-4" />
-                            <span className="font-semibold">Back to Home</span>
-                        </Link>
-                    </div>
-                </header>
-
-                {/* Hero Section */}
-                <section className="py-16 border-b border-slate-200">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-slate-900">
-                                Terms and <span className="text-amber-600">Conditions</span>
-                            </h1>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center text-slate-600 text-sm">
-                                <p>
-                                    <strong className="text-slate-800">Effective Date:</strong> 1st December, 2025
-                                </p>
-                                <span className="hidden sm:inline">•</span>
-                                <p>
-                                    <strong className="text-slate-800">Entity:</strong> EquityPulse Tech Private Limited
-                                </p>
-                                <span className="hidden sm:inline">•</span>
-                                <p>
-                                    <strong className="text-slate-800">Application:</strong> TurboTrade
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Content */}
-                <section className="py-16">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto space-y-12">
+        <LegalPageLayout
+            title={
+                <h1 className="text-2xl sm:text-3xl font-bold font-heading text-foreground mb-2">
+                    Terms and <span className="text-primary">Conditions</span>
+                </h1>
+            }
+            description="Effective Date: 1st December, 2025 | Entity: EquityPulse Tech Private Limited"
+        >
+            <div className="space-y-4">
                             {/* Introduction */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">Introduction</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">Introduction</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         Welcome to TurboTrade, a digital platform owned and operated by EquityPulse Tech Private Limited ("Company", "We", "Us", "Our").
                                     </p>
@@ -67,8 +32,8 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 1. Definitions */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">1. Definitions</h2>
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">1. Definitions</h2>
                                 <div className="prose max-w-none space-y-3 text-slate-700 leading-relaxed">
                                     <p>For the purposes of this document:</p>
                                     <p><strong className="text-slate-900">"Account"</strong> means the personalized account created by a User to access the Platform.</p>
@@ -82,9 +47,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 2. Scope and Nature of Services */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">2. Scope and Nature of Services</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">2. Scope and Nature of Services</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade is a <strong className="text-slate-900">technology-based investment and trading enablement platform</strong> that allows Investors to:
                                     </p>
@@ -108,9 +73,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 3. Eligibility */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">3. Eligibility</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">3. Eligibility</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>To use TurboTrade, you must:</p>
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>Be an individual of at least 18 years of age and legally competent under Indian law;</li>
@@ -126,9 +91,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 4. Account Registration and Access */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">4. Account Registration and Access</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">4. Account Registration and Access</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>Users must create an account on TurboTrade by providing valid details and completing the verification process.</li>
                                         <li>You are responsible for maintaining the confidentiality of your login credentials and all activity under your account.</li>
@@ -139,9 +104,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 5. Subscription and Fees */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">5. Subscription and Fees</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">5. Subscription and Fees</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>TurboTrade operates on a subscription-based model.</li>
                                         <li>Fees for strategies, analytics, or other premium features are displayed transparently on the Platform.</li>
@@ -153,9 +118,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 6. Use of Platform and Services */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">6. Use of Platform and Services</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">6. Use of Platform and Services</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>By using TurboTrade, you agree that you will:</p>
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>Use the Platform solely for lawful purposes;</li>
@@ -171,9 +136,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 7. Broker Integration */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">7. Broker Integration</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">7. Broker Integration</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade integrates with the customer's chosen SEBI-registered broker for trade execution. Orders are executed via secured API.
                                     </p>
@@ -187,9 +152,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 8. Data Collection and Privacy */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">8. Data Collection and Privacy</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">8. Data Collection and Privacy</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade collects and processes limited personal data necessary to provide services — such as name, contact details, trading account identifiers, and usage data.
                                     </p>
@@ -208,9 +173,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 9. Intellectual Property */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">9. Intellectual Property</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">9. Intellectual Property</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         All content, software, algorithms, designs, trademarks, and materials available on TurboTrade are the intellectual property of EquityPulse Tech Private Limited.
                                     </p>
@@ -230,9 +195,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 10. Platform Availability and Maintenance */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">10. Platform Availability and Maintenance</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">10. Platform Availability and Maintenance</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade strives to ensure uninterrupted availability. However, we do not guarantee continuous access or error-free operation.
                                     </p>
@@ -249,9 +214,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 11. No Financial Advice */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">11. No Financial Advice</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">11. No Financial Advice</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade facilitates algorithmic execution based on strategies chosen by the user. By using the platform, users acknowledge that all trading involves substantial risk and that TurboTrade does not provide individualized advice or assurances of profit. Users remain solely responsible for the outcomes of executed trades.
                                     </p>
@@ -268,9 +233,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 12. Limitation of Liability */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">12. Limitation of Liability</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">12. Limitation of Liability</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>To the fullest extent permitted by law:</p>
                                     <p>
                                         The Company, its directors, employees, and affiliates shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from:
@@ -289,9 +254,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 13. Indemnification */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">13. Indemnification</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">13. Indemnification</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         You agree to indemnify and hold harmless EquityPulse Tech Private Limited, its affiliates, officers, and employees from any claims, damages, or expenses (including legal fees) arising from:
                                     </p>
@@ -305,9 +270,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 14. Compliance with SEBI and Indian Laws */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">14. Compliance with SEBI and Indian Laws</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">14. Compliance with SEBI and Indian Laws</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade operates in compliance with applicable Indian laws and SEBI Research Analyst Regulations, 2014.
                                     </p>
@@ -321,9 +286,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 15. Communication and Notices */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">15. Communication and Notices</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">15. Communication and Notices</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>All communication from the Company shall be sent via official channels such as:</p>
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>The TurboTrade app or website notifications,</li>
@@ -337,9 +302,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 16. Termination */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">16. Termination</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">16. Termination</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>The Company reserves the right to terminate or suspend access to TurboTrade without prior notice in case of:</p>
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>Breach of Terms or applicable law,</li>
@@ -357,9 +322,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 17. Governing Law and Jurisdiction */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">17. Governing Law and Jurisdiction</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">17. Governing Law and Jurisdiction</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         These Terms are governed by and construed under the laws of India.
                                     </p>
@@ -370,9 +335,9 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 18. Amendments */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">18. Amendments</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">18. Amendments</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         The Company may revise these Terms from time to time to reflect changes in law, technology, or business operations.
                                     </p>
@@ -383,15 +348,15 @@ const TermsCondition = () => {
                             </Card>
 
                             {/* 19. Contact Information */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">19. Contact Information</h2>
+                            <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                                <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">19. Contact Information</h2>
                                 <div className="prose max-w-none space-y-3 text-slate-700 leading-relaxed">
                                     <p><strong className="text-slate-900">EquityPulse Tech Private Limited</strong></p>
                                     <p>
                                         <strong className="text-slate-900">Registered Office:</strong> RK Complex, Electronic City Phase-1, Bengaluru, Karnataka – 560100, India
                                     </p>
                                     <p>
-                                        <strong className="text-slate-900">Email:</strong> <a href="mailto:support@turbotrade.in" className="text-amber-600 hover:text-amber-700">support@turbotrade.in</a>
+                                        <strong className="text-slate-900">Email:</strong> <a href="mailto:inquiry@turbotrade.ai" className="text-amber-600 hover:text-amber-700">inquiry@turbotrade.ai</a>
                                     </p>
                                     <p>
                                         <strong className="text-slate-900">Website:</strong> <a href="https://turbotrade.in" className="text-amber-600 hover:text-amber-700" target="_blank" rel="noopener noreferrer">https://turbotrade.in</a>
@@ -401,14 +366,8 @@ const TermsCondition = () => {
                                     </p>
                                 </div>
                             </Card>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Footer */}
-                <Footer />
             </div>
-        </div>
+        </LegalPageLayout>
     );
 };
 

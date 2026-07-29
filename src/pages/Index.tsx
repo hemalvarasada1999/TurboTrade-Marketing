@@ -10,11 +10,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <Hero />
-      <Philosophy />
-      <HowItWorks />
-      <Engines />
-      <Features />
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
+        <Hero />
+        <Philosophy />
+        <HowItWorks />
+        <Engines />
+        <Features />
+      </main>
       <Footer />
     </div>
   );

@@ -217,3 +217,206 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.5);
 }
+
+/* ---------- Accessibility System Rules ---------- */
+
+/* Root text scaling & sticky header scroll padding */
+html {
+  font-size: calc(100% * var(--a11y-scale, 1));
+  scroll-padding-top: 80px;
+}
+
+/* Underline links mode (WCAG 1.4.1) */
+html.a11y-underline-links a:not(.skip-link) {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+/* Reduced motion mode (WCAG 2.3.3) */
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* High contrast theme (WCAG 1.4.3 & SEBI Circulars) */
+html.a11y-theme-contrast {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+  --muted: 0 0% 95%;
+  --muted-foreground: 0 0% 0%;
+  --border: 0 0% 0%;
+  --primary: 222 80% 30%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 222 80% 30%;
+  --accent-foreground: 0 0% 100%;
+  color-scheme: light !important;
+}
+
+html.a11y-theme-contrast body,
+html.a11y-theme-contrast header,
+html.a11y-theme-contrast footer,
+html.a11y-theme-contrast main,
+html.a11y-theme-contrast section,
+html.a11y-theme-contrast article {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+html.a11y-theme-contrast .card-elev,
+html.a11y-theme-contrast [class*="bg-card"]:not(.a11y-swatch):not(.a11y-swatch *),
+html.a11y-theme-contrast [class*="bg-surface"]:not(.a11y-swatch):not(.a11y-swatch *),
+html.a11y-theme-contrast [class*="bg-muted"]:not(.a11y-swatch):not(.a11y-swatch *) {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+html.a11y-theme-contrast p:not(.a11y-swatch *),
+html.a11y-theme-contrast span:not(.a11y-swatch *),
+html.a11y-theme-contrast h1:not(.a11y-swatch *),
+html.a11y-theme-contrast h2:not(.a11y-swatch *),
+html.a11y-theme-contrast h3:not(.a11y-swatch *),
+html.a11y-theme-contrast h4:not(.a11y-swatch *),
+html.a11y-theme-contrast h5:not(.a11y-swatch *),
+html.a11y-theme-contrast h6:not(.a11y-swatch *),
+html.a11y-theme-contrast label:not(.a11y-swatch *),
+html.a11y-theme-contrast code:not(.a11y-swatch *) {
+  color: #000000 !important;
+}
+
+/* Dark reading theme */
+html.a11y-theme-dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --card: 222 40% 15%;
+  --card-foreground: 210 40% 98%;
+  --muted: 220 20% 22%;
+  --muted-foreground: 215 16% 65%;
+  --border: 220 20% 22%;
+  --primary: 43 85% 59%;
+  --primary-foreground: 222 47% 11%;
+  --accent: 43 85% 59%;
+  --accent-foreground: 222 47% 11%;
+  color-scheme: dark !important;
+}
+
+html.a11y-theme-dark body,
+html.a11y-theme-dark header,
+html.a11y-theme-dark footer,
+html.a11y-theme-dark main,
+html.a11y-theme-dark section,
+html.a11y-theme-dark article {
+  background-color: hsl(222 47% 11%) !important;
+  color: hsl(210 40% 98%) !important;
+}
+
+html.a11y-theme-dark [class*="bg-card"]:not(.a11y-swatch):not(.a11y-swatch *),
+html.a11y-theme-dark [class*="bg-surface"]:not(.a11y-swatch):not(.a11y-swatch *),
+html.a11y-theme-dark [class*="from-slate-50"],
+html.a11y-theme-dark [class*="via-white"] {
+  background-color: hsl(222 40% 15%) !important;
+  border-color: hsl(220 20% 22%) !important;
+  color: hsl(210 40% 98%) !important;
+}
+
+html.a11y-theme-dark p:not(.a11y-swatch *),
+html.a11y-theme-dark span:not(.a11y-swatch *),
+html.a11y-theme-dark li:not(.a11y-swatch *),
+html.a11y-theme-dark ul:not(.a11y-swatch *),
+html.a11y-theme-dark h1:not(.a11y-swatch *),
+html.a11y-theme-dark h2:not(.a11y-swatch *),
+html.a11y-theme-dark h3:not(.a11y-swatch *),
+html.a11y-theme-dark h4:not(.a11y-swatch *),
+html.a11y-theme-dark h5:not(.a11y-swatch *),
+html.a11y-theme-dark h6:not(.a11y-swatch *),
+html.a11y-theme-dark label:not(.a11y-swatch *),
+html.a11y-theme-dark code:not(.a11y-swatch *),
+html.a11y-theme-dark [class*="text-slate-"]:not(.a11y-swatch *) {
+  color: hsl(210 40% 98%) !important;
+}
+
+html.a11y-theme-dark strong {
+  color: #ffffff !important;
+}
+
+html.a11y-theme-dark .prose,
+html.a11y-theme-dark .prose * {
+  color: hsl(210 40% 98%) !important;
+}
+
+html.a11y-theme-dark .prose li::marker,
+html.a11y-theme-dark ul li::marker {
+  color: hsl(43 85% 59%) !important;
+}
+
+html.a11y-theme-dark .text-muted-foreground {
+  color: hsl(215 16% 70%) !important;
+}
+
+/* Warm reading theme (sepia) */
+html.a11y-theme-warm {
+  --background: 40 40% 90%;
+  --foreground: 30 40% 16%;
+  --card: 40 45% 94%;
+  --card-foreground: 30 40% 16%;
+  --muted: 40 30% 84%;
+  --muted-foreground: 30 30% 30%;
+  --border: 40 25% 75%;
+  --primary: 25 70% 32%;
+  --primary-foreground: 40 40% 94%;
+  --accent: 25 70% 32%;
+  --accent-foreground: 40 40% 94%;
+  color-scheme: light !important;
+}
+
+html.a11y-theme-warm body,
+html.a11y-theme-warm header,
+html.a11y-theme-warm footer,
+html.a11y-theme-warm main,
+html.a11y-theme-warm section,
+html.a11y-theme-warm article {
+  background-color: hsl(40 40% 90%) !important;
+  color: hsl(30 40% 16%) !important;
+}
+
+html.a11y-theme-warm [class*="bg-card"]:not(.a11y-swatch):not(.a11y-swatch *),
+html.a11y-theme-warm [class*="from-slate-50"],
+html.a11y-theme-warm [class*="via-white"] {
+  background-color: hsl(40 45% 94%) !important;
+  border-color: hsl(40 25% 75%) !important;
+  color: hsl(30 40% 16%) !important;
+}
+
+html.a11y-theme-warm p:not(.a11y-swatch *),
+html.a11y-theme-warm span:not(.a11y-swatch *),
+html.a11y-theme-warm h1:not(.a11y-swatch *),
+html.a11y-theme-warm h2:not(.a11y-swatch *),
+html.a11y-theme-warm h3:not(.a11y-swatch *),
+html.a11y-theme-warm h4:not(.a11y-swatch *),
+html.a11y-theme-warm h5:not(.a11y-swatch *),
+html.a11y-theme-warm h6:not(.a11y-swatch *),
+html.a11y-theme-warm label:not(.a11y-swatch *),
+html.a11y-theme-warm code:not(.a11y-swatch *) {
+  color: hsl(30 40% 16%);
+}
+
+/* Monochrome / Grayscale Theme */
+html.a11y-theme-grayscale {
+  filter: grayscale(100%) !important;
+}
+
+/* Audio Reader Highlight ring on active DOM element */
+.a11y-reading-highlight {
+  outline: 2.5px solid hsl(var(--primary)) !important;
+  outline-offset: 6px;
+  border-radius: 12px;
+  transition: outline 0.3s ease-in-out;
+}
+

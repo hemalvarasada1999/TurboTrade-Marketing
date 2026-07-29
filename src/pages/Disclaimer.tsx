@@ -1,46 +1,21 @@
-import { Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import LegalPageLayout from "@/components/LegalPageLayout";
 import { Card } from "@/components/ui/card";
-import Footer from "@/components/Footer";
 
 const RiskDisclaimer = () => {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 relative">
-            {/* Background Pattern Overlay */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.08),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(30,58,138,0.05),transparent_50%)] pointer-events-none" />
-            <div className="relative z-10">
-                {/* Header */}
-                <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-                    <div className="container mx-auto px-4 py-4">
-                        <Link to="/" className="inline-flex items-center gap-2 text-slate-700 hover:text-amber-600 transition-colors">
-                            <ChevronLeft className="h-4 w-4" />
-                            <span className="font-semibold">Back to Home</span>
-                        </Link>
-                    </div>
-                </header>
-
-                {/* Hero Section */}
-                <section className="py-16 border-b border-slate-200">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-slate-900">
-                                Investment Risk & <span className="text-amber-600">Liability Disclaimer</span>
-                            </h1>
-                            <p className="text-slate-600 text-lg">
-                                Please read this disclaimer carefully before using TurboTrade services
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Content */}
-                <section className="py-16">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto space-y-12">
-                            {/* Introduction */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">1. Introduction</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+        <LegalPageLayout
+            title={
+                <h1 className="text-2xl sm:text-3xl font-bold font-heading text-foreground mb-2">
+                    Investment Risk &amp; <span className="text-primary">Liability Disclaimer</span>
+                </h1>
+            }
+            description="Please read this disclaimer carefully before using TurboTrade services"
+        >
+            <div className="space-y-4">
+                {/* Introduction */}
+                <Card className="p-5 sm:p-6 bg-card border-border shadow-sm">
+                    <h2 className="text-base sm:text-lg font-semibold mb-2 text-primary">1. Introduction</h2>
+                    <div className="space-y-4 text-foreground/90 leading-relaxed text-sm sm:text-base">
                                     <p>
                                         This Investor Disclaimer & Liability Waiver ("Disclaimer") forms part of and must be read in conjunction with the Terms & Conditions and Risk Disclosure Document of TurboTrade, owned and operated by EquityPulse Tech Private Limited ("Company", "We", "Us", "Our").
                                     </p>
@@ -51,9 +26,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 2. Nature of Services */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">2. Nature of Services</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">2. Nature of Services</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade is a technology-based platform providing access to algorithmic trading strategies, backtesting tools, and broker integration for automated order placement through official APIs (including Zerodha, Angel One, and others).
                                     </p>
@@ -65,9 +40,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 3. No Investment Advice or Guarantee */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">3. No Investment Advice or Guarantee</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">3. No Investment Advice or Guarantee</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade does not provide personalized financial, investment, tax, or legal advice.
                                     </p>
@@ -92,9 +67,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 4. Investor's Responsibility */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">4. Investor's Responsibility</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">4. Investor's Responsibility</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>By using the TurboTrade platform, you confirm that:</p>
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>You understand the functioning of algorithmic and automated trading.</li>
@@ -107,9 +82,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 5. Limitation of Liability */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">5. Limitation of Liability</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">5. Limitation of Liability</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         To the fullest extent permitted under applicable law, EquityPulse Tech Private Limited, its directors, officers, employees, affiliates, and service providers shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages, including (but not limited to):
                                     </p>
@@ -130,9 +105,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 6. Broker & Third-Party Dependency */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">6. Broker & Third-Party Dependency</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">6. Broker & Third-Party Dependency</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade's services depend on integrations with third-party brokers and data providers.
                                     </p>
@@ -149,9 +124,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 7. Data & Technology Risks */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">7. Data & Technology Risks</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">7. Data & Technology Risks</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade operates on cloud-based systems and internet infrastructure.
                                     </p>
@@ -168,9 +143,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 8. No Fiduciary Relationship */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">8. No Fiduciary Relationship</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">8. No Fiduciary Relationship</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         Use of the TurboTrade platform does not create a fiduciary, advisory, or partnership relationship between you and EquityPulse Tech Private Limited.
                                     </p>
@@ -181,9 +156,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 9. Indemnification */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">9. Indemnification</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">9. Indemnification</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         You agree to indemnify and hold harmless EquityPulse Tech Private Limited, its officers, employees, and affiliates from and against any and all claims, liabilities, damages, losses, or expenses (including reasonable legal fees) arising from:
                                     </p>
@@ -196,9 +171,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 10. No Performance Representation */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">10. No Performance Representation</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">10. No Performance Representation</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         All charts, returns, and analytics shown on TurboTrade are backtested or simulated results based on historical data.
                                     </p>
@@ -212,9 +187,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 11. Regulatory Compliance */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">11. Regulatory Compliance</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">11. Regulatory Compliance</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         TurboTrade operates in compliance with SEBI regulations applicable to registered investment advisers and research analysts.
                                     </p>
@@ -228,9 +203,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 12. Force Majeure */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">12. Force Majeure</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">12. Force Majeure</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         The Company shall not be held responsible for failure or delay in performing its obligations due to events beyond its reasonable control, including but not limited to:
                                     </p>
@@ -244,9 +219,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 13. Jurisdiction */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">13. Jurisdiction</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">13. Jurisdiction</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>
                                         This Disclaimer shall be governed by and construed in accordance with the laws of India.
                                     </p>
@@ -257,9 +232,9 @@ const RiskDisclaimer = () => {
                             </Card>
 
                             {/* 14. Investor Declaration */}
-                            <Card className="p-8 bg-white/70 backdrop-blur border-slate-200 shadow-sm">
-                                <h2 className="text-3xl font-bold mb-4 text-amber-600">14. Investor Declaration</h2>
-                                <div className="prose max-w-none space-y-4 text-slate-700 leading-relaxed">
+                            <Card className="p-6 sm:p-8 bg-card border-border shadow-sm">
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">14. Investor Declaration</h2>
+                                <div className="space-y-3 text-xs sm:text-sm text-foreground/90 leading-relaxed">
                                     <p>By using TurboTrade or subscribing to any strategy, you hereby declare that:</p>
                                     <ul className="list-disc list-inside space-y-2 ml-4">
                                         <li>You have read, understood, and voluntarily agreed to this Disclaimer.</li>
@@ -268,14 +243,8 @@ const RiskDisclaimer = () => {
                                     </ul>
                                 </div>
                             </Card>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Footer */}
-                <Footer />
             </div>
-        </div>
+        </LegalPageLayout>
     );
 };
 

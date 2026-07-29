@@ -11,25 +11,35 @@ import RiskDisclaimer from "./pages/Disclaimer";
 import TermsCondition from "./pages/TermsCondition";
 import RefundPolicy from "./pages/RefundPolicy";
 import Upcoming from "./pages/Upcoming";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+import AccessibilityStatement from "./pages/AccessibilityStatement";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  function ScrollToTop() {
+  function ScrollToTopRouteReset() {
     const { pathname } = useLocation();
     useEffect(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      const target =
+        document.getElementById("main-content") ||
+        (document.querySelector("h1") as HTMLElement | null);
+      if (target) {
+        target.focus();
+      }
     }, [pathname]);
     return null;
   }
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ScrollToTop />
+          <ScrollToTopRouteReset />
+          <ScrollToTopButton />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
@@ -39,6 +49,7 @@ const App = () => {
             {/* <Route path="/refund-policy" element={<RefundPolicy />} /> */}
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/coming-soon" element={<Upcoming />} />
+            <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
@@ -46,7 +57,7 @@ const App = () => {
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
-  )
+  );
 };
 
 export default App;

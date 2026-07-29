@@ -6,7 +6,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     return (
         <footer className="bg-card border-t border-border">
-            <div className="container flex flex-col mx-auto py-5">
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col py-6">
                 <div className="flex justify-between items-center py-3">
                     {/* Brand Section */}
                     <div className="flex flex-col gap-4">
@@ -42,7 +42,7 @@ const Footer = () => {
                                     <Twitter className="h-5 w-5" />
                                 </a>
                                 <a
-                                    href="mailto:info@tradeon.ai"
+                                    href="mailto:inquiry@turbotrade.ai"
                                     className="p-2 rounded-lg bg-muted hover:bg-accent/10 text-muted-foreground hover:text-accent transition-all duration-200 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                                     aria-label="Facebook"
                                 >
@@ -84,11 +84,11 @@ const Footer = () => {
                             <span>Terms & Conditions</span>
                         </Link>
                         <Link
-                            to="/refund-policy"
+                            to="/accessibility-statement"
                             className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
                         >
-                            {/* <RotateCcw className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" /> */}
-                            {/* <span>Refund Policy</span> */}
+                            <Shield className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
+                            <span>Accessibility Statement</span>
                         </Link>
                     </div>
 

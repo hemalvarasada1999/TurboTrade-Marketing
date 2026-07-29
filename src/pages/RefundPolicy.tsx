@@ -80,7 +80,7 @@ const RefundPolicy = () => {
                     To request a refund, please follow these steps:
                 </p>
                 <ol className="list-decimal list-inside text-muted-foreground space-y-2">
-                    <li>Contact our support team at <a href="mailto:support@algowealth.com" className="text-accent hover:underline">support@algowealth.com</a></li>
+                    <li>Contact our support team at <a href="mailto:inquiry@turbotrade.ai" className="text-accent hover:underline">inquiry@turbotrade.ai</a></li>
                     <li>Include your account email and reason for the refund request</li>
                     <li>Provide any relevant transaction or subscription details</li>
                     <li>Allow 5-7 business days for review and processing</li>
@@ -134,8 +134,8 @@ const RefundPolicy = () => {
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Questions</h2>
                 <p className="text-muted-foreground">
                     If you have questions about our Cancellation & Refund Policy, please contact us at{" "}
-                    <a href="mailto:support@algowealth.com" className="text-accent hover:underline">
-                        support@algowealth.com
+                    <a href="mailto:inquiry@turbotrade.ai" className="text-accent hover:underline">
+                        inquiry@turbotrade.ai
                     </a>
                 </p>
             </section>
