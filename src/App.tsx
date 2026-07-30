@@ -13,6 +13,7 @@ import RefundPolicy from "./pages/RefundPolicy";
 import Upcoming from "./pages/Upcoming";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import AccessibilityStatement from "./pages/AccessibilityStatement";
+import BrokerPartnerProgram from "./pages/BrokerPartnerProgram";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,8 @@ const App = () => {
           <ScrollToTopButton />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/broker-partner-program" element={<BrokerPartnerProgram />} />
+            <Route path="/broker-partner" element={<BrokerPartnerProgram />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/disclaimer" element={<RiskDisclaimer />} />
             <Route path="/privacy" element={<Privacy />} />

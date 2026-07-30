@@ -152,7 +152,7 @@ const Hero = () => {
               asChild
               className="btn-light-trail bg-primary text-primary-foreground font-semibold text-base px-8 h-12 w-full sm:w-auto"
             >
-              <Link to="/coming-soon">
+              <Link to="/broker-partner-program">
                 Start Your Journey
               </Link>
             </Button>

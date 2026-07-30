@@ -1,4 +1,4 @@
-import { TrendingUp, Mail, FileText, Shield, ScrollText, RotateCcw, Linkedin, Twitter, Facebook } from "lucide-react";
+import { TrendingUp, Mail, FileText, Shield, ScrollText, RotateCcw, Linkedin, Twitter, Facebook, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import turbotrade from "/turbotrade.png";
 
@@ -55,6 +55,13 @@ const Footer = () => {
 
                     {/* Links Grid */}
                     <div className="flex flex-col gap-2">
+                        <Link
+                            to="/broker-partner-program"
+                            className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1 font-medium text-goldenrod"
+                        >
+                            <Users className="h-4 w-4 text-goldenrod group-hover:text-accent transition-colors" />
+                            <span>Partner Program</span>
+                        </Link>
                         <Link
                             to="/contact"
                             className="group flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-all duration-200 hover:translate-x-1"
