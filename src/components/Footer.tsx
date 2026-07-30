@@ -1,6 +1,7 @@
 import { TrendingUp, Mail, FileText, Shield, ScrollText, RotateCcw, Linkedin, Twitter, Facebook, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import turbotrade from "/turbotrade.png";
+import logoLight from "@/assets/logo-light.png";
+import logoDark from "@/assets/logo-dark.png";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -12,7 +13,8 @@ const Footer = () => {
                     <div className="flex flex-col gap-4">
                         <div className=" text-center md:text-left">
                             <a href="#" className="flex items-center gap-3">
-                                <img src={turbotrade} alt="TurboTrade" className="h-11" />
+                                <img src={logoLight} alt="TurboTrade" className="h-12 md:h-14 w-auto dark:hidden object-contain" />
+                                <img src={logoDark} alt="TurboTrade" className="h-12 md:h-14 w-auto hidden dark:block object-contain" />
                             </a>
                             <p className="text-muted-foreground text-sm max-w-md mx-auto md:mx-0">
                                 Precision-engineered algo execution for systematic traders.

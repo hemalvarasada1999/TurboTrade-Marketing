@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import turbotradeIcon from "/turbotrade.png";
+import turbotradeIcon from "@/assets/logo-mark-dark.png";
 import { useEffect, useState } from "react";
 
 const Hero = () => {

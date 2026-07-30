@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { AccessibilityToolbar } from "@/components/site/AccessibilityToolbar";
-import turbotrade from "/turbotrade.png";
+import logoLight from "@/assets/logo-light.png";
+import logoDark from "@/assets/logo-dark.png";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -27,9 +28,10 @@ const Header = () => {
           scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-transparent"
         }`}
       >
-        <div className="container mx-auto max-w-7xl flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-7xl flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-3">
-            <img src={turbotrade} alt="TurboTrade" className="h-11" />
+            <img src={logoLight} alt="TurboTrade" className="h-12 md:h-14 w-auto dark:hidden object-contain" />
+            <img src={logoDark} alt="TurboTrade" className="h-12 md:h-14 w-auto hidden dark:block object-contain" />
           </Link>
 
           <div className="hidden md:flex items-center gap-3">
