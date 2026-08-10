@@ -1,0 +1,984 @@
+/* ══════════════ SITE PRIMITIVES ══════════════
+   The shared layer of the new design: the page skeleton, buttons, the glass
+   header capsule, the curtain, section rhythm, the marker sweep and the dark
+   footer. Everything here is used by more than one component.
+
+   Section-specific rules live beside this file (landing.css, partner.css).
+
+   Every colour is a token from tokens.css, never a literal. The accessibility
+   toolbar restyles the site by rewriting those tokens, so a hex typed directly
+   into a rule here is a rule the high-contrast and dark reading themes cannot
+   reach. That is the single easiest thing to get wrong in this file. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* scroll-behavior stays auto, not smooth: on a page this tall a smooth anchor
+   jump animates for the better part of a second, which is the single most "slow
+   website" thing a nav link can do.
+
+   scrollbar-gutter:stable is not cosmetic — the curtain locks scrolling with
+   overflow:hidden, which removes the desktop scrollbar and shifts the whole
+   layout ~15px sideways at the moment of the lift. Reserving the gutter
+   permanently prevents it. */
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+}
+
+.site {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ff);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── element defaults, at zero specificity ──
+   Every selector in this block is wrapped in :where(), which strips it to 0,0,0
+   — the same weight a bare `img {}` or `p {}` would carry. That is deliberate
+   and load-bearing.
+
+   These have to be scoped to `.site` (the legal pages must keep their own
+   Tailwind typography), but scoping normally would make them `.site p` at 0,1,1
+   — heavier than every single-class rule in landing.css and partner.css. A plain
+   `.site p{margin:0}` silently beats `.deck{margin:18px 0 0}`, `.pnl-cap`,
+   `.f-tag`, `.hero-fine` and about a dozen others, and `.site section{padding}`
+   beats `.stage{padding:0}` and pushes the whole hero off the fold. :where()
+   gives the scoping without the weight. Do not unwrap these. */
+:where(.site) :where(img) {
+  max-width: 100%;
+  display: block;
+}
+:where(.site) :where(a) {
+  color: inherit;
+}
+
+/* Headings are set here rather than in index.css's base layer because the
+   design's -.034em tracking is calibrated to these exact sizes. */
+:where(.site) :where(h1, h2, h3, h4) {
+  margin: 0;
+  font-family: var(--ff);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.034em;
+}
+:where(.site) :where(h1) {
+  font-size: clamp(2.6rem, 5.6vw, 4.35rem);
+  letter-spacing: -0.042em;
+}
+:where(.site) :where(h2) {
+  font-size: clamp(1.95rem, 3.5vw, 2.85rem);
+}
+:where(.site) :where(h3) {
+  font-size: 1.3rem;
+  letter-spacing: -0.022em;
+}
+:where(.site) :where(h4) {
+  font-size: 1.04rem;
+  letter-spacing: -0.02em;
+}
+:where(.site) :where(p) {
+  margin: 0;
+}
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 26px;
+}
+.mono {
+  font-family: var(--mono);
+}
+
+/* --body, not --body-2: #8AA0A7 measures 2.74:1 on white, well under the 4.5:1
+   AA floor for small text, and every eyebrow sits on white or a near-white
+   tint. --body is 5.35:1 and barely reads darker at this size. */
+.eyebrow {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+.lede {
+  font-size: 1.06rem;
+  color: var(--body);
+  line-height: 1.66;
+}
+
+.site-skip {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 12px 18px;
+  font-weight: 600;
+  z-index: 400;
+}
+.site-skip:focus {
+  position: fixed;
+  left: 14px;
+  top: 14px;
+  width: auto;
+  height: auto;
+  clip: auto;
+  overflow: visible;
+  border-radius: 99px;
+}
+.site :focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ══════════════ BUTTONS ══════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 15px 28px;
+  border-radius: 99px;
+  border: 1.6px solid transparent;
+  font-family: var(--ff);
+  font-weight: 600;
+  font-size: 0.97rem;
+  text-decoration: none;
+  transition: 0.17s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn svg {
+  flex: none;
+}
+.btn-y {
+  background: var(--yellow);
+  color: var(--ink);
+  border-color: var(--yellow);
+}
+.btn-y:hover {
+  background: var(--yellow-h);
+  box-shadow: 0 10px 26px -10px rgba(255, 202, 41, 0.85);
+}
+.btn-d {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.btn-d:hover {
+  background: var(--ink-l);
+}
+.btn-o {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-o:hover {
+  border-color: var(--ink);
+  background: var(--tint-t);
+}
+.btn-sm {
+  padding: 10px 19px;
+  font-size: 0.88rem;
+}
+
+/* ══════════════ HEADER ══════════════
+   The header is a capsule in both states. `header.nav` is nothing but a fixed
+   positioning shell: no background, no blur, no shadow, no border. Every
+   visual belongs to `.nav-in`, so there is no full-bleed glass bar at any
+   scroll position and nothing to remove later. Scrolling only narrows and
+   tightens the pill.
+
+   Nothing here animates a layout property, and that is deliberate. An earlier
+   build transitioned padding, max-width and the logo's height while moving the
+   blur from one element to another, all at scrollY > 24 — the first millimetre
+   of a flick. Three relayouts a frame plus a full-viewport layer swap, dropped
+   right where scroll momentum starts, which is why it took a second flick to
+   get going. Layout snaps now; only paint properties fade. */
+header.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  contain: layout;
+  padding: 7px 20px;
+  background: none;
+  box-shadow: none;
+}
+/* 2px, not 16px. The logo lockup is a 500x200 PNG whose artwork occupies only
+   the middle 52% — it ships with 22% transparent margin above and 25% below.
+   At a rendered height of 78px that is already 17px of air on top and 20px
+   underneath, before any padding. Crop the PNG and this can be raised. */
+.nav-in {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 2px 26px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-radius: 99px;
+  border: 1px solid var(--glass-line);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: var(--glass-sh);
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+/* scrolled: the same capsule, drawn tighter and lifted further off the page */
+header.nav.scrolled {
+  padding: 8px 20px;
+}
+header.nav.scrolled .nav-in {
+  max-width: 980px;
+  padding: 5px 22px;
+  background: var(--glass-2);
+  border-color: var(--glass-line-2);
+  box-shadow: var(--glass-sh-2);
+}
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  text-decoration: none;
+}
+/* height snaps rather than animating — a 78px to 40px tween relayouts the
+   whole bar every frame, and the swap is invisible at flick speed */
+.nav-logo img {
+  height: 78px;
+  width: auto;
+}
+header.nav.scrolled .nav-logo img {
+  height: 40px;
+}
+.brand-tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--yellow-dk);
+  background: var(--tint-y);
+  border: 1px solid var(--tint-y-line);
+  border-radius: 99px;
+  padding: 4px 10px;
+}
+.nav-links {
+  display: flex;
+  gap: 26px;
+  margin-left: auto;
+  font-size: 0.93rem;
+  font-weight: 500;
+}
+/* --body measured 4.30:1 against the blurred sky behind the glass — under the
+   4.5:1 floor. Ink at weight 500 reads as navigation without shouting. */
+.nav-links a {
+  color: var(--ink);
+  text-decoration: none;
+  transition: 0.15s;
+  opacity: 0.86;
+}
+.nav-links a:hover {
+  opacity: 1;
+  color: var(--ink);
+}
+.nav-cta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex: none;
+}
+.nav-cta-end {
+  margin-left: auto;
+}
+.nav-cta .btn-o {
+  border-color: var(--glass-btn-line);
+  background: var(--glass-btn);
+}
+/* ── the accessibility trigger, in the capsule's own language ──
+   A hairline pill the same height as .btn-sm rather than the shadcn rounded-lg
+   it ships with, so the three controls at the right of the capsule read as one
+   set. The label hides below 1100px: at 980px the section links collapse into
+   the burger and the row has to fit logo + a11y + burger + "Start free". */
+.a11y-capsule-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: none;
+  padding: 10px 15px;
+  border-radius: 99px;
+  border: 1.6px solid var(--glass-btn-line);
+  background: var(--glass-btn);
+  color: var(--ink);
+  font-family: var(--ff);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.17s ease;
+}
+.a11y-capsule-trigger:hover {
+  border-color: var(--ink);
+  background: var(--tint-t);
+}
+@media (max-width: 1100px) {
+  .a11y-capsule-trigger .a11y-trigger-label {
+    display: none;
+  }
+  .a11y-capsule-trigger {
+    padding: 10px 11px;
+  }
+}
+/* on a phone every control in the row goes to the 44px tap floor together */
+@media (max-width: 980px) {
+  .a11y-capsule-trigger {
+    padding: 13px 14px;
+  }
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: 1.5px solid var(--line);
+  border-radius: 99px;
+  padding: 9px 12px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+@media (max-width: 980px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    padding: 8px 26px 14px;
+    gap: 0;
+    margin: 0;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  /* 13px of vertical padding turns a 23px text row into a 45px tap target.
+     Menu rows are the easiest thing on a page to get wrong here: they look
+     spaced out because of the gap, but the gap is dead space, not target. */
+  .nav-links a {
+    padding: 13px 0;
+  }
+  .burger {
+    display: block;
+    padding: 11px 14px;
+  }
+  .nav-cta .btn-o {
+    display: none;
+  }
+  /* "Start free" is the primary action on a phone and was a 36px target */
+  .nav-cta .btn-sm {
+    padding: 14px 20px;
+  }
+}
+/* ── the header row has to fit five things on a 360px phone ──
+   logo + accessibility + burger + "Start free" + the gaps between them. At
+   48px the logo is 120px wide (the lockup is 2.5:1), which with 26px capsule
+   padding and 24px gaps came to 385px — overflowing every 375px and 360px
+   handset. Most Android phones report 360. Padding, gap and logo all step
+   down together; changing one without the others puts the overflow back. */
+@media (max-width: 760px) {
+  .nav-logo img {
+    height: 42px;
+  }
+  header.nav.scrolled .nav-logo img {
+    height: 36px;
+  }
+  .nav-in {
+    padding-left: 18px;
+    padding-right: 18px;
+    gap: 14px;
+  }
+}
+@media (max-width: 560px) {
+  .brand-tag {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .nav-logo img {
+    height: 36px;
+  }
+  header.nav.scrolled .nav-logo img {
+    height: 32px;
+  }
+  .nav-in {
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 10px;
+  }
+  .nav-cta .btn-sm {
+    padding: 14px 16px;
+  }
+  .burger {
+    padding: 11px 12px;
+  }
+}
+@media (max-width: 900px) {
+  /* a smaller blur radius costs materially less to composite on a phone while
+     still reading as glass. One capsule, one layer, never swapped. */
+  .nav-in {
+    -webkit-backdrop-filter: blur(12px) saturate(168%);
+    backdrop-filter: blur(12px) saturate(168%);
+  }
+  header.nav,
+  header.nav.scrolled {
+    padding: 6px 14px;
+  }
+}
+/* no backdrop-filter support -> lean on opacity so the capsule stays legible */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-in {
+    background: var(--glass-solid);
+  }
+  header.nav.scrolled .nav-in {
+    background: var(--glass-solid-2);
+  }
+}
+
+/* ══════════════ THE CURTAIN ══════════════
+   A fixed overlay, not a section. It costs zero scroll distance: the hero is
+   already at scroll 0 underneath it, so once the curtain lifts the page is
+   completely ordinary.
+
+   z-index 150 puts it under the header (200) on purpose — the glass capsule
+   floats over the artwork and the nav stays usable, so the curtain never traps
+   anyone who wants to click Pricing before scrolling. */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: var(--curtain-bg);
+  overflow: hidden;
+  transform: translateY(0);
+  will-change: transform;
+  transition: transform 0.42s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.curtain.up {
+  transform: translateY(-101%);
+}
+/* both the <picture> and the <img> need the fill — the <img> is not a direct
+   child, so a `>` combinator here silently leaves a band of bare page */
+.curtain picture,
+.curtain img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 900px) {
+  .curtain img {
+    object-position: center 45%;
+  }
+}
+/* the artwork is bright and busy under the figure, so the kicker gets its own
+   scrim rather than relying on the illustration staying pale */
+.curtain::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  background: var(--curtain-scrim);
+  pointer-events: none;
+}
+.curtain-kicker {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 84px;
+  z-index: 2;
+  margin: 0;
+  padding: 0 26px;
+  text-align: center;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1.5vw, 1.06rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--curtain-ink);
+  pointer-events: none;
+}
+/* same treatment as .pnl-cap under the product panel — mono, .56rem, .1em
+   tracking, uppercase — so the two captions read as one voice rather than two
+   different sizes of small print */
+.curtain-cap {
+  position: absolute;
+  right: 26px;
+  bottom: 14px;
+  z-index: 2;
+  margin: 0;
+  max-width: 46%;
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+  text-transform: uppercase;
+  color: var(--curtain-body);
+  text-align: right;
+  pointer-events: none;
+}
+.curtain-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  color: var(--curtain-ink);
+  pointer-events: none;
+}
+.curtain-hint span {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+.curtain-hint svg {
+  animation: nudge 1.9s ease-in-out infinite;
+}
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+@media (max-width: 700px) {
+  .curtain-kicker {
+    bottom: 92px;
+    padding: 0 22px;
+    letter-spacing: 0.16em;
+  }
+  /* the caption wraps to three lines on a phone and would run into a centred
+     scroll cue, so the cue moves to the opposite corner instead */
+  .curtain-cap {
+    right: 22px;
+    bottom: 12px;
+    max-width: 64%;
+  }
+  .curtain-hint {
+    left: 22px;
+    bottom: 16px;
+    transform: none;
+    justify-items: start;
+  }
+}
+/* Scroll is locked only while the curtain is up. `scrollbar-gutter:stable` on
+   html is what stops the desktop scrollbar vanishing and jolting the layout
+   15px sideways at the moment of the lock. */
+html.curtained,
+html.curtained body {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .curtain {
+    transition: none;
+  }
+  .curtain-hint svg {
+    animation: none;
+  }
+}
+
+/* ══════════════ PAGE RISE ══════════════
+   The entrance for a route arrived at from a footer link — the Company and Legal
+   columns, and the partner program. Content lifts the last 22px into place as it
+   fades in, so a navigation reads as the new page arriving rather than as the old
+   one being replaced between frames.
+
+   It replaces a smooth `window.scrollTo` that used to run on every route change.
+   That was the wrong tool: React Router renders the new route at whatever scroll
+   offset the old one was left at, so the visitor watched an already-correct page
+   scroll itself upward for half a second before settling. The jump to the top is
+   instant now, and this is the transition.
+
+   Applied with a `key={pathname}` on the element so React remounts it and the
+   animation actually replays — a CSS animation on a persistent node fires once
+   and never again.
+
+   22px, not 60px. The travel has to be short enough that text is legible for the
+   whole of it; a long rise means the visitor waits to start reading, which is a
+   strange thing to ask of somebody who just clicked "Privacy policy".
+
+   will-change is deliberately absent: this runs once per navigation and promoting
+   a full page's worth of content to its own layer for 460ms costs more than the
+   compositing it saves. */
+@keyframes page-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-rise {
+  animation: page-rise 0.46s cubic-bezier(0.22, 0.68, 0.28, 1) both;
+}
+/* Both switches, because they are independent: the media query is the OS
+   setting, the class is the accessibility toolbar's own control. Opacity-only
+   under reduced motion rather than nothing at all — a cross-fade carries the
+   "this is a new page" signal without the vestibular trigger that movement is. */
+@media (prefers-reduced-motion: reduce) {
+  .page-rise {
+    animation: none;
+  }
+}
+html.a11y-reduce-motion .page-rise {
+  animation: none;
+}
+
+/* ══════════════ SECTION RHYTHM ══════════════ */
+/* :where() again — .stage sets padding:0 and must win. See the note above. */
+:where(.site) :where(section) {
+  padding: 112px 0;
+}
+@media (max-width: 940px) {
+  :where(.site) :where(section) {
+    padding: 78px 0;
+  }
+}
+.site section.tint {
+  background: var(--tint-t);
+}
+.s-head {
+  max-width: 660px;
+  margin-bottom: 56px;
+}
+.s-head.ctr {
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.s-head h2 {
+  margin: 16px 0 18px;
+}
+/* The deck sits between the h2 and the lede and carries the mechanism. It is
+   distinguished from the lede by weight and ink, not by size: two grey
+   paragraphs of near-identical size read as one long lede and the claim loses
+   its proof. */
+.s-head .deck {
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-l);
+}
+
+/* ── composition helpers ──
+   A sticky side head for a long list, a centred head where the content is
+   symmetrical. These let a page of six same-shaped sections alternate without
+   moving a single word. */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+  gap: 58px;
+  align-items: start;
+}
+.split .s-head {
+  margin-bottom: 0;
+  position: sticky;
+  top: calc(var(--nav-h) + 12px);
+}
+@media (max-width: 940px) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .split .s-head {
+    position: static;
+  }
+}
+
+/* ── the marker sweep ──
+   A background band behind the glyphs, so no stacking tricks. nowrap because
+   the band is a single background image: a wrap paints it across only part of
+   the phrase. */
+.hl {
+  white-space: nowrap;
+  padding: 0 0.06em;
+  background: linear-gradient(var(--yellow), var(--yellow)) no-repeat;
+  background-size: 100% 0.3em;
+  background-position: 0 76%;
+}
+
+/* ══════════════ FAQ ══════════════ */
+.faq {
+  max-width: 820px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+.faq details {
+  border-bottom: 1px solid var(--line);
+}
+.faq summary {
+  padding: 22px 46px 22px 0;
+  font-size: 1.06rem;
+  font-weight: 600;
+  letter-spacing: -0.014em;
+  cursor: pointer;
+  position: relative;
+  list-style: none;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--yellow-dk);
+  line-height: 1;
+}
+.faq details[open] summary::after {
+  content: "–";
+}
+.faq .a {
+  padding: 0 40px 25px 0;
+  font-size: 0.97rem;
+  line-height: 1.68;
+  color: var(--body);
+}
+
+/* ══════════════ TICK ══════════════ */
+.tick {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--paper);
+  font-size: 0.62rem;
+  font-weight: 700;
+  flex: none;
+}
+
+/* ══════════════ FOOTER ══════════════
+   Scoped to `footer.site-footer`, not `.site footer`. The legal pages (privacy,
+   terms, disclaimer, the accessibility statement) render this footer inside a
+   shadcn/Tailwind layout that does NOT carry the `.site` class, because adopting
+   the design's 17px body and clamped heading scale would restyle the legal copy
+   itself. Keying off the footer's own class is what lets both layouts share it. */
+footer.site-footer {
+  background: var(--dark-surface-deep);
+  color: var(--on-dark-3);
+  padding: 64px 0 36px;
+  font-size: 0.92rem;
+}
+.f-top {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: 36px;
+}
+@media (max-width: 880px) {
+  .f-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 540px) {
+  .f-top {
+    grid-template-columns: 1fr;
+  }
+}
+.f-top img {
+  height: 38px;
+  width: auto;
+}
+.f-tag {
+  margin-top: 17px;
+  color: var(--on-dark-4);
+  max-width: 32ch;
+}
+.f-top h4 {
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-dark-4);
+  margin-bottom: 16px;
+}
+.f-top ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 11px;
+}
+.f-top a {
+  color: var(--on-dark-3);
+  text-decoration: none;
+}
+.f-top a:hover {
+  color: var(--yellow);
+}
+.f-reg {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 0.67rem;
+  line-height: 2;
+  color: var(--on-dark-4);
+}
+.f-social {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+}
+.f-social a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--dark-hairline);
+  background: var(--dark-card);
+  color: var(--on-dark-3);
+  transition: 0.15s ease;
+}
+.f-social a:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
+/* Typographic badge, not an ISO logo. ISO does not permit certified
+   organisations to use its logo — only the certification body's mark, under
+   that body's rules. Swap for the certifier's mark once the artwork and the
+   permission are in hand; the markup is ready for an <img>. */
+.f-iso {
+  margin-top: 16px;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--dark-card-line);
+  border-radius: 12px;
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--on-dark-2);
+}
+.f-iso b {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--on-dark);
+  font-weight: 700;
+}
+.f-iso svg {
+  flex: none;
+  color: var(--yellow);
+}
+/* the plain-English summary sits ABOVE the legal text, it does not replace it */
+.plain {
+  margin-top: 42px;
+  border: 1px solid var(--yellow-veil-line);
+  background: var(--yellow-veil);
+  border-radius: var(--rc);
+  padding: 24px 26px;
+}
+.plain h4 {
+  font-family: var(--ff);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--on-dark);
+  margin-bottom: 10px;
+  text-transform: none;
+}
+.plain ul {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 7px;
+}
+.plain li {
+  font-size: 0.92rem;
+  color: var(--on-dark-2);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.7;
+}
+.plain li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--yellow);
+}
+.f-disc {
+  margin-top: 26px;
+  padding-top: 26px;
+  border-top: 1px solid var(--dark-hairline);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--on-dark-4);
+}
+.f-disc b {
+  color: var(--on-dark-3);
+}
+.f-bot {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.67rem;
+  color: var(--on-dark-4);
+}
+
+/* an unfilled placeholder, so it is impossible to ship one by accident */
+.ph {
+  background: var(--yellow-veil-2);
+  border-bottom: 1px dashed var(--yellow);
+  padding: 0 3px;
+  font-family: var(--mono);
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site *,
+  .curtain,
+  .curtain * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

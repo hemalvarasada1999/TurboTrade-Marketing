@@ -19,7 +19,12 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      "fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      /* z-[900], not shadcn's default z-50. This site's chrome is stacked well
+         above 50: the header capsule is 200, the curtain 150 and the skip link
+         400 (see styles/site.css). At z-50 the scrim sat UNDER the fixed header,
+         which stayed fully lit while the rest of the page dimmed. A modal scrim
+         has to cover everything, so it goes above the highest of them. */
+      "fixed inset-0 z-[900] bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className,
     )}
     {...props}
@@ -29,7 +34,11 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  /* z-[910] — one step above the overlay above, and above the fixed header at
+     200. This is the bug that hid the accessibility panel's close button: the
+     panel drew at z-50, the header capsule at 200, so the header covered the
+     panel's entire top bar including the X. */
+  "fixed z-[910] gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
     variants: {
       side: {

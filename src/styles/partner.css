@@ -1,0 +1,923 @@
+/* ══════════════ BROKER PARTNER PROGRAM ══════════════
+   Section rules for the /broker-partner-program route only. The header capsule,
+   buttons, section rhythm, the FAQ and the marker sweep all come from site.css.
+
+   This page is addressed to registered intermediaries, not retail traders, and
+   the compliance wording in the markup is deliberate — see the comments in
+   PartnerProof.tsx before rewording anything about SEBI. */
+
+/* ══════════════ HERO ══════════════ */
+.phero {
+  padding-top: calc(var(--nav-h) + 40px);
+  background: radial-gradient(120% 80% at 84% 6%, var(--tint-y) 0%, transparent 58%),
+    linear-gradient(180deg, var(--paper) 0%, var(--tint-t) 100%);
+}
+@media (max-width: 940px) {
+  .phero {
+    padding-top: calc(var(--nav-h) + 14px);
+  }
+}
+.phero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  gap: 52px;
+  align-items: center;
+}
+.phero h1 {
+  margin: 18px 0 0;
+  max-width: 15ch;
+  font-size: clamp(2.4rem, 5vw, 3.9rem);
+  line-height: 1.06;
+}
+/* #748C95, not --body-2. --body-2 measures 2.74:1 on white, under even the
+   3.0:1 large-text floor — and this is half a headline, not a caption. The
+   strike-through already carries the "not this" meaning; the colour only has to
+   step back, not disappear. */
+.strike {
+  display: block;
+  margin-top: 4px;
+  color: var(--strike);
+  text-decoration: line-through;
+  text-decoration-thickness: 0.05em;
+}
+.phero .lede {
+  margin-top: 20px;
+  max-width: 48ch;
+}
+.phero .lede em {
+  font-style: normal;
+  color: var(--ink);
+  font-weight: 600;
+}
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 10px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 8px 15px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.chip i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  flex: none;
+}
+
+/* the demand panel — the same still-of-a-product idiom as the landing hero.
+   FIGURES: FY19 and ~1 crore are traceable to SEBI's study on individual F&O
+   traders. Keep the sourcing note attached to the numbers. */
+.signal {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--rc);
+  padding: 22px 24px;
+  box-shadow: var(--sh);
+}
+.signal-top {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+.signal-top .t {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.signal-top .s {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+.signal-body {
+  padding-top: 18px;
+}
+/* a <dl>: FY19 and FY25 are terms, the counts are their definitions */
+.sfig {
+  margin: 0;
+}
+.srow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.srow dt {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--body);
+  width: 46px;
+  flex: none;
+}
+.srow dd {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.srow.b dd {
+  font-size: 2.05rem;
+}
+.track {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--tint-t);
+  overflow: hidden;
+  margin: 9px 0 18px 58px;
+}
+.track i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--yellow);
+  width: 100%;
+}
+.track.thin i {
+  width: 7%;
+}
+.sdelta {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.sdelta b {
+  font-size: 1.34rem;
+  letter-spacing: -0.03em;
+  color: var(--green);
+  flex: none;
+}
+.sdelta span {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--body);
+}
+.snote {
+  margin-top: 14px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--body);
+}
+.signal-foot {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--body);
+}
+.signal-foot em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ══════════════ WHAT STAYS YOURS ══════════════
+   margin-top, not its own section: the band closes the hero. It answers the
+   objection the headline provokes, so it belongs in the same breath as the
+   claim, not a scroll later. */
+.conflict {
+  background: var(--tint-y);
+  border-radius: var(--r);
+  padding: 42px;
+  margin-top: 64px;
+}
+/* statement left, the qualifier and the shared-incentive line right — a shape
+   nothing else on the page uses */
+.conflict-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 44px;
+  align-items: start;
+}
+.conflict-q {
+  font-size: clamp(1.5rem, 2.7vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.032em;
+  line-height: 1.14;
+  margin-top: 14px;
+  max-width: 16ch;
+}
+.conflict-a {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--body);
+}
+.conflict-a b {
+  color: var(--ink);
+}
+.conflict-a + .conflict-a {
+  margin-top: 16px;
+}
+/* one guarantee, sitting directly under the statement it qualifies rather than
+   in a row of its own. Not a heading — there is nothing beneath it. */
+.cline {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 18px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.conflict-foot {
+  margin-top: 20px;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--body);
+}
+.conflict-foot b {
+  color: var(--ink);
+}
+
+/* ══════════════ TWO MODELS ══════════════ */
+.models {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.model {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--rc);
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.model.feat {
+  border: 2px solid var(--yellow);
+  box-shadow: var(--sh);
+}
+.model-id {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--body);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.rec {
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.model h3 {
+  margin: 13px 0 6px;
+  font-size: 1.5rem;
+}
+.model-meta {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yellow-dk);
+}
+.model p {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--body);
+}
+.model-best {
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--body);
+}
+.model-best b {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--body);
+  margin-bottom: 6px;
+}
+
+/* ══════════════ PROOF ══════════════
+   An ordered list, stacked beside a sticky head. Boxless like the #what columns
+   on the landing page: hairlines and the numeral do the separating, so four
+   items do not become four cards. The counter comes from the markup, not CSS,
+   because the numbers are content — they are referred to in review. */
+.proof {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pi {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 18px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.pi:first-child {
+  border-top: 1px solid var(--line);
+}
+.pi .n {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--yellow-dk);
+}
+.pi h3 {
+  font-size: 1.06rem;
+  letter-spacing: -0.02em;
+}
+.pi p {
+  margin-top: 7px;
+  font-size: 0.93rem;
+  line-height: 1.58;
+  color: var(--body);
+}
+
+/* ══════════════ REGULATORY ══════════════
+   A tinted panel at the foot of the proof section, not a section of its own.
+   The heading is an h3 at 1.45rem rather than the h2's clamp up to 2.85rem — at
+   full size it read as a second headline and fought the list above it. */
+.regnote {
+  margin-top: 58px;
+  background: var(--tint-t);
+  border-radius: var(--r);
+  padding: 40px 42px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 44px;
+  align-items: start;
+}
+.regnote h3 {
+  margin-top: 12px;
+  font-size: clamp(1.28rem, 2vw, 1.45rem);
+  line-height: 1.16;
+  letter-spacing: -0.028em;
+  max-width: 16ch;
+}
+.reg {
+  display: grid;
+  gap: 16px;
+}
+.reg p {
+  font-size: 1rem;
+  line-height: 1.66;
+  color: var(--body);
+}
+.reg b {
+  color: var(--ink);
+}
+@media (max-width: 940px) {
+  .regnote {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 44px;
+    padding: 30px 26px;
+    border-radius: var(--rc);
+  }
+  .regnote h3 {
+    max-width: none;
+  }
+}
+
+/* ══════════════ APPLICATION ══════════════ */
+.form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: 52px;
+  align-items: start;
+}
+.form-aside h2 {
+  margin: 16px 0 0;
+}
+.form-aside .lede {
+  margin-top: 18px;
+}
+.aside-list {
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 13px;
+}
+.aside-item {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  color: var(--body);
+}
+.aside-item .tick {
+  margin-top: 2px;
+}
+.alt {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.alt .lbl {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--body);
+  margin-bottom: 12px;
+}
+.cal {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+  font-size: 0.97rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--yellow);
+  padding-bottom: 3px;
+  transition: 0.15s;
+}
+.cal:hover {
+  color: var(--yellow-dk);
+  gap: 13px;
+}
+.cal-note {
+  margin-top: 10px;
+  font-size: 0.86rem;
+  color: var(--body);
+}
+.reach {
+  margin-top: 24px;
+  display: grid;
+  gap: 12px;
+}
+.reach a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  background: var(--tint-t);
+  border-radius: var(--rs);
+  padding: 12px 15px;
+}
+.reach a:hover {
+  background: var(--tint-t-h);
+}
+.reach .ic {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  flex: none;
+}
+.reach .who {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+.reach a > span:last-child {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.partner-form {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--rc);
+  padding: 32px 30px;
+  box-shadow: var(--sh);
+}
+.form-err {
+  display: none;
+  background: var(--tint-r);
+  border: 1px solid var(--tint-r-line);
+  border-radius: var(--rs);
+  padding: 13px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 22px;
+}
+.form-err.on {
+  display: block;
+}
+.f-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+.f {
+  margin-bottom: 18px;
+}
+.f label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+.req {
+  color: var(--red);
+  margin-left: 2px;
+}
+.f input,
+.f select,
+.f textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--rs);
+  padding: 12px 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.f textarea {
+  min-height: 104px;
+  resize: vertical;
+  line-height: 1.55;
+}
+.f input::placeholder,
+.f textarea::placeholder {
+  color: var(--body-2);
+}
+.f input:focus,
+.f select:focus,
+.f textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px var(--ink-veil);
+}
+.f [aria-invalid="true"] {
+  border-color: var(--red);
+}
+.err {
+  display: none;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--red);
+}
+.err.on {
+  display: block;
+}
+.hint {
+  display: none;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--body);
+}
+.hint.on {
+  display: block;
+}
+/* ── custom radio and checkbox ──
+   The native controls were sized with width/height, which the OS widget does
+   not honour: it kept painting at its intrinsic size, spilling out of its flex
+   box and sitting on top of the first letter of the label. `appearance:none` is
+   the only reliable fix — once the browser stops drawing the control, the box
+   is ours and the flex gap behaves.
+
+   Equal pills that fill the form's width. flex:1 1 0 makes them the same size;
+   min-width defaults to auto, so a long label widens its pill rather than
+   clipping. */
+.checks {
+  display: flex;
+  gap: 10px;
+}
+.chk {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s;
+  background: var(--paper);
+  white-space: nowrap;
+}
+.chk:hover {
+  border-color: var(--ink);
+}
+.chk:has(input:checked) {
+  border-color: var(--ink);
+  background: var(--tint-t);
+}
+/* The checked marks are drawn with `background`, NOT `::after`. An <input> is a
+   replaced element and generates no pseudo-content — `input::after` renders in
+   no browser, so a dot built that way is simply invisible and the control looks
+   permanently unchecked. Radio uses an inset ring; checkbox uses an inline SVG.
+   --control-line is 3.15:1 on white: WCAG 1.4.11 wants 3:1 on the boundary of
+   an interactive control, and unlike a text field's border this outline IS the
+   control. Deliberately darker than the --line on the inputs beside it.
+
+   padding:0 is the load-bearing line. These sit inside a .f wrapper, so
+   `.f input{width:100%;padding:12px 14px}` was reaching them — .chk input
+   overrode the width but never the padding, and with box-sizing:border-box 14px
+   of side padding against a 19px box forces a 31px used width against a 27px
+   height. That is what turned them into oversized ellipses. */
+.chk input,
+.consent input {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  width: 17px;
+  height: 17px;
+  min-width: 0;
+  background: var(--paper);
+  border: 1.5px solid var(--control-line);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.chk input {
+  border-radius: 50%;
+}
+/* ink fill with a 4px paper ring punched in at the edge = a radio dot */
+.chk input:checked {
+  border-color: var(--ink);
+  background: var(--ink);
+  box-shadow: inset 0 0 0 4px var(--paper);
+}
+.consent {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--body);
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+.consent input {
+  border-radius: 6px;
+  margin-top: 1px;
+}
+.consent input:checked {
+  border-color: var(--ink);
+  background: var(--ink)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+    center / 11px 11px no-repeat;
+}
+.chk input:focus-visible,
+.consent input:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+.submit {
+  width: 100%;
+  margin-top: 8px;
+}
+.sub-note {
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+
+.success {
+  background: var(--tint-g);
+  border: 1px solid var(--tint-g-line);
+  border-radius: var(--rc);
+  padding: 44px 36px;
+  text-align: center;
+}
+.success .ring {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--paper);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.success h3 {
+  font-size: 1.4rem;
+}
+.success p {
+  margin-top: 12px;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: var(--body);
+}
+.ref {
+  margin-top: 20px;
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  background: var(--paper);
+  border: 1px solid var(--tint-g-line);
+  border-radius: 99px;
+  padding: 8px 16px;
+  color: var(--green);
+}
+
+/* ══════════════ FOOTER ══════════════
+   The partner page's own footer: a two-column risk block rather than the
+   landing page's four-column sitemap. The legal routes still appear — a page a
+   broker lands on directly cannot be the one page with no way to reach the
+   privacy policy. */
+.foot-in {
+  display: grid;
+  grid-template-columns: 1.9fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.foot-l img {
+  height: 38px;
+  width: auto;
+}
+.foot-l p {
+  margin-top: 22px;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--on-dark-4);
+}
+.foot-l p b {
+  color: var(--on-dark-3);
+}
+.foot-r {
+  font-family: var(--mono);
+  font-size: 0.67rem;
+  line-height: 2.1;
+  letter-spacing: 0.1em;
+  color: var(--on-dark-4);
+  text-align: right;
+}
+.foot-r span {
+  color: var(--on-dark-5);
+}
+.foot-legal {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  justify-content: flex-end;
+  font-family: var(--ff);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+}
+.foot-legal a {
+  color: var(--on-dark-3);
+  text-decoration: none;
+}
+.foot-legal a:hover {
+  color: var(--yellow);
+}
+.foot-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--on-dark-3);
+  text-decoration: none;
+}
+.foot-back:hover {
+  color: var(--yellow);
+}
+
+/* ══════════════ RESPONSIVE ══════════════ */
+@media (max-width: 980px) {
+  .phero-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .phero h1,
+  .phero .lede {
+    max-width: none;
+  }
+  .models {
+    grid-template-columns: 1fr;
+  }
+  .proof {
+    grid-template-columns: 1fr;
+  }
+  .pi,
+  .pi:nth-child(odd),
+  .pi:nth-child(even) {
+    padding: 24px 0;
+    border-left: 0;
+  }
+  .conflict {
+    margin-top: 44px;
+  }
+  .conflict-top {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .conflict-q {
+    max-width: none;
+  }
+  .foot-in {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .foot-r,
+  .foot-legal {
+    text-align: left;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .phero h1 {
+    font-size: 2rem;
+  }
+  .conflict {
+    padding: 28px 24px;
+    border-radius: var(--rc);
+  }
+  .model {
+    padding: 26px 22px;
+  }
+  .partner-form {
+    padding: 24px 20px;
+  }
+  .f-row {
+    grid-template-columns: 1fr;
+  }
+  .cta-row .btn {
+    flex: 1 1 100%;
+  }
+  .success {
+    padding: 34px 22px;
+  }
+  /* three pills cannot share ~300px of form width — stack them. 14px of
+     vertical padding puts each at 45px, over the 44px tap floor. */
+  .checks {
+    flex-direction: column;
+  }
+  .chk {
+    padding: 14px 18px;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 400px) {
+  /* "Launch Algo Trading." is inside .hl, which is white-space:nowrap — 20
+     unbreakable characters. At 1.78rem that runs 285px against 268px of usable
+     width on a 320px screen. */
+  .phero h1 {
+    font-size: 1.6rem;
+  }
+}

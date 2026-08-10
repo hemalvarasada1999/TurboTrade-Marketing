@@ -1,15 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 
+/* The design system. tokens.css derives --ink/--yellow/--line from the shadcn
+   triplets defined in :root below, so the accessibility toolbar keeps driving
+   both palettes at once — see the header comment in that file. site.css
+   carries the primitives every section shares. */
+@import "./styles/tokens.css";
+@import "./styles/site.css";
+@import "./styles/landing.css";
+@import "./styles/partner.css";
+@import "./styles/legal.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: 'Roboto Slab', serif;
-  --font-sans: 'Inter Variable', sans-serif;
-  --font-roboto-slab: 'Roboto Slab', serif;
+  /* Headings are Inter, not a serif. The new design sets every h1–h4 in the
+     same family as the body at tight negative tracking; a slab face here
+     breaks the -.034em letter-spacing the headline sizes are built around. */
+  --font-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: 'Inter Variable', "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Color Palette - Updated to match user request */
   --color-background: hsl(var(--background));
@@ -221,9 +233,12 @@
 /* ---------- Accessibility System Rules ---------- */
 
 /* Root text scaling & sticky header scroll padding */
+/* scroll-padding-top tracks --nav-h from tokens.css: the header is a fixed
+   112px capsule, so an anchor jump without this clearance lands the heading
+   underneath it. */
 html {
   font-size: calc(100% * var(--a11y-scale, 1));
-  scroll-padding-top: 80px;
+  scroll-padding-top: var(--nav-h);
 }
 
 /* Underline links mode (WCAG 1.4.1) */

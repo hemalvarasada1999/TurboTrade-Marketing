@@ -14,21 +14,26 @@ import Upcoming from "./pages/Upcoming";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import AccessibilityStatement from "./pages/AccessibilityStatement";
 import BrokerPartnerProgram from "./pages/BrokerPartnerProgram";
+import { focusPageStart } from "@/lib/scroll";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  /* Land every new route at the top, instantly.
+     This used to smooth-scroll. React Router renders the incoming route at
+     whatever offset the outgoing one was left at, so a visitor who clicked
+     "Privacy policy" from the footer watched a correct page scroll itself upward
+     for half a second before settling. The arrival animation is now the
+     .page-rise transition on the layout instead — see styles/site.css.
+
+     The focus call is what restores the keyboard position (WCAG 2.4.3), and it
+     has to use preventScroll or it fights whatever put us at the top. */
   function ScrollToTopRouteReset() {
     const { pathname } = useLocation();
     useEffect(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      const target =
-        document.getElementById("main-content") ||
-        (document.querySelector("h1") as HTMLElement | null);
-      if (target) {
-        target.focus();
-      }
+      window.scrollTo(0, 0);
+      focusPageStart();
     }, [pathname]);
     return null;
   }

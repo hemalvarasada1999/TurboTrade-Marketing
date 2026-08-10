@@ -1,0 +1,185 @@
+/* ══════════════ LEGAL & CONTACT PAGES ══════════════
+   Contact, Disclaimer, Privacy, Terms, the Accessibility Statement and the
+   Refund Policy. All six render through LegalPageLayout, so styling that one
+   wrapper puts every one of them on the new design.
+
+   WHY THESE PAGES ARE NOT WRAPPED IN `.site` LIKE THE LANDING PAGE IS.
+   The `.site` scope in site.css carries element-level resets for h1–h4, and the
+   heading one sets the design's clamped display sizes. Those resets are
+   unlayered, and every heading inside these pages is sized by a Tailwind utility
+   (`text-base sm:text-lg`, `text-2xl`) which lives in @layer utilities —
+   unlayered always beats layered, so `.site` would blow every "3. Nature of
+   Services" heading up to a 2.85rem display size. Hence a separate `.legal-page`
+   scope that adopts the palette, the type family and the surfaces, but leaves
+   the content's own size hierarchy alone.
+
+   The rules below that reach for Tailwind class names (`.text-primary`,
+   `.bg-card`, `.rounded-xl`) are deliberate and contained to this scope. The
+   page bodies are ~1,300 lines of existing legal copy that must not be reworded
+   to be restyled, and retinting the handful of utilities they actually use is
+   the smallest change that gets them onto the new palette. */
+
+.legal-page {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ff);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── the head band ──
+   The same gradient as the landing hero and the partner hero, so a visitor who
+   clicks "Privacy policy" in the footer lands somewhere that is obviously the
+   same site. Bottom hairline, because the body below it is plain paper. */
+.legal-head {
+  padding: calc(var(--nav-h) + 34px) 0 42px;
+  border-bottom: 1px solid var(--line);
+  background: radial-gradient(120% 80% at 84% 6%, var(--tint-y) 0%, transparent 58%),
+    linear-gradient(180deg, var(--paper) 0%, var(--tint-t) 100%);
+}
+.legal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--body);
+  text-decoration: none;
+  transition: 0.15s ease;
+}
+.legal-back:hover {
+  color: var(--ink);
+}
+.legal-back svg {
+  flex: none;
+  transition: transform 0.15s ease;
+}
+.legal-back:hover svg {
+  transform: translateX(-3px);
+}
+.legal-head .eyebrow {
+  margin-top: 26px;
+}
+/* (0,1,1) and unlayered, so it wins over the `text-2xl sm:text-3xl` the pages
+   put on their own <h1>. Both title shapes — a plain string and a page-supplied
+   heading node — end up at the same size. */
+.legal-head h1 {
+  margin: 13px 0 0;
+  font-family: var(--ff);
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.032em;
+  color: var(--ink);
+  max-width: 26ch;
+}
+/* the pages accent one word of the title with `text-primary`. On the head band
+   that is signal yellow on near-white — 1.8:1. --yellow-dk is 6.4:1 and reads
+   as the same accent. */
+.legal-head h1 .text-primary {
+  color: var(--yellow-dk);
+}
+.legal-lede {
+  margin: 15px 0 0;
+  font-size: 1.02rem;
+  line-height: 1.62;
+  color: var(--body);
+  max-width: 62ch;
+}
+
+/* ── the body ── */
+.legal-body {
+  padding: 48px 0 84px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--body);
+}
+.legal-body > article {
+  max-width: 900px;
+}
+
+/* Section headings. Sizes are left to the content; only the colour and the
+   design's negative tracking are applied here. */
+.legal-body h2,
+.legal-body h3,
+.legal-body h4 {
+  font-family: var(--ff);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+/* THE CONTRAST FIX. Every numbered section heading in these pages is
+   `text-primary`, which resolves to signal yellow #F2BC2B — 1.8:1 on white and
+   effectively unreadable. It was that way before the redesign. --yellow-dk is
+   the same hue dark enough to be text (6.4:1), which is exactly the role it
+   plays on the landing page's eyebrows and tags. */
+.legal-body .text-primary {
+  color: var(--yellow-dk);
+}
+.legal-body strong,
+.legal-body b {
+  color: var(--ink);
+  font-weight: 700;
+}
+/* one page hardcodes `text-slate-900`, which is a fixed near-black and survives
+   into the dark reading theme as black-on-dark */
+.legal-body .text-slate-900 {
+  color: var(--ink);
+}
+.legal-body a:not(.btn) {
+  color: var(--yellow-dk);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+.legal-body a:not(.btn):hover {
+  color: var(--ink);
+}
+.legal-body ul li::marker {
+  color: var(--yellow-dk);
+}
+
+/* ── surfaces ──
+   The content builds its panels from shadcn's <Card> and from bare
+   border/rounded utilities. Both are pulled onto the design's hairline, radius
+   and tint so a legal page's cards match a strategy tile. */
+.legal-body .bg-card,
+.legal-body .bg-background {
+  background: var(--paper);
+}
+.legal-body .bg-muted\/30,
+.legal-body .bg-muted\/20,
+.legal-body .bg-primary\/5 {
+  background: var(--tint-t);
+}
+.legal-body .bg-primary\/10 {
+  background: var(--tint-y);
+}
+.legal-body .border-border,
+.legal-body .border-primary\/20 {
+  border-color: var(--line);
+}
+.legal-body .rounded-2xl,
+.legal-body .rounded-xl {
+  border-radius: var(--rc);
+}
+.legal-body .rounded-lg {
+  border-radius: var(--rs);
+}
+/* shadcn's Card ships a `shadow-sm`; the design's card shadow is softer and
+   travels further, and matching it is what makes the two families read as one */
+.legal-body .shadow-sm {
+  box-shadow: var(--sh);
+}
+/* the lucide icons inside those panels are `text-primary` — on a --tint-y or
+   paper fill the raw yellow disappears at 16px */
+.legal-body svg.text-primary {
+  color: var(--yellow-dk);
+}
+
+@media (max-width: 940px) {
+  .legal-head {
+    padding: calc(var(--nav-h) + 18px) 0 34px;
+  }
+  .legal-body {
+    padding: 36px 0 64px;
+  }
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { focusPageStart, smoothScrollToTop } from "@/lib/scroll";
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,18 +20,13 @@ const ScrollToTopButton = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    smoothScrollToTop();
 
-    // Restore focus for keyboard navigation (WCAG 2.4.3)
-    const target =
-      document.getElementById("main-content") ||
-      (document.querySelector("h1") as HTMLElement | null);
-    if (target) {
-      target.focus();
-    }
+    /* Restore focus for keyboard navigation (WCAG 2.4.3).
+       focusPageStart uses preventScroll — a bare focus() scrolls the target into
+       view, which used to cancel the smooth scroll on the frame after it
+       started. That is why this button never actually animated. */
+    focusPageStart();
   };
 
   return (

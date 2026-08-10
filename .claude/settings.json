@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx eslint *)",
+      "Bash(npx vite *)",
+      "Bash(node -e \"console.log\\('react', require\\('./node_modules/react/package.json'\\).version\\); console.log\\('react-dom', require\\('./node_modules/react-dom/package.json'\\).version\\)\")"
+    ]
+  }
+}

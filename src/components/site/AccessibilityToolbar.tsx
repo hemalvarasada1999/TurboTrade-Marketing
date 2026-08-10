@@ -96,7 +96,15 @@ function applySettingsDOM(s: Settings) {
   }
 }
 
-export function AccessibilityToolbar() {
+type ToolbarProps = {
+  /* Replaces the trigger's default shadcn styling. The new design's header is a
+     glass capsule with its own button language (pill, hairline, --ink), and a
+     bordered rounded-lg sitting inside it reads as a leftover from the old
+     header. The panel itself is unchanged — it is a sheet on its own surface. */
+  triggerClassName?: string;
+};
+
+export function AccessibilityToolbar({ triggerClassName }: ToolbarProps = {}) {
   const [open, setOpen] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [currentReadingText, setCurrentReadingText] = useState<string>("");
@@ -167,9 +175,19 @@ export function AccessibilityToolbar() {
 
   const resetAll = () => {
     stopSpeaking();
-    const defaults = getDefaults();
-    setSettings(defaults);
-    setLiveAnnouncement("Accessibility preferences reset to system defaults.");
+    /* theme is forced back to "default", NOT taken from getDefaults().
+       getDefaults() reads the legacy `turbotrade-theme` key and returns "dark" if
+       that is what it finds — which is right on a cold load, where it restores a
+       returning visitor's choice, but wrong here. Resetting while in the dark
+       theme left the page dark, so the one control whose whole job is "put
+       everything back" was the one that did not. Site Default is white.
+
+       The legacy key does not need clearing by hand: applySettingsDOM writes
+       "light" to it for any non-dark theme, so the next reload agrees. */
+    setSettings({ ...getDefaults(), theme: "default" });
+    setLiveAnnouncement(
+      "Accessibility preferences reset. Theme set back to Site Default.",
+    );
   };
 
   const handleSpeechToggle = (enable: boolean) => {
@@ -268,20 +286,43 @@ export function AccessibilityToolbar() {
             aria-expanded={open}
             aria-controls="a11y-preferences-sheet"
             title="Accessibility preferences"
-            className="inline-flex h-8 sm:h-9 items-center justify-center gap-1.5 rounded-lg border border-border bg-background/80 px-2.5 sm:px-3 text-xs sm:text-[13px] font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer shrink-0"
+            className={
+              triggerClassName ??
+              "inline-flex h-8 sm:h-9 items-center justify-center gap-1.5 rounded-lg border border-border bg-background/80 px-2.5 sm:px-3 text-xs sm:text-[13px] font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer shrink-0"
+            }
           >
             <Accessibility
-              className="h-4 w-4 shrink-0 text-primary"
+              className={triggerClassName ? "h-4 w-4 shrink-0" : "h-4 w-4 shrink-0 text-primary"}
               aria-hidden="true"
             />
-            <span className="hidden md:inline">Accessibility</span>
+            <span className="a11y-trigger-label hidden md:inline">Accessibility</span>
           </button>
         </SheetTrigger>
 
         <SheetContent
           id="a11y-preferences-sheet"
           side="right"
-          className="w-full sm:max-w-[420px] p-0 bg-background border-l border-border flex flex-col gap-0 [&>button.absolute]:hidden z-[100]"
+          /* Sized to the phone viewport, then capped on larger screens.
+
+             `h-[100dvh]` is the load-bearing part. Sheet's `right` variant ships
+             `inset-y-0 h-full`, and `h-full` on a fixed element resolves against
+             the LARGE viewport — it ignores the browser's collapsible address and
+             tab bars. On iOS Safari and Chrome Android that put the panel's
+             footer, which holds "Reset all preferences", behind the browser
+             chrome where it could not be tapped. `dvh` tracks the visible
+             viewport, so the panel is exactly as tall as the usable screen.
+
+             `w-full` up to the `sm` breakpoint makes it full-width on a phone —
+             these are 44px-target controls in two columns and they need the whole
+             width. From `sm` up it settles at 420px as a side sheet.
+
+             No z-index here on purpose. It used to carry `z-[100]`, which was
+             below the header's 200 — that is what hid this panel's close button.
+             Passing a competing arbitrary z-class alongside the variant's own is
+             a coin toss anyway: equal specificity means the compiled stylesheet
+             order decides, not the order they appear in this attribute. The
+             stacking now lives in one place, sheetVariants in ui/sheet.tsx. */
+          className="w-full sm:max-w-[420px] h-[100dvh] max-h-[100dvh] p-0 bg-background border-l border-border flex flex-col gap-0 [&>button.absolute]:hidden"
         >
           <div className="sr-only">
             <SheetTitle>Accessibility preferences</SheetTitle>
@@ -556,7 +597,7 @@ export function AccessibilityToolbar() {
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[110] flex items-center gap-3 rounded-full border border-primary/30 bg-background/95 px-4 py-2.5 shadow-2xl backdrop-blur-md transition-all animate-in fade-in slide-in-from-bottom-4 max-w-[90vw] sm:max-w-xl"
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[920] flex items-center gap-3 rounded-full border border-primary/30 bg-background/95 px-4 py-2.5 shadow-2xl backdrop-blur-md transition-all animate-in fade-in slide-in-from-bottom-4 max-w-[90vw] sm:max-w-xl"
         >
           <div className="flex items-center gap-1.5 text-primary shrink-0">
             <Volume2 className="h-4 w-4 animate-pulse text-primary" />

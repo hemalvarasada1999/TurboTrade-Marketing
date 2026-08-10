@@ -4,29 +4,46 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TurboTrade.ai - Financial Freedom through Automated Investing</title>
+    <title>TurboTrade.ai · Trading that runs without you</title>
     <meta
       name="description"
-      content="Build wealth the smarter way with our expert-built algo trading platform. Automated investing for retail investors seeking financial freedom."
+      content="The market is open 9:15 to 3:30. You don't have to be. TurboTrade runs ready-made strategies on auto-pilot in your own broker account — your money never leaves your broker. SEBI registered. Free for five trading days, then pay per strategy."
     />
+    <meta name="author" content="TurboTrade.ai" />
+    <meta name="theme-color" content="#12313D" />
+
+    <!-- The opening illustration is the largest contentful paint on the home
+         route, so it is preloaded at the size that will actually be served.
+         Portrait phones get artwork drawn portrait rather than a centre crop of
+         the landscape file — see the comment in Curtain.tsx. -->
+    <link rel="preload" as="image" fetchpriority="high"
+          imagesrcset="/images/meditation-wide-640.webp 640w, /images/meditation-wide-900.webp 900w, /images/meditation-wide-1280.webp 1280w, /images/meditation-wide-1682.webp 1682w"
+          imagesizes="100vw" media="(orientation:landscape), (min-width:861px)">
+    <link rel="preload" as="image" fetchpriority="high"
+          imagesrcset="/images/meditation-tall-640.webp 640w, /images/meditation-tall-828.webp 828w, /images/meditation-tall-1086.webp 1086w"
+          imagesizes="100vw" media="(orientation:portrait) and (max-width:860px)">
+
+    <!-- Inter ships as a local variable font via @fontsource-variable/inter in
+         index.css. JetBrains Mono is the design's mono voice — every eyebrow,
+         registration number and caption — and is not bundled, so it loads here.
+         The page degrades to system mono without it. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="icon" type="image/png" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="description" content="Build wealth the smarter way with our expert-built algo trading platform. Automated investing for retail investors seeking financial freedom." />
-    <meta name="author" content="TurboTrade.ai" />
 
-    <meta property="og:title" content="TurboTrade.ai" />
-    <meta property="og:description" content="Build wealth the smarter way with our expert-built algo trading platform. Automated investing for retail investors seeking financial freedom." />
+    <meta property="og:title" content="TurboTrade.ai · Trading that runs without you" />
+    <meta property="og:description" content="Ready-made strategies, trading on auto-pilot in your own broker account. Your money stays with your broker. Free for five trading days. No profit share." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/turbotrade-dark.png" />
+    <meta property="og:image" content="/images/Full_dark.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@TurboTradeAi" />
-    <meta name="twitter:title" content="TurboTrade.ai" />
-    <meta name="twitter:description" content="Build wealth the smarter way with our expert-built algo trading platform. Automated investing for retail investors seeking financial freedom." />
-    <meta name="twitter:image" content="/turbotrade-dark.png" />
+    <meta name="twitter:title" content="TurboTrade.ai · Trading that runs without you" />
+    <meta name="twitter:description" content="Ready-made strategies, trading on auto-pilot in your own broker account. Your money stays with your broker. Free for five trading days. No profit share." />
+    <meta name="twitter:image" content="/images/Full_dark.png" />
   </head>
 
 <body>
@@ -35,4 +52,3 @@
 </body>
 
 </html>
-
