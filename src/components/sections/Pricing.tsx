@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { APP_ROUTE } from "@/lib/brand";
+import { APP_LOGIN_URL, APP_SIGNUP_URL } from "@/lib/brand";
 
 /* ══════════════ PRICING ══════════════
    Two cards, but a sequence rather than a tier choice — free for five days, then
@@ -61,9 +60,9 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link className="btn btn-y" to={APP_ROUTE}>
+            <a className="btn btn-y" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
               Start free
-            </Link>
+            </a>
           </div>
 
           <div className="pc">
@@ -79,9 +78,9 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link className="btn btn-o" to={APP_ROUTE}>
+            <a className="btn btn-o" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
               Log in to see prices
-            </Link>
+            </a>
           </div>
         </div>
 

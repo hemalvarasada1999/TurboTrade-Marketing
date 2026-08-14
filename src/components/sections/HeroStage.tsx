@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { APP_ROUTE, SEBI_RA_NUMBER } from "@/lib/brand";
+import { APP_SIGNUP_URL, APP_STRATEGIES_URL, SEBI_RA_NUMBER } from "@/lib/brand";
 
 /* ══════════════ HERO ══════════════
    Three bands in one screen: the claim beside a still of the product, a
@@ -90,17 +89,10 @@ export default function HeroStage({ shine = false }: Props) {
                 You don't have to be.
               </p>
               <div className="hero-cta">
-                <Link className="btn btn-y" to={APP_ROUTE}>
+                <a className="btn btn-y" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
                   Start free
-                </Link>
-                <a
-                  className="btn btn-o"
-                  href="#strategies"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById("strategies")?.scrollIntoView({ block: "start" });
-                  }}
-                >
+                </a>
+                <a className="btn btn-o" href={APP_STRATEGIES_URL} target="_blank" rel="noopener noreferrer">
                   See strategies
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6">
                     <path d="M5 12h14M13 6l6 6-6 6" />

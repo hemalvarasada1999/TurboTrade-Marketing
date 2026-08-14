@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AccessibilityToolbar } from "@/components/site/AccessibilityToolbar";
-import { APP_ROUTE } from "@/lib/brand";
+import { APP_LOGIN_URL, APP_SIGNUP_URL } from "@/lib/brand";
 import { useBrandLogo } from "@/hooks/use-brand-logo";
 
 /* ══════════════ HEADER ══════════════
@@ -129,12 +129,12 @@ const Header = ({ variant = "site" }: Props) => {
               </a>
             ) : (
               <>
-                <Link className="btn btn-o btn-sm" to={APP_ROUTE}>
+                <a className="btn btn-o btn-sm" target="_blank" rel="noopener noreferrer" href={APP_LOGIN_URL}>
                   Log in
-                </Link>
-                <Link className="btn btn-y btn-sm" to={APP_ROUTE}>
+                </a>
+                <a className="btn btn-y btn-sm" target="_blank" rel="noopener noreferrer" href={APP_SIGNUP_URL}>
                   Start free
-                </Link>
+                </a>
               </>
             )}
           </div>

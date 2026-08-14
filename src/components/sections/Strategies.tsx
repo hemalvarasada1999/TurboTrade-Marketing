@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { APP_ROUTE } from "@/lib/brand";
+import { APP_STRATEGIES_URL } from "@/lib/brand";
 
 /* ══════════════ STRATEGIES ══════════════
    The head does four jobs and each belongs to exactly one element: the deck
@@ -84,7 +83,7 @@ export default function Strategies() {
 
         <div className="tiles">
           {TILES.map((t) => (
-            <Link className="tile" to={APP_ROUTE} key={t.h}>
+            <a className="tile" href={APP_STRATEGIES_URL} key={t.h} target="_blank" rel="noopener noreferrer">
               <span className="ic">
                 <svg
                   width="21"
@@ -109,7 +108,7 @@ export default function Strategies() {
                     fenced in the roadmap last time. */}
                 <span className="sub">{t.sub}</span>
               </span>
-            </Link>
+            </a>
           ))}
         </div>
 
@@ -133,12 +132,12 @@ export default function Strategies() {
                 it: one less stacked band, and the button sits beside the reason
                 to press it. */}
             <div className="s-cta">
-              <Link className="btn btn-d" to={APP_ROUTE}>
+              <a className="btn btn-d" href={APP_STRATEGIES_URL} target="_blank" rel="noopener noreferrer">
                 Browse every strategy
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
-              </Link>
+              </a>
             </div>
           </div>
           <div>

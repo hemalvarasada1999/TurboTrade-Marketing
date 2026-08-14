@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Twitter, Mail } from "lucide-react";
-import { APP_ROUTE, SEBI_RA_NUMBER } from "@/lib/brand";
+import {
+  APP_LOGIN_URL,
+  APP_ROUTE,
+  APP_STRATEGIES_URL,
+  SEBI_RA_NUMBER,
+} from "@/lib/brand";
 import { useBrandLogo } from "@/hooks/use-brand-logo";
 
 /* ══════════════ FOOTER ══════════════
@@ -81,7 +86,9 @@ const Footer = () => {
             <h4>Platform</h4>
             <ul>
               <li>
-                <Link to={APP_ROUTE}>See the strategies</Link>
+                <a href={APP_STRATEGIES_URL} target="_blank" rel="noopener noreferrer">
+                  See the strategies
+                </a>
               </li>
               <li>
                 <Link to="/#how">How it works</Link>
@@ -93,7 +100,9 @@ const Footer = () => {
                 <Link to={APP_ROUTE}>Brokers we support</Link>
               </li>
               <li>
-                <Link to={APP_ROUTE}>Log in</Link>
+                <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
+                  Log in
+                </a>
               </li>
             </ul>
           </div> */}
