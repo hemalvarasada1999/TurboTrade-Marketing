@@ -15,6 +15,7 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import AccessibilityStatement from "./pages/AccessibilityStatement";
 import BrokerPartnerProgram from "./pages/BrokerPartnerProgram";
 import { focusPageStart } from "@/lib/scroll";
+import { useRouteAnalytics } from "@/lib/analytics";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => {
      has to use preventScroll or it fights whatever put us at the top. */
   function ScrollToTopRouteReset() {
     const { pathname } = useLocation();
+    useRouteAnalytics();
     useEffect(() => {
       window.scrollTo(0, 0);
       focusPageStart();
