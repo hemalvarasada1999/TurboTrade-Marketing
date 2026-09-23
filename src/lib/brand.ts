@@ -1,3 +1,5 @@
+import { COMPANY } from "./company";
+
 /* Brand assets and the handful of facts repeated across sections.
    Paths, not imports: these live in /public/images and are referenced by URL so
    the <picture> srcsets in the curtain can name them as plain strings. */
@@ -31,7 +33,8 @@ export const CURTAIN_TALL = [
   "/images/meditation-tall-1086.webp 1086w",
 ].join(", ");
 
-export const SEBI_RA_NUMBER = "INH000028565";
+/* The value lives in .env; see lib/company.ts. */
+export const SEBI_RA_NUMBER = COMPANY.sebiRa;
 
 /* The holding page, kept for any CTA that has no home in the app yet. A link
    that 404s costs more trust than one that says "not yet". */

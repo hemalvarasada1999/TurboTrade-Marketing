@@ -1,6 +1,7 @@
 import LegalPageLayout from "./LegalPageLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { COMPANY } from "@/lib/company";
 
 const Contact = () => {
   return (
@@ -19,10 +20,10 @@ const Contact = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-1 text-base">Email</h3>
                 <a
-                  href="mailto:inquiry@turbotrade.ai"
+                  href={`mailto:${COMPANY.email}`}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm break-all"
                 >
-                  inquiry@turbotrade.ai
+                  {COMPANY.email}
                 </a>
               </div>
             </div>
@@ -39,10 +40,10 @@ const Contact = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-1 text-base">Phone</h3>
                 <a
-                  href="tel:+919321010161"
+                  href={`tel:${COMPANY.phoneTel}`}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  +91 9321010161
+                  {COMPANY.phone}
                 </a>
               </div>
             </div>
@@ -59,7 +60,7 @@ const Contact = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-1 text-base">Address</h3>
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                  1st floor, RK Complex, KSSIDC Compound, Indra Nagar, Electronic City Phase I, Bengaluru, Karnataka 560100
+                  {COMPANY.contactAddress}
                 </p>
               </div>
             </div>

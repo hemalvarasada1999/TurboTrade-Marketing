@@ -1,4 +1,9 @@
 {
+    "redirects": [
+        { "source": "/sebi-compliance", "destination": "/disclosures", "statusCode": 301 },
+        { "source": "/risk-disclosure", "destination": "/disclaimer", "statusCode": 301 },
+        { "source": "/refund-policy", "destination": "/cancellation-refund", "statusCode": 301 }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",

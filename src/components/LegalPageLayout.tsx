@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 /* ══════════════ LEGAL PAGE LAYOUT ══════════════
-   The shell for Contact, Disclaimer, Privacy, Terms, the Accessibility
-   Statement and the Refund Policy. Six pages, one wrapper — so this is the file
-   that puts all of them on the new design.
+   The shell for the Contact page. The legal documents themselves (/legal and
+   every policy) render through pages/LegalDoc.tsx, which shares this head band
+   and adds breadcrumbs and a contents rail.
 
    Shape borrowed from the marketing pages: a tinted head band carrying the
    eyebrow, the title and the standfirst, then the copy on plain paper, then the

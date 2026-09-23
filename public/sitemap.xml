@@ -4,7 +4,9 @@
   /coming-soon) are deliberately absent: they render the same pages as
   /broker-partner-program and /upcoming, and listing both spellings splits the
   ranking between them. src/lib/analytics.ts maps the aliases to these URLs
-  with a canonical <link> for anyone who arrives on one.
+  with a canonical <link> for anyone who arrives on one. The legal redirects
+  (/sebi-compliance, /risk-disclosure, /refund-policy) are 301s in vercel.json
+  and are absent for the same reason.
 
   Keep this in step with the routes in src/App.tsx when pages are added or
   retired, and move <lastmod> forward when a page's content actually changes.
@@ -35,26 +37,62 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://turbotrade.ai/disclaimer</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://turbotrade.ai/privacy</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://turbotrade.ai/legal</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://turbotrade.ai/terms</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://turbotrade.ai/privacy</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://turbotrade.ai/cancellation-refund</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://turbotrade.ai/disclaimer</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://turbotrade.ai/grievance-redressal</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://turbotrade.ai/investor-charter</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://turbotrade.ai/disclosures</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://turbotrade.ai/complaint-board</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://turbotrade.ai/accessibility-statement</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

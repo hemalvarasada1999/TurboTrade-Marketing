@@ -117,6 +117,10 @@ const Header = ({ variant = "site" }: Props) => {
                     {item.label}
                   </a>
                 ))}
+                {/* A route, not a section: the hub that lists every policy. */}
+                <Link to="/legal" onClick={() => setMenuOpen(false)}>
+                  Legal
+                </Link>
               </nav>
             </>
           )}

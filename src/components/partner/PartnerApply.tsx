@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
+import { COMPANY } from "@/lib/company";
 
 /* ══════════════ PARTNER APPLICATION ══════════════
    The lead form. Validation, the free-mail nudge, the reference code and the
@@ -229,7 +230,7 @@ export default function PartnerApply() {
               <p className="cal-note">Exploratory, no deck. Bring your questions.</p>
 
               <div className="reach">
-                <a href="mailto:hirena@turbotrade.ai">
+                <a href={`mailto:${COMPANY.partnerEmail}`}>
                   <span className="ic">
                     <svg
                       width="14"
@@ -247,10 +248,11 @@ export default function PartnerApply() {
                     </svg>
                   </span>
                   <span>
-                    <span className="who">Email</span>hirena@turbotrade.ai
+                    <span className="who">Email</span>
+                    {COMPANY.partnerEmail}
                   </span>
                 </a>
-                <a href="tel:+919321010161">
+                <a href={`tel:${COMPANY.phoneTel}`}>
                   <span className="ic">
                     <svg
                       width="14"
@@ -267,7 +269,7 @@ export default function PartnerApply() {
                     </svg>
                   </span>
                   <span>
-                    <span className="who">Phone</span>+91 93210 10161
+                    <span className="who">Phone</span>{COMPANY.phone}
                   </span>
                 </a>
               </div>

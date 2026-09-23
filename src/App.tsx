@@ -2,23 +2,32 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./components/Contact";
-import Privacy from "./pages/Privacy";
-import RiskDisclaimer from "./pages/Disclaimer";
-import TermsCondition from "./pages/TermsCondition";
-import RefundPolicy from "./pages/RefundPolicy";
+import { LEGAL_NAV } from "./content/legal/meta";
 import Upcoming from "./pages/Upcoming";
 import ScrollToTopButton from "./components/ScrollToTopButton";
-import AccessibilityStatement from "./pages/AccessibilityStatement";
 import BrokerPartnerProgram from "./pages/BrokerPartnerProgram";
 import { focusPageStart } from "@/lib/scroll";
 import { useRouteAnalytics } from "@/lib/analytics";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 const queryClient = new QueryClient();
+
+/* The legal copy is ~120 kB of text that the home page never needs, so it is
+   split out and fetched on the first visit to any legal route. */
+const LegalDoc = lazy(() => import("./pages/LegalDoc"));
+
+/* Old or alternative spellings of legal routes. vercel.json answers these with
+   a 301 in production; these client-side redirects cover the dev server and any
+   in-app link that still uses them. */
+const LEGAL_REDIRECTS: Record<string, string> = {
+  "/sebi-compliance": "/disclosures",
+  "/risk-disclosure": "/disclaimer",
+  "/refund-policy": "/cancellation-refund",
+};
 
 const App = () => {
   /* Land every new route at the top, instantly.
@@ -53,13 +62,21 @@ const App = () => {
             <Route path="/broker-partner-program" element={<BrokerPartnerProgram />} />
             <Route path="/broker-partner" element={<BrokerPartnerProgram />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/disclaimer" element={<RiskDisclaimer />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<TermsCondition />} />
-            {/* <Route path="/refund-policy" element={<RefundPolicy />} /> */}
+            {/* /legal, /terms, /privacy, /cancellation-refund, /disclaimer,
+                /grievance-redressal, /investor-charter, /disclosures,
+                /complaint-board and /accessibility-statement */}
+            {LEGAL_NAV.map(({ slug }) => (
+              <Route key={slug} path={`/${slug}`} element={
+                  <Suspense fallback={null}>
+                    <LegalDoc slug={slug} />
+                  </Suspense>
+                } />
+            ))}
+            {Object.entries(LEGAL_REDIRECTS).map(([from, to]) => (
+              <Route key={from} path={from} element={<Navigate to={to} replace />} />
+            ))}
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/coming-soon" element={<Upcoming />} />
-            <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
