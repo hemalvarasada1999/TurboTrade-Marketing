@@ -15,6 +15,7 @@
 const env = import.meta.env;
 
 const phone = env.VITE_CONTACT_PHONE;
+const partnerPhone = env.VITE_PARTNER_PHONE;
 
 export const COMPANY = {
   entity: "EquityPulse Tech Private Limited",
@@ -32,5 +33,8 @@ export const COMPANY = {
   phone,
   /* tel: wants the number without spaces. */
   phoneTel: phone.replace(/[^\d+]/g, ""),
+  /* The broker partner programme has its own line, separate from sales. */
+  partnerPhone,
+  partnerPhoneTel: partnerPhone.replace(/[^\d+]/g, ""),
   upiHandle: env.VITE_UPI_HANDLE,
 } as const;

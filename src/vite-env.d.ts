@@ -9,6 +9,7 @@ interface ImportMetaEnv {
   readonly VITE_LEGAL_EMAIL: string;
   readonly VITE_PARTNER_EMAIL: string;
   readonly VITE_CONTACT_PHONE: string;
+  readonly VITE_PARTNER_PHONE: string;
   readonly VITE_UPI_HANDLE: string;
   readonly VITE_APP_URL?: string;
 }

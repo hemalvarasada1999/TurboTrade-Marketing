@@ -252,7 +252,7 @@ export default function PartnerApply() {
                     {COMPANY.partnerEmail}
                   </span>
                 </a>
-                <a href={`tel:${COMPANY.phoneTel}`}>
+                <a href={`tel:${COMPANY.partnerPhoneTel}`}>
                   <span className="ic">
                     <svg
                       width="14"
@@ -269,7 +269,7 @@ export default function PartnerApply() {
                     </svg>
                   </span>
                   <span>
-                    <span className="who">Phone</span>{COMPANY.phone}
+                    <span className="who">Phone</span>{COMPANY.partnerPhone}
                   </span>
                 </a>
               </div>
