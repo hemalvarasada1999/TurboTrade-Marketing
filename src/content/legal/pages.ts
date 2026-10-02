@@ -141,9 +141,9 @@ export const LEGAL_DOCS: Record<string, LegalDoc> = {
         "html": "<h3>Daily broker authentication is mandatory <span class=\"cl\">Art. 3.4</span></h3>\n<p>You must re-authenticate your Broker API session every trading day before any strategy can execute. If you hold positional (overnight or multi-session) trades and fail to authenticate before the scheduled exit or management time, <b>the entire risk of unmanaged or unexited positions falls on you</b>, including losses, margin penalties and regulatory consequences.</p>\n<h3>Static IP users <span class=\"cl\">Art. 3.5</span></h3>\n<p>If you configure your Broker API integration using a static IP, you represent that you understand API order flows, order routing, latency, token management and execution dependencies, and you are solely responsible for any misconfiguration or connectivity issue arising from that setup. Static IP allocation is currently complimentary; we may introduce a charge with prior notice <span class=\"cl\">Art. 13.17</span>.</p>\n<h3>Investing algos and basket rebalance signals <span class=\"cl\">Art. 3.6</span></h3>\n<p>For stock baskets and investing algorithms, the Platform may generate a system-generated, non-discretionary rebalance signal. It is not portfolio management or an automatic execution instruction. Whether and when to act is your decision; if you choose to act, you must authenticate on the exact day the signal is generated. Reminder alerts are a courtesy only.</p>"
       },
       {
-        "id": "free-trial-demo-and-paper-trading",
-        "heading": "7. Free trial, demo and paper trading",
-        "html": "<ul><li><b>Demo / free trial</b> <span class=\"cl\">Art. 5.2A</span> — offered at our discretion. It may include <b>real trades of short duration</b> to let you verify live broker connectivity and execution. Real trades carry real risk; any loss during a trial is yours. Scope, duration and parameters may be changed or withdrawn at any time.</li>\n<li><b>Paper trading</b> <span class=\"cl\">Art. 5.2B</span> — simulated only. No real orders are placed and no funds are at risk. Simulated fills ignore slippage, partial fills, market impact, brokerage and real liquidity, so paper results are not indicative of live performance.</li></ul>"
+        "id": "paper-trading",
+        "heading": "7. Paper trading",
+        "html": "<p>Paper trading is simulated only <span class=\"cl\">Art. 5.2B</span>. No real orders are placed and no funds are at risk. Simulated fills ignore slippage, partial fills, market impact, brokerage and real liquidity, so paper results are not indicative of live performance.</p>"
       },
       {
         "id": "additional-terms-for-automated-execution",
@@ -239,7 +239,7 @@ export const LEGAL_DOCS: Record<string, LegalDoc> = {
       {
         "id": "scope-of-this-policy",
         "heading": "1. Scope of this policy",
-        "html": "<p>This Privacy Policy explains how <b>{{ENTITY}}</b> (\"<b>EquityPulse</b>\", \"<b>TurboTrade.ai</b>\", \"<b>we</b>\") collects, uses, shares, stores and protects personal data when you visit www.turbotrade.ai, create an account, connect a broker, subscribe to the Algo Services, or contact us.</p>\n<p>It applies to website visitors, registered users, subscribers, trial and paper-trading users, and anyone who contacts us for support, billing, grievance or privacy matters. It does not cover third-party websites, brokers, payment gateways or data vendors, which follow their own policies.</p>\n<p>It is framed under the Digital Personal Data Protection Act, 2023 and the rules made under it, the Information Technology Act, 2000 and applicable rules, and the SEBI (Research Analysts) Regulations, 2014, and should be read with our <a href=\"/terms\">Terms &amp; Conditions</a> and the Algo Services Agreement <span class=\"cl\">Art. 17</span>.</p>"
+        "html": "<p>This Privacy Policy explains how <b>{{ENTITY}}</b> (\"<b>EquityPulse</b>\", \"<b>TurboTrade.ai</b>\", \"<b>we</b>\") collects, uses, shares, stores and protects personal data when you visit www.turbotrade.ai, create an account, connect a broker, subscribe to the Algo Services, or contact us.</p>\n<p>It applies to website visitors, registered users, subscribers, paper-trading users, and anyone who contacts us for support, billing, grievance or privacy matters. It does not cover third-party websites, brokers, payment gateways or data vendors, which follow their own policies.</p>\n<p>It is framed under the Digital Personal Data Protection Act, 2023 and the rules made under it, the Information Technology Act, 2000 and applicable rules, and the SEBI (Research Analysts) Regulations, 2014, and should be read with our <a href=\"/terms\">Terms &amp; Conditions</a> and the Algo Services Agreement <span class=\"cl\">Art. 17</span>.</p>"
       },
       {
         "id": "our-role",
@@ -444,38 +444,33 @@ export const LEGAL_DOCS: Record<string, LegalDoc> = {
         "html": "<ul><li>Backtests use historical data under idealised assumptions and are for information only — not a predictor of live results <span class=\"cl\">Art. 9.1–9.3</span>.</li>\n<li>Unless stated otherwise, backtests assume perfect fills at signal prices, no slippage or transaction costs, unlimited liquidity and continuous market availability. These do not hold in live markets <span class=\"cl\">9.6</span>.</li>\n<li>Paper-traded and simulated results may differ materially from live trading because of order-book impact, microstructure, capital constraints and broker processing <span class=\"cl\">9.4, 5.2B</span>.</li>\n<li>Where the Platform shows returns, it states the basis (absolute or percentage), the period, whether figures are gross of costs, and that past performance is not indicative of the future <span class=\"cl\">Art. 11.1</span>.</li>\n<li>Market data comes from exchanges, licensed vendors and third-party APIs, is not independently audited by us, and can be delayed or wrong <span class=\"cl\">11.2</span>.</li>\n<li>Unless otherwise stated, percentage returns are absolute returns. Performance for any period before a strategy's launch date is backtested and was not delivered to the public for actual trading.</li>\n<li>When strategies place market orders, different users may get different fill prices for the same signal, because of timing, liquidity and broker processing.</li></ul>\n<div class=\"note\"><b>Backtesting disclaimer</b>All simulated performance is based on historical price data and does not represent live trading. Strategy metrics are for educational and research purposes only and are not investment advice. Past performance and backtests do not guarantee future results. Trade only with funds you can afford to lose. EquityPulse / TurboTrade.ai bears no liability for investment decisions based on backtested performance.</div>"
       },
       {
-        "id": "free-trial-risk",
-        "heading": "10. Free trial risk",
-        "html": "<p>A demo or free trial may include <b>real trades of short duration</b> to verify broker connectivity and execution. These are real trades with real financial risk; any loss during a trial is yours <span class=\"cl\">Art. 5.2A</span>.</p>"
-      },
-      {
         "id": "conflict-of-interest",
-        "heading": "11. Conflict of interest",
+        "heading": "10. Conflict of interest",
         "html": "<ul><li>We comply with the RA Regulations on disclosing and managing conflicts of interest <span class=\"cl\">Art. 12.1</span>.</li>\n<li>EquityPulse and its officers, directors, employees and associates do not hold, trade in or benefit from positions in securities that are the subject of a current strategy recommendation <span class=\"cl\">12.2</span>.</li>\n<li>As of the date of the Agreement there are no material conflicts arising from connections with any issuer; any future conflict will be disclosed promptly <span class=\"cl\">12.3</span>.</li>\n<li>Our employees and associates have received no compensation from issuers whose securities are the subject of our strategies <span class=\"cl\">12.4</span>.</li>\n<li><b>Broker revenue sharing:</b> we may receive a share of brokerage from brokers empanelled on TurboTrade.ai for trades executed through the Platform. It costs you nothing extra, does not influence strategy outputs, and does not restrict your choice of broker <span class=\"cl\">12.5 · M.5</span>.</li></ul>"
       },
       {
         "id": "no-assured-returns-no-advice-no-fiduciary-relati",
-        "heading": "12. No assured returns, no advice, no fiduciary relationship",
+        "heading": "11. No assured returns, no advice, no fiduciary relationship",
         "html": "<ul><li>Any scheme or representation offering guaranteed, assured or fixed returns is prohibited by law. We make no such representation <span class=\"cl\">M.6–M.7</span>.</li>\n<li>We do not provide personalised investment, tax, legal or accounting advice <span class=\"cl\">Art. 2.2, 20</span>. Our research is not an offer or solicitation to buy or sell any security, and does not take into account your individual objectives, financial situation or needs.</li>\n<li>No fiduciary, advisory, agency or partnership relationship is created <span class=\"cl\">Art. 38</span>.</li>\n<li>You waive claims for losses suffered in connection with strategy execution; there is no recourse against EquityPulse for trading losses <span class=\"cl\">Art. 4.4 · M.8</span>.</li></ul>"
       },
       {
         "id": "limitation-of-liability-and-force-majeure",
-        "heading": "13. Limitation of liability and force majeure",
+        "heading": "12. Limitation of liability and force majeure",
         "html": "<p>Our aggregate liability is capped at the Subscription Fees (excluding the AMC / Onboarding Charge) paid in the three calendar months before the claim. We are not liable for trading losses, lost profits, indirect or consequential loss, broker or exchange failures, data errors, Force Majeure events, or your failure to monitor or intervene. The Platform is provided \"as is\" and \"as available\" <span class=\"cl\">Art. 18, 22</span>.</p>"
       },
       {
         "id": "security-warning",
-        "heading": "14. Security warning",
+        "heading": "13. Security warning",
         "html": "<div class=\"note warn\"><b>We will never ask for your passwords or OTPs.</b>No one from EquityPulse or TurboTrade.ai will ask for login credentials, passwords, OTPs or authentication details for your trading, Demat, bank or any other financial account. Never share them. Report any such request to us at <a href=\"mailto:{{EMAIL}}\">{{EMAIL}}</a> and to SEBI <span class=\"cl\">Art. 17.3 · M.15</span>.</div>"
       },
       {
         "id": "your-acknowledgement",
-        "heading": "15. Your acknowledgement",
+        "heading": "14. Your acknowledgement",
         "html": "<p>By subscribing you confirm that you <span class=\"cl\">Execution & Client Acknowledgement</span>:</p>\n<ol class=\"alpha\"><li>have read and understood the Agreement, including these risk disclosures;</li>\n<li>were not induced, coerced or misled into subscribing;</li>\n<li>accept the Blackbox nature of the strategies and the absence of any guaranteed return;</li>\n<li>accept all risks of algorithmic trading, sole responsibility for outcomes, and the daily authentication requirement;</li>\n<li>can financially sustain potential losses and have assessed your own risk tolerance and position.</li></ol>"
       },
       {
         "id": "contact",
-        "heading": "16. Contact",
+        "heading": "15. Contact",
         "html": "<dl class=\"contact\"><div><dt>Entity</dt><dd>{{ENTITY}}</dd></div><div><dt>Brand</dt><dd>TurboTrade.ai</dd></div><div><dt>CIN</dt><dd>{{CIN}}</dd></div><div><dt>SEBI Research Analyst Reg. No.</dt><dd>{{SEBI_RA}}</dd></div><div><dt>BSE Enlistment No.</dt><dd>{{BSE}}</dd></div><div><dt>Registered office</dt><dd>{{REGISTERED_OFFICE}}</dd></div><div><dt>Email</dt><dd><a href=\"mailto:{{EMAIL}}\">{{EMAIL}}</a></dd></div><div><dt>Phone</dt><dd><a href=\"tel:{{PHONE_TEL}}\">{{PHONE}}</a></dd></div><div><dt>Website</dt><dd><a href=\"https://www.turbotrade.ai\">www.turbotrade.ai</a></dd></div></dl>"
       }
     ]
