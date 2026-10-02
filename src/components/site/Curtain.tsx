@@ -79,7 +79,10 @@ export default function Curtain({ onLift }: Props) {
        feeding the scroller, and only then release the lock and reset to 0.
 
        A click is the exception. There is no momentum behind it, and a click on a
-       nav link needs scrolling to work immediately for the anchor jump. */
+       nav link needs scrolling to work immediately for the anchor jump — so the
+       lock comes off at once, but the curtain still slides up and only unmounts
+       once the transition has finished. Unmounting on the click itself made it
+       vanish in a single frame. */
     let lastFeed = 0;
     let liftedAt = 0;
     let raf = 0;
@@ -89,13 +92,20 @@ export default function Curtain({ onLift }: Props) {
       lastFeed = Date.now();
     };
 
+    /* matches the .curtain transition in site.css */
+    const SLIDE_MS = reduce ? 0 : 440;
+
+    const finish = () => {
+      setShow(false);
+      onLift?.();
+    };
+
     const release = () => {
       window.removeEventListener("wheel", feed);
       window.removeEventListener("touchmove", feed);
       window.scrollTo(0, 0); /* belt and braces — land on the hero */
       document.documentElement.classList.remove("curtained");
-      setShow(false);
-      onLift?.();
+      finish();
     };
 
     const settle = () => {
@@ -115,12 +125,14 @@ export default function Curtain({ onLift }: Props) {
       unbind();
       setUp(true);
       if (e.type === "click") {
-        release();
+        /* no scrollTo(0) here: a nav-link click is already jumping somewhere */
+        document.documentElement.classList.remove("curtained");
+        settleTimer = window.setTimeout(finish, SLIDE_MS);
         return;
       }
       window.addEventListener("wheel", feed, passive);
       window.addEventListener("touchmove", feed, passive);
-      settleTimer = window.setTimeout(settle, reduce ? 0 : 440);
+      settleTimer = window.setTimeout(settle, SLIDE_MS);
     };
 
     const bind = () => {

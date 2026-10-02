@@ -137,7 +137,7 @@ const Header = ({ variant = "site" }: Props) => {
                   Log in
                 </a>
                 <a className="btn btn-y btn-sm" target="_blank" rel="noopener noreferrer" href={APP_SIGNUP_URL}>
-                  Start free
+                  Sign up
                 </a>
               </>
             )}

@@ -310,7 +310,7 @@ header.nav.scrolled .nav-logo img {
    A hairline pill the same height as .btn-sm rather than the shadcn rounded-lg
    it ships with, so the three controls at the right of the capsule read as one
    set. The label hides below 1100px: at 980px the section links collapse into
-   the burger and the row has to fit logo + a11y + burger + "Start free". */
+   the burger and the row has to fit logo + a11y + burger + "Sign up". */
 .a11y-capsule-trigger {
   display: inline-flex;
   align-items: center;
@@ -387,13 +387,13 @@ header.nav.scrolled .nav-logo img {
   .nav-cta .btn-o {
     display: none;
   }
-  /* "Start free" is the primary action on a phone and was a 36px target */
+  /* "Sign up" is the primary action on a phone and was a 36px target */
   .nav-cta .btn-sm {
     padding: 14px 20px;
   }
 }
 /* ── the header row has to fit five things on a 360px phone ──
-   logo + accessibility + burger + "Start free" + the gaps between them. At
+   logo + accessibility + burger + "Sign up" + the gaps between them. At
    48px the logo is 120px wide (the lockup is 2.5:1), which with 26px capsule
    padding and 24px gaps came to 385px — overflowing every 375px and 360px
    handset. Most Android phones report 360. Padding, gap and logo all step

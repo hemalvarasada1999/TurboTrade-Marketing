@@ -33,6 +33,13 @@ export const CURTAIN_TALL = [
   "/images/meditation-tall-1086.webp 1086w",
 ].join(", ");
 
+/* The hero's three app screens (585×1266 WebP, light theme, sample data). */
+export const HERO_SCREENS = {
+  algos: "/images/hero/algos.webp",
+  detail: "/images/hero/detail.webp",
+  stop: "/images/hero/stop.webp",
+};
+
 /* The value lives in .env; see lib/company.ts. */
 export const SEBI_RA_NUMBER = COMPANY.sebiRa;
 
@@ -64,7 +71,7 @@ const appEntry = (next: string, fallback: string) =>
 /* "Log in" — signed in goes to the dashboard, otherwise the login form. */
 export const APP_LOGIN_URL = appEntry("/dashboard", "/auth/login");
 
-/* "Start free" — an existing session should not be asked to sign up again, so
+/* "Sign up" / "Create account" — an existing session should not be asked to sign up again, so
    it lands on the dashboard; everyone else gets the signup form. */
 export const APP_SIGNUP_URL = appEntry("/dashboard", "/auth/signup");
 

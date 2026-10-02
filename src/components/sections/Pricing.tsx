@@ -1,17 +1,15 @@
 import { APP_LOGIN_URL, APP_SIGNUP_URL } from "@/lib/brand";
 
 /* ══════════════ PRICING ══════════════
-   Two cards, but a sequence rather than a tier choice — free for five days, then
-   per strategy. The paid card deliberately shows no figure: the price varies per
-   strategy and belongs on the strategy page.
+   Pay per strategy, only on the days it places a trade. Two cards: the model,
+   and one example week showing what that means in practice. Neither shows a
+   figure — the price varies per strategy and lives on the strategy page,
+   behind the login.
 
-   The trial does not simulate anything. Real trades, real money, at the smallest
-   size the exchange allows, and the card says so — because somebody who reads
-   "free trial" and assumes no exposure finds out at the worst possible moment.
-
-   Note what is absent: "No card. Broker not connected." The broker link is
-   required on day one now. That friction moved from day six to day one and has to
-   be visible before signup, not at the connect screen. */
+   Two claims here depend on product facts. "No trade that day, nothing to pay"
+   is only true while there is no fixed annual or platform fee, and positional
+   strategies must not carry a separate per-hold-day charge. If either changes,
+   this section has to say so. */
 
 const Check = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.9" aria-hidden="true">
@@ -19,18 +17,20 @@ const Check = () => (
   </svg>
 );
 
-const TRIAL = [
-  "One strategy, at the smallest size the exchange allows",
-  "Real trades and real money, in your own broker account",
-  "Backtest every strategy, over any period you choose",
-  "No payment to start. Your broker account is connected.",
+const MODEL = [
+  "Charged only on days a strategy you subscribed to places a trade",
+  "No trade that day, nothing to pay",
+  "Each strategy is billed on its own. Add or remove any time",
+  "No profit share. Everything a strategy makes is yours",
 ];
 
-const PAID = [
-  "Real trades in your own broker account",
-  "You set the size. The stop loss is set in advance.",
-  "Stop one strategy, or all of them, at any moment",
-  "Same-day trade list, plus WhatsApp alerts",
+/* Illustrative, and the fine print says so. */
+const WEEK: { d: string; traded: boolean }[] = [
+  { d: "Mon", traded: true },
+  { d: "Tue", traded: false },
+  { d: "Wed", traded: false },
+  { d: "Thu", traded: true },
+  { d: "Fri", traded: false },
 ];
 
 export default function Pricing() {
@@ -39,21 +39,23 @@ export default function Pricing() {
       <div className="wrap">
         <div className="s-head ctr">
           <span className="eyebrow">Pricing</span>
-          <h2>One price per strategy. We take none of your profit.</h2>
+          <h2>
+            Pay only on the days <span className="hl">it trades.</span>
+          </h2>
           <p className="lede">
-            Everything a strategy makes is yours. Our price is for running it, and you pay only for
-            the ones you have switched on, month by month.
+            Every strategy is built around market structure and regime, and stays out when
+            conditions don&rsquo;t suit it. It doesn&rsquo;t over-trade, so you don&rsquo;t over-pay.
           </p>
         </div>
 
         <div className="price">
-          <div className="pc feat" id="trial">
-            <div className="nm">Free trial</div>
+          <div className="pc feat" id="account">
+            <div className="nm">Pay as you use</div>
             <div className="amt">
-              ₹0<small> · five trading days</small>
+              Per strategy<small> · per trade day</small>
             </div>
             <ul>
-              {TRIAL.map((li) => (
+              {MODEL.map((li) => (
                 <li key={li}>
                   <Check />
                   {li}
@@ -61,35 +63,45 @@ export default function Pricing() {
               ))}
             </ul>
             <a className="btn btn-y" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
-              Start free
+              Create account
             </a>
           </div>
 
-          <div className="pc">
-            <div className="nm">After the trial</div>
+          <div className="pc pr-week">
+            <div className="nm">How a week is billed</div>
             <div className="amt">
-              Per strategy<small> · every month</small>
+              2 of 5 days<small> · one strategy</small>
             </div>
-            <ul>
-              {PAID.map((li) => (
-                <li key={li}>
-                  <Check />
-                  {li}
+            <ul
+              className="pr-days"
+              aria-label="Example week: the strategy traded on Monday and Thursday and sat out Tuesday, Wednesday and Friday"
+            >
+              {WEEK.map(({ d, traded }) => (
+                <li key={d} className={traded ? "on" : "off"}>
+                  <span className="d">{d}</span>
+                  <span className="m" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={traded ? 2.6 : 2.4} strokeLinecap="round">
+                      <path d={traded ? "M3 17l6-6 4 4 8-8" : "M5 12h14"} />
+                    </svg>
+                  </span>
+                  <span className="s">{traded ? "Traded" : "Sat out"}</span>
+                  <span className="c">{traded ? "Charged" : "₹0"}</span>
                 </li>
               ))}
             </ul>
+            <p className="pr-note">
+              Quiet days aren&rsquo;t a fault. Waiting for the right conditions is part of the plan,
+              and you don&rsquo;t pay for it.
+            </p>
             <a className="btn btn-o" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
               Log in to see prices
             </a>
           </div>
         </div>
 
-        {/* Prices sit behind the login, so this line no longer promises them on
-            the open site. If a public "from ₹X" is ever agreed, this is where it
-            goes. */}
         <p className="price-fine">
-          Inside, every strategy shows its price and the money you need to run it. Brokerage,
-          exchange charges and GST are separate.
+          Example week is illustrative. Each strategy shows its price per trade day inside.
+          Brokerage, exchange charges and GST are separate.
         </p>
       </div>
     </section>

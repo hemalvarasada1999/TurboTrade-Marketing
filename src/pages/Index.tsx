@@ -10,14 +10,16 @@ import Strategies from "@/components/sections/Strategies";
 import Pricing from "@/components/sections/Pricing";
 import PartnerBand from "@/components/sections/PartnerBand";
 import Faq from "@/components/sections/Faq";
+import GetStarted from "@/components/sections/GetStarted";
 
 /* Section order is the argument, not a layout choice:
-     hero        the claim, the product still, the three steps
-     discipline  what actually happens while you're away
-     strategies  pick a style, then what you know before switching it on
-     pricing     one price per strategy, no profit share
-     partners    the one band not addressed to a retail trader
-     faq         the objections, answered candidly
+     hero         the claim, the app screens, the three steps
+     discipline   what actually happens while you're away
+     strategies   every strategy, live from the app, records locked
+     pricing      per strategy, only on the days it trades
+     partners     the one band not addressed to a retail trader
+     faq          the objections, answered candidly
+     get-started  one last ask: create an account, or log in
 
    Moving `partners` above `pricing` puts a B2B pitch between a retail visitor
    and the price. Moving `faq` above `pricing` answers objections nobody has yet. */
@@ -70,6 +72,7 @@ const Index = () => {
         <Pricing />
         <PartnerBand />
         <Faq />
+        <GetStarted />
       </main>
       <Footer />
     </div>

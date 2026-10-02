@@ -39,7 +39,7 @@ const Footer = () => {
 
             <div className="f-social">
               <a
-                href="https://in.linkedin.com/company/tradeonai"
+                href="https://www.linkedin.com/company/turbotrade"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TurboTrade on LinkedIn"

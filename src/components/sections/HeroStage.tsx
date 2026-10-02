@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { APP_SIGNUP_URL, APP_STRATEGIES_URL, SEBI_RA_NUMBER } from "@/lib/brand";
+import { APP_LOGIN_URL, APP_SIGNUP_URL, APP_STRATEGIES_URL, HERO_SCREENS, SEBI_RA_NUMBER } from "@/lib/brand";
 
 /* ══════════════ HERO ══════════════
-   Three bands in one screen: the claim beside a still of the product, a
-   three-step strip, and the trust row that ends the hero.
+   Three bands in one screen: the claim beside three app screens, a three-step
+   strip, and the trust row that ends the hero.
 
-   The panel carries role="img" and one aria-label. Assistive tech gets the
-   one-sentence description rather than two dozen orphaned fragments, and
-   everything inside it is decorative by definition — it is a screenshot drawn in
-   CSS, not a live view. Do not add real numbers to it. */
+   The phone stack carries role="img" and one aria-label. Assistive tech gets
+   the one-sentence description rather than three unlabelled images, and the
+   screens are sample data by definition. Never put performance numbers in them. */
 
 type Props = {
   /* True once the curtain has lifted. The registration badge's gold sweep is
@@ -16,6 +15,13 @@ type Props = {
      finish before anyone could see it. */
   shine?: boolean;
 };
+
+/* The floating notes around the phones, one per screen's point. */
+const CHIPS = [
+  { cls: "c1", label: "Charged only on trade days", d: "M20 6L9 17l-5-5" },
+  { cls: "c2", label: "Set lots per strategy", d: "M5 12h14M12 5v14" },
+  { cls: "c3", label: "One-tap stop", d: "M18.36 6.64a9 9 0 11-12.73 0M12 2v10" },
+];
 
 const STEPS = [
   { n: "01", h: "Connect your broker", p: "One login. Revoke any time." },
@@ -90,7 +96,7 @@ export default function HeroStage({ shine = false }: Props) {
               </p>
               <div className="hero-cta">
                 <a className="btn btn-y" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
-                  Start free
+                  Create account
                 </a>
                 <a className="btn btn-o" href={APP_STRATEGIES_URL} target="_blank" rel="noopener noreferrer">
                   See strategies
@@ -99,72 +105,51 @@ export default function HeroStage({ shine = false }: Props) {
                   </svg>
                 </a>
               </div>
-              <p className="hero-fine">Free for 5 trading days. One strategy, real trades.</p>
+              <p className="hero-fine">
+                See every strategy&rsquo;s numbers before you commit. Already have an account?{" "}
+                <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
+                  Log in
+                </a>
+              </p>
             </div>
 
             <div>
+              {/* Three app screens: the strategy page, My Algos mid-session, and
+                  the emergency stop. Every ₹ figure and the account's margin were
+                  scrubbed from the captures — they came from a real account, so
+                  do not swap in a screenshot that shows either. */}
               <div
-                className="pnl"
+                className="phones"
                 role="img"
-                aria-label="A still of the TurboTrade dashboard mid-session: three strategies running at one or two lots each, each exiting on its own rules, a quantity control set to two lots, and two open positions with a square-off button."
+                aria-label="TurboTrade app screens: a strategy page with credits charged only on trade days, seven strategies running, three of them in a trade at once, with lot controls and a pause button, and the one-tap emergency stop."
               >
-                <div className="pnl-top">
-                  <span className="lv">
-                    <span className="dot" />
-                    Live
+                <figure className="ph ph-l">
+                  <img src={HERO_SCREENS.detail} alt="" width="585" height="1266" loading="eager" decoding="async" />
+                </figure>
+                <figure className="ph ph-r">
+                  <img src={HERO_SCREENS.stop} alt="" width="585" height="1266" loading="eager" decoding="async" />
+                </figure>
+                <figure className="ph ph-c">
+                  <img src={HERO_SCREENS.algos} alt="" width="585" height="1266" fetchpriority="high" decoding="async" />
+                </figure>
+                {CHIPS.map((c) => (
+                  <span className={`ph-chip ${c.cls}`} key={c.cls}>
+                    <i aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                        <path d={c.d} />
+                      </svg>
+                    </i>
+                    {c.label}
                   </span>
-                  <span className="tm">11:40 am</span>
-                </div>
-                <div className="pnl-clock">
-                  <span>9:15</span>
-                  <span className="bar">
-                    <i />
-                  </span>
-                  <span>3:30</span>
-                </div>
-                <span className="pnl-lbl">Running</span>
-                <div className="pnl-rows">
-                  <div className="prow">
-                    <span className="dot" />
-                    Nifty momentum<span className="q">2 lots</span>
-                  </div>
-                  <div className="prow">
-                    <span className="dot" />
-                    Bank straddle<span className="q">1 lot</span>
-                  </div>
-                  <div className="prow">
-                    <span className="dot" />
-                    Delta neutral<span className="q">1 lot</span>
-                  </div>
-                </div>
-                <p className="pnl-note">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
-                  </svg>
-                  Each exits on its own rules
-                </p>
-                <div className="pnl-ctl">
-                  Quantity
-                  <span className="r qty">
-                    <i>&minus;</i>
-                    <span>2 lots</span>
-                    <i>+</i>
-                  </span>
-                </div>
-                <div className="pnl-ctl">
-                  Open positions <span className="v">2</span>
-                  <span className="r pill-btn">Square off</span>
-                </div>
+                ))}
               </div>
-              <p className="pnl-cap">Illustrative. Not live data.</p>
+              <p className="pnl-cap">App screens shown with sample data.</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* band two: the three steps, boxless. The numeral does the work a card
-          border used to — ~90px of height back, and one less thing that makes
-          the hero read like a pricing table. */}
+      {/* band two: the three steps, as white cards on the frosted strip */}
       <div className="hsteps" id="how">
         <div className="hsteps-in">
           <div className="hgrid">
@@ -183,8 +168,8 @@ export default function HeroStage({ shine = false }: Props) {
         </div>
       </div>
 
-      {/* band three: a full-bleed tinted strip, the last thing in the hero and
-          the rule that tells you the hero has finished */}
+      {/* band three: the trust points as pills, on the same frosted strip as
+          the steps — the hairline under it is what ends the hero */}
       <div className="hband">
         <p className="hband-in">
           <span>

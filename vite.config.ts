@@ -35,6 +35,20 @@ export default defineConfig(({ mode }) => {
       host: "::",
       port: 8080,
       historyApiFallback: true,
+      /* The strategy API allows only the production origins through CORS, so
+         in dev the browser calls /appapi on this server and Vite forwards it.
+         The Origin header is dropped on the way: the API rejects localhost but
+         answers a request with no Origin at all. See src/lib/strategies.ts. */
+      proxy: {
+        "/appapi": {
+          target: env.VITE_API_URL || "https://appapi.turbotrade.ai",
+          changeOrigin: true,
+          rewrite: (p: string) => p.replace(/^\/appapi/, ""),
+          configure: (proxy) => {
+            proxy.on("proxyReq", (req) => req.removeHeader("origin"));
+          },
+        },
+      },
     },
     plugins: [
       react(),

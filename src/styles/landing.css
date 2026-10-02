@@ -5,23 +5,26 @@
    tokens.css for why.
 
    Section order, and it is load-bearing for the argument:
-     stage      the claim, the product still, three steps, the trust row
-     disc       what happens while you're away
-     strategies pick a style, then the numbers
-     pricing    one price per strategy
-     partner    the one block not addressed to a retail trader
-     faq        candour lives here */
+     stage        the claim, the app screens, three steps, the trust row
+     disc         what happens while you're away
+     strategies   every strategy, live from the app, records locked
+     pricing      per strategy, only on the days it trades
+     partner      the one block not addressed to a retail trader
+     faq          candour lives here
+     get-started  the closing ask */
 
 /* ══════════════ HERO ══════════════
-   One screen, three bands: the claim and the product panel side by side, then
-   a three-step strip and a trust row along the foot. No illustration, no
-   scroll pin, no JavaScript.
+   One screen, three bands: the claim and three app screens side by side, then
+   a three-step strip and a trust row along the foot. No scroll pin, no
+   JavaScript.
 
    padding:0 is load-bearing: the global `section{padding:112px 0}` rule applies
    to this <section> too and would push the whole composition off the fold. */
 .stage {
   position: relative;
   z-index: 1;
+  /* the tilted side phones overhang the column on narrow screens */
+  overflow-x: clip;
   padding: 0;
   min-height: 100vh;
   min-height: 100svh;
@@ -86,6 +89,12 @@
   margin-top: 13px;
   font-size: 0.84rem;
   color: var(--body);
+}
+.hero-fine a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ── the registration seal ──
@@ -221,189 +230,130 @@
   line-height: 1.2;
 }
 
-/* ── the panel: a still of the product, not a live view ──
-   role="img" in the markup, so assistive tech gets one description instead of
-   two dozen orphaned fragments. Everything inside is decorative by definition. */
-.pnl {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--rc);
-  padding: 18px 18px 16px;
-  box-shadow: var(--sh);
+/* ── the app screens ──
+   Three phone frames: the strategy page tilted left, the emergency stop tilted
+   right, My Algos in front. The images are real app captures with every rupee
+   figure scrubbed; role="img" in the markup gives assistive tech one sentence
+   for the whole stack. */
+.phones {
+  position: relative;
+  height: 560px;
+  max-width: 560px;
+  margin: 0 auto;
 }
-.pnl-top {
-  display: flex;
+.ph {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  border-radius: 38px;
+  padding: 7px;
+  background: var(--ink-d);
+  box-shadow: 0 2px 4px #0b25301a, 0 30px 60px -24px #0b253073;
+}
+.ph img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 31px;
+}
+.ph-c {
+  width: 258px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.ph-l {
+  width: 218px;
+  transform: translate(-112%, -46%) rotate(-7deg);
+  z-index: 1;
+  opacity: 0.96;
+}
+.ph-r {
+  width: 218px;
+  transform: translate(12%, -46%) rotate(7deg);
+  z-index: 2;
+  opacity: 0.96;
+}
+.ph-chip {
+  position: absolute;
+  z-index: 4;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  color: var(--body);
-}
-.pnl-top .lv {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.pnl-top .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: bl 2.2s infinite;
-}
-.pnl-top .tm {
-  margin-left: auto;
-}
-.pnl-clock {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 11px;
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: var(--body);
-}
-.pnl-clock .bar {
-  flex: 1;
-  height: 5px;
+  padding: 8px 14px 8px 8px;
   border-radius: 99px;
-  background: var(--tint-t);
-  overflow: hidden;
-}
-.pnl-clock .bar i {
-  display: block;
-  height: 100%;
-  width: 38%;
-  border-radius: 99px;
-  background: var(--yellow);
-}
-.pnl-lbl {
-  display: block;
-  margin: 18px 0 8px;
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--body);
-}
-.pnl-rows {
-  display: grid;
-  gap: 6px;
-}
-.prow {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: var(--tint-t);
-  border-radius: var(--rs);
-  padding: 9px 12px;
-  font-size: 0.88rem;
-}
-.prow .dot {
-  flex: none;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-}
-.prow .q {
-  margin-left: auto;
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  color: var(--body);
-}
-.pnl-note {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 10px;
-  font-size: 0.78rem;
-  color: var(--body);
-}
-.pnl-note svg {
-  flex: none;
-  color: var(--body-2);
-}
-.pnl-ctl {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 15px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-  font-size: 0.88rem;
-  color: var(--body);
-}
-.pnl-ctl + .pnl-ctl {
-  margin-top: 11px;
-  padding-top: 0;
-  border-top: 0;
-}
-.pnl-ctl .v {
-  font-family: var(--mono);
-  font-weight: 700;
-  color: var(--ink);
-}
-.pnl-ctl .r {
-  margin-left: auto;
-}
-.qty {
-  display: inline-flex;
-  align-items: center;
+  background: var(--glass-solid);
   border: 1px solid var(--line);
-  border-radius: 99px;
-  overflow: hidden;
-  background: var(--paper);
-}
-.qty span {
-  padding: 5px 11px;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-.qty i {
-  padding: 5px 10px;
-  font-style: normal;
-  font-size: 0.88rem;
-  color: var(--body);
-  background: var(--tint-t);
-}
-.pill-btn {
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  padding: 5px 13px;
-  font-size: 0.76rem;
+  box-shadow: var(--glass-sh);
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--ink);
-  background: var(--paper);
+  white-space: nowrap;
+}
+.ph-chip i {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+}
+.ph-chip.c1 {
+  left: -2%;
+  top: 14%;
+}
+.ph-chip.c1 i {
+  background: var(--tint-g);
+  color: var(--green);
+}
+.ph-chip.c2 {
+  right: -4%;
+  top: 40%;
+}
+.ph-chip.c2 i {
+  background: var(--tint-y);
+  color: var(--yellow-dk);
+}
+.ph-chip.c3 {
+  left: 6%;
+  bottom: 9%;
+}
+.ph-chip.c3 i {
+  background: var(--tint-r);
+  color: var(--red);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ph-c {
+    animation: phUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .ph-l,
+  .ph-r {
+    animation: phIn 1s 0.12s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+@keyframes phUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -44%);
+  }
+}
+@keyframes phIn {
+  from {
+    opacity: 0;
+  }
 }
 .pnl-cap {
   margin: 10px 2px 0;
   font-family: var(--mono);
-  font-size: 0.56rem;
+  font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--body);
-  text-align: right;
-}
-@keyframes bl {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.28;
-  }
+  text-align: center;
 }
 
-/* ── band two: the three steps, boxless ──
-   A hairline band and a hairline between columns. The numeral does the work the
-   card border used to, which is ~90px of height back and one less thing that
-   makes the hero read like a pricing table. */
+/* ── band two: the three steps, as cards ──
+   White cards on a frosted strip, numbers in yellow tiles. */
 .hsteps {
   flex: none;
   border-top: 1px solid var(--line);
@@ -414,81 +364,89 @@
 .hsteps-in {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 20px 26px 18px;
+  padding: 22px 26px;
 }
 .hgrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 .hstep {
   display: flex;
-  gap: 12px;
-  align-items: baseline;
-  padding: 0 24px;
-}
-.hstep:first-child {
-  padding-left: 0;
-}
-.hstep:last-child {
-  padding-right: 0;
-}
-.hstep + .hstep {
-  border-left: 1px solid var(--line);
+  gap: 16px;
+  align-items: center;
+  padding: 18px 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--rs);
+  box-shadow: var(--sh);
 }
 .hstep .hn {
   flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+  color: var(--ink-d);
   font-family: var(--mono);
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--yellow-dk);
 }
 .hstep h2 {
   margin: 0;
-  font-size: 1.02rem;
+  font-size: 1.14rem;
   letter-spacing: -0.018em;
 }
 .hstep p {
   margin: 3px 0 0;
-  font-size: 0.88rem;
-  color: var(--body);
+  font-size: 0.92rem;
+  color: var(--ink-l);
   line-height: 1.4;
 }
 
-/* ── band three: the three things people actually worry about ──
-   A full-bleed tinted strip with a hairline top and bottom — the thing that
-   visually ends the hero. It sits outside .hsteps-in so the tint runs edge to
-   edge while the text stays on the 1180px measure.
-
-   The type is sans 0.94/600 in --ink, not the 0.72rem mono it started as: that
-   was the page's fine-print voice, which is the wrong signal for the three
-   claims that decide whether somebody signs up. */
+/* ── band three: the trust points ──
+   Light pills on the same frosted strip as the step cards; the hairline under
+   it is what tells you the hero has finished. */
 .hband {
   flex: none;
-  background: var(--tint-t);
-  border-top: 1px solid var(--line);
+  background: var(--hsteps-bg);
+  -webkit-backdrop-filter: saturate(150%) blur(8px);
+  backdrop-filter: saturate(150%) blur(8px);
   border-bottom: 1px solid var(--line);
 }
 .hband-in {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 18px 26px;
+  padding: 2px 26px 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px 40px;
+  gap: 10px 12px;
 }
 .hband-in span {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.94rem;
+  gap: 9px;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: -0.012em;
-  color: var(--ink);
+  color: var(--ink-l);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 7px 16px 7px 7px;
 }
 .hband-in svg {
   flex: none;
+  box-sizing: border-box;
+  width: 26px;
+  height: 26px;
+  padding: 5px;
+  border-radius: 50%;
   color: var(--green);
+  background: var(--tint-g);
 }
 
 /* Short laptop windows: vertical room binds long before width does. */
@@ -506,21 +464,21 @@
   .st-grid {
     gap: 40px;
   }
-  .pnl {
-    padding: 15px 15px 13px;
+  .phones {
+    height: 500px;
   }
-  .pnl-lbl {
-    margin: 14px 0 7px;
+  .ph-c {
+    width: 232px;
   }
-  .prow {
-    padding: 7px 11px;
-    font-size: 0.84rem;
+  .ph-l,
+  .ph-r {
+    width: 196px;
   }
   .hsteps-in {
-    padding: 15px 26px 14px;
+    padding: 16px 26px;
   }
   .hband-in {
-    padding: 15px 26px;
+    padding: 0 26px 18px;
   }
 }
 @media (max-width: 980px) {
@@ -537,24 +495,18 @@
   .st-copy h1 {
     max-width: 16ch;
   }
-  .pnl {
-    max-width: 460px;
+  .phones {
+    height: 520px;
   }
   .hgrid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
   }
   .hstep {
-    padding: 0;
-  }
-  .hstep + .hstep {
-    border-left: 0;
-    border-top: 1px solid var(--line);
-    padding-top: 14px;
+    padding: 14px 16px;
   }
   .hband-in {
     justify-content: flex-start;
-    gap: 12px 30px;
   }
 }
 @media (max-width: 600px) {
@@ -572,21 +524,64 @@
   .hero-cta .btn {
     flex: 1 1 100%;
   }
-  .pnl {
-    padding: 15px 15px 13px;
+  .phones {
+    height: 440px;
+    max-width: 360px;
+  }
+  .ph {
+    border-radius: 30px;
+    padding: 5px;
+  }
+  .ph img {
+    border-radius: 25px;
+  }
+  .ph-c {
+    width: 188px;
+  }
+  .ph-l,
+  .ph-r {
+    width: 140px;
+  }
+  .ph-l {
+    transform: translate(-96%, -46%) rotate(-7deg);
+  }
+  .ph-r {
+    transform: translate(-4%, -46%) rotate(7deg);
+  }
+  .ph-chip {
+    font-size: 0.74rem;
+    padding: 6px 11px 6px 6px;
+  }
+  .ph-chip i {
+    width: 20px;
+    height: 20px;
+  }
+  .ph-chip.c1 {
+    left: 0;
+    top: 4%;
+  }
+  .ph-chip.c2 {
+    right: 0;
+    top: 46%;
+  }
+  .ph-chip.c3 {
+    left: 0;
+    bottom: 3%;
   }
   .hsteps-in {
     padding: 16px 22px 18px;
   }
-  /* one per line on a phone — three claims wrapping into each other mid-phrase
-     is how they stopped being readable in the first place */
+  .hstep .hn {
+    width: 40px;
+    height: 40px;
+  }
   .hband-in {
-    flex-direction: column;
-    gap: 11px;
-    padding: 16px 22px;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 0 22px 20px;
   }
   .hband-in span {
-    font-size: 0.9rem;
+    font-size: 0.84rem;
   }
   /* this override has to live *after* the base rules, not up in the hero's
      other 600px block — same specificity, so source order decides */
@@ -607,412 +602,554 @@
     font-size: 0.73rem;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .pnl-top .dot {
-    animation: none;
-  }
-}
-
 /* ══════════════ WHILE YOU'RE AWAY ══════════════
-   Replaces three alternating text-and-card sections that between them ran three
-   full screens and said one thing. Four boxless columns carry the argument; the
-   band underneath carries the proof. Nothing here is a card — hairlines and the
-   two soft tints do the separating, which is what keeps it from reading heavy. */
+   Split head, four one-line cards, then a slim yellow strip with the four
+   things fixed before a trade opens. The same .w-head split is reused by the
+   strategies header so the two sections read as a pair. */
 .disc {
   background: var(--paper);
 }
-.disc-head {
-  max-width: 640px;
-  margin-bottom: 54px;
+.site section#what {
+  padding: 96px 0 72px;
 }
-/* the break in the markup is deliberate: it keeps "just disciplined execution."
-   whole on its own line. `.hl` is white-space:nowrap — the marker sweep is a
-   single background band, so a wrap would paint it across only part of the
-   phrase. See the 600px block for the size that keeps it inside a phone. */
-.disc-head h2 {
-  margin: 16px 0 20px;
-  max-width: 24ch;
+.w-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 24px 64px;
+  align-items: end;
+  margin-bottom: 48px;
 }
-.disc-head .lede {
-  max-width: 56ch;
+/* the break in the markup keeps "just disciplined execution." whole on its own
+   line; see the 600px block for the size that keeps it inside a phone */
+.w-head h2 {
+  margin: 14px 0 0;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
 }
-.dgrid {
+.w-head .lede {
+  margin: 0 0 6px;
+  font-size: 1.12rem;
+  color: var(--ink-l);
+  font-weight: 500;
+  max-width: 30ch;
+}
+.w-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--line);
-  padding-top: 38px;
+  gap: 18px;
 }
-.dcol {
-  padding: 0 28px;
-}
-.dcol:first-child {
-  padding-left: 0;
-}
-.dcol:last-child {
-  padding-right: 0;
-}
-.dcol + .dcol {
-  border-left: 1px solid var(--line);
-}
-.dcol .ic {
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
-  background: var(--tint-t);
-  display: grid;
-  place-items: center;
-  color: var(--ink);
-}
-.dcol h3 {
-  margin: 17px 0 8px;
-  font-size: 1.03rem;
-  letter-spacing: -0.02em;
-}
-.dcol p {
-  font-size: 0.91rem;
-  line-height: 1.55;
-  color: var(--body);
-}
-/* the band is the only filled surface in the section — soft yellow, so it reads
-   as a conclusion rather than another card in a row of cards */
-.dband {
-  margin-top: 54px;
-  background: var(--tint-y);
-  border-radius: var(--r);
-  padding: 44px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.74fr);
-  gap: 48px;
-  align-items: center;
-}
-.dband h3 {
-  font-size: 1.34rem;
-  margin: 0 0 12px;
-  max-width: 19ch;
-}
-.dband p {
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: var(--body);
-  max-width: 48ch;
-}
-/* ink fill, not yellow: the band is already --tint-y, and yellow-on-cream would
-   both muddy and compete with the hero's primary CTA */
-.dband .btn {
-  margin-top: 26px;
-}
-.dpanel {
+.w-card {
   background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: var(--rc);
-  padding: 22px 24px;
+  padding: 28px 24px 26px;
+  box-shadow: 0 1px 2px #0b25300a;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.w-card:hover {
+  transform: translateY(-2px);
   box-shadow: var(--sh);
 }
-.dpanel .hd {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--body);
-  margin-bottom: 15px;
-}
-.dpanel ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.w-card .ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--tint-y);
+  color: var(--yellow-dk);
   display: grid;
-  gap: 12px;
+  place-items: center;
 }
-.dpanel li {
+.w-card h3 {
+  margin: 22px 0 8px;
+  font-size: 1.08rem;
+  letter-spacing: -0.02em;
+}
+.w-card p {
+  margin: 0;
+  color: var(--body);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+.w-fixed {
+  margin-top: 18px;
   display: flex;
   align-items: center;
-  gap: 11px;
-  font-size: 0.92rem;
+  justify-content: space-between;
+  gap: 24px 40px;
+  flex-wrap: wrap;
+  padding: 24px 28px;
+  border-radius: var(--rc);
+  background: var(--tint-y);
+  border: 1px solid var(--tint-y-line);
 }
-.dpanel li svg {
-  flex: none;
-  color: var(--body-2);
-}
-.dpanel .fx {
-  margin-left: auto;
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+.w-fixed .hd {
+  font: 700 0.62rem/1 var(--mono);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--yellow-dk);
-  background: var(--tint-y);
+}
+.w-fixed p {
+  margin: 8px 0 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.w-fixed ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.w-fixed li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--paper);
   border-radius: 99px;
-  padding: 4px 10px;
+  padding: 10px 16px 10px 13px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 1px 2px #0b25300f;
+}
+.w-fixed li svg {
+  flex: none;
+  color: var(--yellow-dk);
+  width: 15px;
+  height: 15px;
 }
 @media (max-width: 980px) {
-  .dgrid {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 34px;
-    padding-top: 32px;
-  }
-  .dcol {
-    padding: 0 26px;
-  }
-  .dcol:nth-child(odd) {
-    padding-left: 0;
-  }
-  .dcol:nth-child(even) {
-    padding-right: 0;
-  }
-  .dcol:nth-child(3) {
-    border-left: 0;
-  }
-  .dband {
+  .w-head {
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 36px;
+    margin-bottom: 36px;
   }
-  .dband h3,
-  .dband p {
-    max-width: none;
+  .w-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 600px) {
-  .disc-head {
-    margin-bottom: 38px;
+  .site section#what {
+    padding: 64px 0 60px;
   }
   /* "disciplined execution." cannot wrap, so the type has to come down to fit
-     it inside a 390px viewport: ~21 characters against ~338px of usable width */
-  .disc-head h2 {
+     it inside a 360px viewport */
+  #what .w-head h2 {
     font-size: 1.6rem;
-    max-width: none;
   }
-  .dgrid {
-    grid-template-columns: 1fr;
-    row-gap: 0;
-    padding-top: 30px;
+  .w-grid {
+    gap: 12px;
   }
-  .dcol,
-  .dcol:nth-child(odd),
-  .dcol:nth-child(even) {
-    padding: 0;
+  .w-card {
+    padding: 20px 18px;
   }
-  .dcol + .dcol {
-    border-left: 0;
-    border-top: 1px solid var(--line);
-    margin-top: 26px;
-    padding-top: 26px;
+  .w-card h3 {
+    margin-top: 16px;
+    font-size: 1rem;
   }
-  .dband {
-    margin-top: 40px;
-    padding: 28px 24px;
-    border-radius: var(--rc);
+  .w-card p {
+    font-size: 0.88rem;
   }
-  .dpanel {
-    padding: 18px 20px;
+  .w-fixed {
+    padding: 20px;
+  }
+  .w-fixed li {
+    padding: 8px 13px 8px 11px;
+    font-size: 0.84rem;
   }
 }
 
 /* ══════════════ STRATEGIES ══════════════
-   This section carries more below the head than the others, so it gets a
-   tighter head-to-content gap than the global 56px. */
-#strategies .s-head {
-  margin-bottom: 44px;
+   A live table of every strategy (see Strategies.tsx). Six columns on a
+   laptop; below 900px each row becomes a two-column card and the .st-k labels
+   appear. Built only from tokens, so it follows the reading themes. */
+.site section#strategies {
+  padding-top: 80px;
 }
-/* Three columns, not two. At four tiles a 2x2 was square; at three the same
-   grid leaves a hole, and a 3-up needs the icon stacked above the text rather
-   than beside it or the copy column drops to ~180px on a laptop. */
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+.st-headrow {
+  margin-bottom: 32px;
 }
-@media (max-width: 880px) {
-  .tiles {
-    grid-template-columns: 1fr;
-  }
+.st-headrow h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
 }
-.tile {
+.st-table {
+  margin-top: 4px;
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--rc);
-  padding: 26px;
-  background: var(--paper);
-  transition: 0.17s;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
-  text-decoration: none;
-}
-.tile:hover {
-  border-color: var(--yellow);
+  overflow: hidden;
   box-shadow: var(--sh);
-  transform: translateY(-2px);
 }
-.tile .ic {
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
+.st-head,
+.st-row {
   display: grid;
-  place-items: center;
-  flex: none;
+  grid-template-columns:
+    minmax(170px, 1.35fr) minmax(108px, 0.9fr) minmax(108px, 0.9fr) 0.65fr 0.95fr
+    minmax(270px, 1.7fr);
+  align-items: center;
+  gap: 18px;
+  padding: 0 24px;
+}
+.st-head {
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-ll);
+  padding-top: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
   background: var(--tint-t);
+}
+.st-head .r,
+.st-num {
+  text-align: right;
+}
+.st-lockh {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 8px;
+  color: var(--yellow-dk);
+}
+.st-row {
+  color: inherit;
+  text-decoration: none;
+  min-height: 78px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s;
+}
+.st-row:last-child {
+  border-bottom: 0;
+}
+a.st-row:hover {
+  background: var(--tint-t);
+}
+.st-row:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: -2px;
+}
+.st-name {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.st-name > span:last-child {
+  white-space: nowrap;
+}
+.st-name b {
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
-.tile .tag {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
+.st-ic {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: var(--tint-t);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+}
+.st-ic svg {
+  width: 20px;
+  height: 20px;
+}
+.st-sub {
+  display: block;
+  font: 500 13px/1.4 var(--ff);
+  color: var(--body);
+  margin-top: 2px;
+}
+.st-c {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.st-spark,
+.st-eq {
+  display: block;
+  width: 100%;
+  max-width: 132px;
+  height: 32px;
+}
+.st-eq {
+  overflow: visible;
+}
+.st-eq .l {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.st-eq.up .l {
+  stroke: var(--green);
+}
+.st-eq.dn .l {
+  stroke: var(--red);
+}
+.st-eq .a {
+  opacity: 0.1;
+}
+.st-eq.up .a {
+  fill: var(--green);
+}
+.st-eq.dn .a {
+  fill: var(--red);
+}
+.st-eq .z {
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  vector-effect: non-scaling-stroke;
+}
+.st-spark .p {
+  fill: var(--green);
+}
+.st-spark .n {
+  fill: var(--red);
+}
+.st-spark .z0 {
+  fill: var(--control-line);
+}
+.st-spark .z {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.st-pos {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.st-tag {
+  font: 700 11px/1 var(--mono);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--yellow-dk);
 }
-.tile h3 {
-  margin: 6px 0 9px;
-  font-size: 1.06rem;
-  line-height: 1.24;
-}
-.tile p {
-  font-size: 0.9rem;
-  color: var(--body);
-}
-/* The text wrapper stretches and .sub is pushed to the bottom, so the three
-   hairlines land on one line across the row however unequal the bodies are.
-   Without this the shortest tile's rule floats 45px above its neighbours and
-   the row reads misaligned. */
-.tile > span:nth-child(2) {
-  flex: 1;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-}
-/* instrument names live here — readable for anyone who knows the vocabulary,
-   ignorable for the beginner the tiles are written for. Naming the tile after
-   the instrument was what fenced in the roadmap last time.
-   No rule above .sub: with the bodies cut to two sentences the hairline sat in
-   a visible gap and read as an unfinished card. */
-.tile .sub {
-  display: block;
-  margin-top: auto;
-  padding-top: 18px;
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.05em;
-  line-height: 1.55;
-  color: var(--body-2);
-}
-
-/* ── the numbers block, boxless ──
-   It was a bordered card, which put a second card shape directly under a row of
-   three and made the section read as four boxes. The page already has a
-   language for this: #what separates with hairlines and space, nothing else. So
-   the only rule here is the vertical one between the columns — a different job
-   from a horizontal band rule above the block. A rule across the top splits the
-   strategies from the numbers; a rule between the columns binds them.
-
-   No fill either: #pricing below is a full-bleed --tint-t and #what already
-   owns the --tint-y band, so a tinted surface here would echo one or muddy the
-   other. Space does the separating.
-
-   stretch, not center: a rule only as tall as the shorter column reads as a
-   stray mark. Full height makes it deliberate. */
-.nb {
-  margin-top: 66px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  align-items: stretch;
-}
-.nb > div:first-child {
-  padding-right: 54px;
-}
-.nb > div:last-child {
-  padding-left: 54px;
-  border-left: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.nb-h {
-  margin: 0;
-  font-size: clamp(1.28rem, 2.2vw, 1.55rem);
-  letter-spacing: -0.028em;
-  text-wrap: balance;
-}
-.nb-kick {
-  margin-top: 13px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--body);
-  line-height: 1.62;
-  max-width: 46ch;
-  text-wrap: pretty;
-}
-/* A 3x3 grid, not a ragged wrap. Nine labels on an even grid read as a spec
-   sheet; the same nine flowing raggedly read as more prose. This strip is also
-   a promise — do not list a metric the strategy pages do not actually show. */
-.chips {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-.chips li {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
-  line-height: 1.4;
+.st-side {
+  font: 500 14px/1.3 var(--ff);
   color: var(--ink-l);
+}
+.st-k {
+  display: none;
+}
+
+/* ── the fog glass ──
+   Real backtested figures under a light frosted pane: the colours and the
+   shape of the numbers show, the values do not read. Decoration only — the
+   figures are in the page source. */
+.st-fog {
+  position: relative;
+  display: block;
+  height: 44px;
+  border-radius: 12px;
+  overflow: hidden;
   background: var(--tint-t);
-  border-radius: 99px;
-  padding: 9px 10px;
+  border: 1px solid var(--line);
+}
+.st-fog-v {
+  position: absolute;
+  inset: 0 36px 0 8px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 6px;
+  align-items: center;
   text-align: center;
+  font: 700 14px/1 var(--ff);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  filter: blur(1.9px);
+  opacity: 0.88;
+  user-select: none;
+  pointer-events: none;
 }
-.s-cta {
-  margin-top: 26px;
+.st-fog-v b:nth-child(1) {
+  color: var(--green);
 }
-@media (max-width: 880px) {
-  /* Stacked, the button must land after the chips — the metrics are the reason
-     to press it. Both column wrappers dissolve so all four children order
-     together, and the vertical rule has nothing left to divide. */
-  .nb {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 44px;
+.st-fog-v b:nth-child(2) {
+  color: var(--red);
+}
+.st-fog-v b:nth-child(3) {
+  color: var(--ink);
+}
+.st-fog-g {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--paper) 35%, transparent) 0%,
+    color-mix(in srgb, var(--paper) 8%, transparent) 40%,
+    color-mix(in srgb, var(--paper) 40%, transparent) 62%,
+    color-mix(in srgb, var(--paper) 12%, transparent) 100%
+  );
+  -webkit-backdrop-filter: blur(1px) saturate(1.1);
+  backdrop-filter: blur(1px) saturate(1.1);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--paper) 95%, transparent),
+    inset 0 -1px 0 #0b25300a;
+}
+.st-fog-l {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 99px;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  color: var(--yellow-dk);
+  box-shadow: 0 1px 3px #0b25301f;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+a.st-row:hover .st-fog {
+  border-color: var(--tint-y-line);
+}
+a.st-row:hover .st-fog-l {
+  background: var(--yellow);
+  color: var(--ink-d);
+}
+
+/* ── loading, error and empty states ── */
+.st-bone {
+  display: block;
+  height: 14px;
+  border-radius: 99px;
+  background: var(--tint-t);
+}
+.st-bone-chart {
+  height: 32px;
+  max-width: 132px;
+  border-radius: 8px;
+}
+.st-skel .st-ic,
+.st-skel .st-bone,
+.st-skel .st-fog {
+  animation: stPulse 1.4s ease-in-out infinite;
+}
+@keyframes stPulse {
+  50% {
+    opacity: 0.45;
   }
-  .nb > div {
-    display: contents;
+}
+@media (prefers-reduced-motion: reduce) {
+  .st-skel .st-ic,
+  .st-skel .st-bone,
+  .st-skel .st-fog {
+    animation: none;
   }
-  .nb > div:first-child,
-  .nb > div:last-child {
-    padding: 0;
-    border: 0;
+}
+.st-msg {
+  padding: 28px 24px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--body);
+}
+.st-msg button {
+  margin-left: 4px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.st-msg button:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.st-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.st-login {
+  font-size: 14px;
+  color: var(--body);
+}
+.st-login a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.st-fine {
+  margin-top: 18px;
+  text-align: center;
+  font: 400 12px/1.6 var(--ff);
+  color: var(--body);
+}
+@media (max-width: 900px) {
+  .st-head {
+    display: none;
   }
-  .nb-h {
-    order: 1;
+  .st-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+    padding: 16px 18px;
+    min-height: 0;
   }
-  .nb-kick {
-    order: 2;
+  .st-name {
+    grid-column: 1 / -1;
+  }
+  .st-spark,
+  .st-eq,
+  .st-bone-chart {
     max-width: none;
-    margin-top: 0;
+    height: 34px;
   }
-  .chips {
-    order: 3;
+  .st-num {
+    text-align: left;
   }
-  .s-cta {
-    order: 4;
-    margin-top: 0;
+  .st-k {
+    display: block;
+    font: 600 10.5px/1.3 var(--mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-ll);
+    margin-bottom: 5px;
+    white-space: nowrap;
+  }
+  .st-fog {
+    grid-column: 1 / -1;
+    height: 40px;
+  }
+  .st-cta {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .st-cta .btn {
+    justify-content: center;
   }
 }
-@media (max-width: 520px) {
-  .chips {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 600px) {
+  .site section#strategies {
+    padding-top: 64px;
   }
 }
 
 /* ══════════════ PRICING ══════════════
-   Two cards, but a sequence rather than a tier choice — free for five days,
-   then per strategy. The paid card deliberately shows no figure: the price
-   varies per strategy and belongs on the strategy page. */
+   Pay per strategy, per trade day. The model on the left, an example week on
+   the right. Neither card shows a figure: the price varies per strategy and
+   belongs on the strategy page. */
 .price {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1098,6 +1235,107 @@
   margin-top: 24px;
   font-size: 0.87rem;
   color: var(--body);
+}
+
+/* ── the example week ── */
+.pr-week .pr-days {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: none;
+}
+.pr-days li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 4px 12px;
+  border-radius: var(--rs);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  text-align: center;
+}
+.pr-days .d {
+  font: 700 0.66rem/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+.pr-days .m {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.pr-days .m svg {
+  margin: 0;
+  color: inherit;
+}
+.pr-days .s {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.pr-days .c {
+  font: 700 0.62rem/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 99px;
+  padding: 4px 8px;
+}
+.pr-days .on {
+  background: var(--tint-g);
+  border-color: var(--tint-g-line);
+}
+.pr-days .on .m {
+  background: var(--green);
+  color: #fff;
+}
+.pr-days .on .c {
+  background: var(--paper);
+  color: var(--green);
+}
+.pr-days .off .m {
+  background: var(--tint-t);
+  color: var(--body-2);
+}
+.pr-days .off .s {
+  color: var(--body);
+}
+.pr-days .off .c {
+  background: var(--tint-t);
+  color: var(--ink-l);
+}
+.pr-note {
+  margin: 0;
+  flex: 1;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--body);
+}
+@media (max-width: 600px) {
+  .pr-week .pr-days {
+    gap: 5px;
+  }
+  .pr-days li {
+    padding: 11px 2px 10px;
+  }
+  .pr-days .s {
+    font-size: 0.72rem;
+  }
+  .pr-days .c {
+    font-size: 0.56rem;
+    padding: 3px 6px;
+  }
+}
+
+/* ══════════════ GET STARTED ══════════════ */
+.gs-cta {
+  justify-content: center;
 }
 
 /* ══════════════ BROKER PARTNER BAND ══════════════
@@ -1226,10 +1464,6 @@
 
 /* narrow screens: the product mockups need to breathe, not clip */
 @media (max-width: 640px) {
-  .tile {
-    padding: 22px;
-    gap: 14px;
-  }
   .pc {
     padding: 26px 22px;
   }
