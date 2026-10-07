@@ -51,11 +51,13 @@
   --tint-t: #eff5f7;
   --tint-g: #ebf6f0;
   --tint-r: #fdf0ec;
+  --tint-b: #ebf2fd;
 
   /* ── status ── */
   --green: #12805a;
   --green-d: #4fcb93;
   --red: #c03a20;
+  --blue: #1f5fc4;
   --red-d: #f08a70;
 
   /* ── dark surfaces ──
@@ -173,10 +175,12 @@ html.a11y-theme-contrast {
   --tint-t: #ffffff;
   --tint-g: #ffffff;
   --tint-r: #ffffff;
+  --tint-b: #ffffff;
 
   --green: #000000;
   --green-d: #000000;
   --red: #000000;
+  --blue: #000000;
   --red-d: #000000;
 
   --dark-surface: #ffffff;
@@ -242,10 +246,12 @@ html.a11y-theme-dark {
   --tint-t: hsl(222 30% 18%);
   --tint-g: hsl(159 25% 16%);
   --tint-r: hsl(10 30% 18%);
+  --tint-b: hsl(216 40% 20%);
 
   --green: hsl(159 55% 55%);
   --green-d: hsl(159 55% 60%);
   --red: hsl(10 75% 68%);
+  --blue: hsl(214 85% 72%);
   --red-d: hsl(10 75% 72%);
 
   --dark-surface: hsl(222 45% 8%);
@@ -317,10 +323,12 @@ html.a11y-theme-warm {
   --tint-t: hsl(40 35% 87%);
   --tint-g: hsl(90 25% 86%);
   --tint-r: hsl(15 40% 88%);
+  --tint-b: hsl(214 35% 88%);
 
   --green: hsl(140 45% 24%);
   --green-d: hsl(140 40% 34%);
   --red: hsl(5 65% 36%);
+  --blue: hsl(214 60% 34%);
   --red-d: hsl(5 60% 46%);
 
   --dark-surface: hsl(30 40% 16%);

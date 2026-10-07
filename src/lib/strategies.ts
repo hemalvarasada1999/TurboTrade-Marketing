@@ -38,7 +38,13 @@ type StrategyDescriptionDTO = {
     minimumRequiredCapital: number;
     strategy: { id: number; strategyId: string; name: string };
     instrument: { id: number; name: string };
-    brandName: string;
+    /* older responses carried the name here; it now lives in brandDetails */
+    brandName?: string | null;
+    brandDetails?: {
+      brandName: string;
+      /* e.g. "Hedge Option Selling", "Naked Option Selling", "Short Straddle" */
+      positionType: string;
+    } | null;
   };
 };
 
@@ -66,6 +72,9 @@ export type StrategyRow = {
   type: string;
   /* "Option buying" | "Option selling" */
   side: string;
+  /* null when the app has not said, or the brand is not in MOMENTUM below */
+  momentum: boolean | null;
+  hedged: boolean | null;
   minCapital: number;
   /* 12-month figures for the fogged cell, already rounded to one decimal */
   roi: number;
@@ -121,16 +130,20 @@ export async function fetchStrategies(
 }
 
 function toRow(d: StrategyDescriptionDTO, pnl: StrategyPnlDTO[]): StrategyRow {
+  const si = d.strategyInstrument;
+  const name = si.brandDetails?.brandName || si.brandName || si.strategy.name;
   const months = [...pnl]
     .sort((a, b) => a.dateTime.localeCompare(b.dateTime))
     .map((p) => p.value);
 
   return {
     id: d.id,
-    name: d.strategyInstrument.brandName || d.strategyInstrument.strategy.name,
+    name,
     index: d.strategyInstrument.instrument.name,
     type: d.type,
     side: sideOf(d.style, d.type),
+    momentum: MOMENTUM[name] ?? null,
+    hedged: hedgedOf(d.strategyInstrument.brandDetails?.positionType),
     minCapital: d.strategyInstrument.minimumRequiredCapital,
     roi: round1(d.roi),
     maxDd: round1(d.maxDd),
@@ -146,6 +159,27 @@ function toRow(d: StrategyDescriptionDTO, pnl: StrategyPnlDTO[]): StrategyRow {
 function sideOf(style: string, type: string): string {
   const s = style.replace(new RegExp(`^${type}\\s+`, "i"), "").trim();
   return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+}
+
+/* Whether a strategy trades on momentum. The API has no field for this, so it
+   is kept here by brand name; a brand the app adds before this map is updated
+   shows a dash rather than a guess. */
+const MOMENTUM: Record<string, boolean> = {
+  Venguard: true,
+  Vector: true,
+  Apex: true,
+  Gravity: false,
+  Horizon: false,
+  Nexus: false,
+  Cadence: false,
+  Inertia: false,
+};
+
+/* Only "Hedge Option Selling" pairs every sold leg with a bought one. Naked
+   selling, straddles, synthetics and plain buying all run without a hedge. */
+function hedgedOf(positionType?: string | null): boolean | null {
+  if (!positionType) return null;
+  return /\bhedge\b/i.test(positionType) && !/\bnaked\b/i.test(positionType);
 }
 
 const round1 = (n: number) => Math.round(n * 10) / 10;

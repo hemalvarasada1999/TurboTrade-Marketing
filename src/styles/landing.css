@@ -761,9 +761,10 @@
 }
 
 /* ══════════════ STRATEGIES ══════════════
-   A live table of every strategy (see Strategies.tsx). Six columns on a
-   laptop; below 900px each row becomes a two-column card and the .st-k labels
-   appear. Built only from tokens, so it follows the reading themes. */
+   A live table of every strategy (see Strategies.tsx). Eight columns on a
+   laptop; below 1180px each row becomes a card (four columns, two on phones)
+   and the .st-k labels appear. Built only from tokens, so it follows the
+   reading themes. */
 .site section#strategies {
   padding-top: 80px;
 }
@@ -785,17 +786,21 @@
 .st-row {
   display: grid;
   grid-template-columns:
-    minmax(170px, 1.35fr) minmax(108px, 0.9fr) minmax(108px, 0.9fr) 0.65fr 0.95fr
-    minmax(270px, 1.7fr);
+    /* name, equity, P&L flex; capital, logic, position and hedge are sized to
+       their longest content (₹3.2L, Non-momentum, Option selling, Without
+       hedge) so a pill never runs into the next column; the fog takes the rest */
+    minmax(136px, 1.3fr) minmax(108px, 1fr) minmax(108px, 1fr) 80px 138px 100px 116px
+    minmax(180px, 1.3fr);
   align-items: center;
-  gap: 18px;
+  gap: 14px;
   padding: 0 24px;
 }
 .st-head {
-  font: 600 11px/1 var(--mono);
+  font: 600 10.5px/1 var(--mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ink-ll);
+  white-space: nowrap;
   padding-top: 16px;
   padding-bottom: 14px;
   border-bottom: 1px solid var(--line);
@@ -810,7 +815,6 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding-left: 8px;
   color: var(--yellow-dk);
 }
 .st-row {
@@ -922,10 +926,39 @@ a.st-row:hover {
   stroke: var(--line);
   stroke-width: 1;
 }
+.st-logic,
+.st-hedge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.st-logic {
+  padding: 5px 10px;
+  border-radius: 99px;
+  font: 500 12.5px/1 var(--ff);
+}
+.st-logic.mo {
+  background: var(--tint-b);
+  color: var(--blue);
+}
+.st-logic.nm {
+  background: var(--tint-t);
+  color: var(--ink-l);
+}
+.st-hedge {
+  font: 500 13.5px/1.2 var(--ff);
+}
+.st-hedge.on {
+  color: var(--green);
+}
+.st-hedge.off {
+  color: var(--yellow-dk);
+}
 .st-pos {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 .st-tag {
   font: 700 11px/1 var(--mono);
@@ -936,14 +969,18 @@ a.st-row:hover {
 .st-side {
   font: 500 14px/1.3 var(--ff);
   color: var(--ink-l);
+  white-space: nowrap;
+}
+.st-dash {
+  color: var(--body);
 }
 .st-k {
   display: none;
 }
 
 /* ── the fog glass ──
-   Real backtested figures under a light frosted pane: the colours and the
-   shape of the numbers show, the values do not read. Decoration only — the
+   Real backtested figures under a heavy frosted pane: the blue smudges show
+   there is a number, the values cannot be read. Decoration only — the
    figures are in the page source. */
 .st-fog {
   position: relative;
@@ -956,28 +993,20 @@ a.st-row:hover {
 }
 .st-fog-v {
   position: absolute;
-  inset: 0 36px 0 8px;
+  inset: 0 34px 0 6px;
   display: grid;
   grid-template-columns: 1.15fr 1fr 1fr;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
   text-align: center;
-  font: 700 14px/1 var(--ff);
+  font: 700 13px/1 var(--ff);
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
-  filter: blur(1.9px);
-  opacity: 0.88;
+  color: var(--blue);
+  filter: blur(4.5px);
+  opacity: 0.75;
   user-select: none;
   pointer-events: none;
-}
-.st-fog-v b:nth-child(1) {
-  color: var(--green);
-}
-.st-fog-v b:nth-child(2) {
-  color: var(--red);
-}
-.st-fog-v b:nth-child(3) {
-  color: var(--ink);
 }
 .st-fog-g {
   position: absolute;
@@ -989,8 +1018,8 @@ a.st-row:hover {
     color-mix(in srgb, var(--paper) 40%, transparent) 62%,
     color-mix(in srgb, var(--paper) 12%, transparent) 100%
   );
-  -webkit-backdrop-filter: blur(1px) saturate(1.1);
-  backdrop-filter: blur(1px) saturate(1.1);
+  -webkit-backdrop-filter: blur(3px) saturate(1.1);
+  backdrop-filter: blur(3px) saturate(1.1);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--paper) 95%, transparent),
     inset 0 -1px 0 #0b25300a;
@@ -1096,24 +1125,35 @@ a.st-row:hover .st-fog-l {
   font: 400 12px/1.6 var(--ff);
   color: var(--body);
 }
-@media (max-width: 900px) {
+/* Cards. Between 720px and the full table each card is four columns — the two
+   charts side by side, then capital, logic, position and hedge in one line —
+   so a row stays short; on phones it drops to two. */
+@media (max-width: 1179px) {
   .st-head {
     display: none;
   }
   .st-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 16px;
-    padding: 16px 18px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px 18px;
+    padding: 18px 20px;
     min-height: 0;
   }
-  .st-name {
+  .st-name,
+  .st-fog {
     grid-column: 1 / -1;
+  }
+  .st-chart {
+    grid-column: span 2;
   }
   .st-spark,
   .st-eq,
   .st-bone-chart {
-    max-width: none;
+    max-width: 280px;
     height: 34px;
+  }
+  .st-skel .st-bone-chart {
+    grid-column: span 2;
   }
   .st-num {
     text-align: left;
@@ -1124,12 +1164,27 @@ a.st-row:hover .st-fog-l {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--ink-ll);
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     white-space: nowrap;
   }
   .st-fog {
-    grid-column: 1 / -1;
     height: 40px;
+  }
+}
+@media (max-width: 720px) {
+  .st-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+    padding: 16px 18px;
+  }
+  .st-chart,
+  .st-skel .st-bone-chart {
+    grid-column: auto;
+  }
+  .st-spark,
+  .st-eq,
+  .st-bone-chart {
+    max-width: none;
   }
   .st-cta {
     flex-direction: column;
