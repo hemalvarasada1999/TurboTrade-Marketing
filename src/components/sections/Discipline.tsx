@@ -1,8 +1,7 @@
 /* ══════════════ WHILE YOU'RE AWAY ══════════════
-   Fewer words, more air. A split head (claim left, one line right), four
-   one-line cards, then a slim strip naming the four things fixed before a trade
-   opens. There is no "See the strategies" button: the strategies section comes
-   straight after. */
+   Fewer words, more air. A split head (claim left, one line right), then four
+   one-line cards. There is no "See the strategies" button: the strategies
+   section comes straight after. */
 
 const CARDS = [
   {
@@ -38,23 +37,6 @@ const CARDS = [
     icon: <path d="M18.36 6.64a9 9 0 11-12.73 0M12 2v10" />,
     h: "Stop any time",
     p: "One tap pauses it and closes open trades.",
-  },
-];
-
-/* The four things fixed before a trade opens. "Fixed" is the whole point of the
-   strip — do not soften it to "configurable". */
-const FIXED = [
-  { icon: <path d="M12 4v10M8 12l4 4 4-4M4 20h16" />, label: "Entry" },
-  { icon: <path d="M12 20V10M8 12l4-4 4 4M4 4h16" />, label: "Target" },
-  { icon: <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" />, label: "Stop loss" },
-  {
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3.5 2" />
-      </>
-    ),
-    label: "Exit time",
   },
 ];
 
@@ -103,21 +85,6 @@ export default function Discipline() {
               <p>{c.p}</p>
             </div>
           ))}
-        </div>
-
-        <div className="w-fixed">
-          <div>
-            <span className="hd">Set before it goes live</span>
-            <p>Fixed when the trade opens. Never changed while it runs.</p>
-          </div>
-          <ul>
-            {FIXED.map((f) => (
-              <li key={f.label}>
-                <Icon size={16}>{f.icon}</Icon>
-                {f.label}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

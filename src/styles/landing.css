@@ -603,9 +603,8 @@
   }
 }
 /* ══════════════ WHILE YOU'RE AWAY ══════════════
-   Split head, four one-line cards, then a slim yellow strip with the four
-   things fixed before a trade opens. The same .w-head split is reused by the
-   strategies header so the two sections read as a pair. */
+   Split head, then four one-line cards. The same .w-head split is reused by
+   the strategies header so the two sections read as a pair. */
 .disc {
   background: var(--paper);
 }
@@ -671,55 +670,6 @@
   font-size: 0.93rem;
   line-height: 1.5;
 }
-.w-fixed {
-  margin-top: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px 40px;
-  flex-wrap: wrap;
-  padding: 24px 28px;
-  border-radius: var(--rc);
-  background: var(--tint-y);
-  border: 1px solid var(--tint-y-line);
-}
-.w-fixed .hd {
-  font: 700 0.62rem/1 var(--mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--yellow-dk);
-}
-.w-fixed p {
-  margin: 8px 0 0;
-  font-size: 0.98rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-.w-fixed ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.w-fixed li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--paper);
-  border-radius: 99px;
-  padding: 10px 16px 10px 13px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  box-shadow: 0 1px 2px #0b25300f;
-}
-.w-fixed li svg {
-  flex: none;
-  color: var(--yellow-dk);
-  width: 15px;
-  height: 15px;
-}
 @media (max-width: 980px) {
   .w-head {
     grid-template-columns: 1fr;
@@ -750,13 +700,6 @@
   }
   .w-card p {
     font-size: 0.88rem;
-  }
-  .w-fixed {
-    padding: 20px;
-  }
-  .w-fixed li {
-    padding: 8px 13px 8px 11px;
-    font-size: 0.84rem;
   }
 }
 
