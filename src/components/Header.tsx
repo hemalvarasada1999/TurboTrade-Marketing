@@ -136,7 +136,7 @@ const Header = ({ variant = "site" }: Props) => {
                 <a className="btn btn-o btn-sm" target="_blank" rel="noopener noreferrer" href={APP_LOGIN_URL}>
                   Log in
                 </a>
-                <a className="btn btn-y btn-sm" target="_blank" rel="noopener noreferrer" href={APP_SIGNUP_URL}>
+                <a className="btn btn-y btn-sm nav-signup" target="_blank" rel="noopener noreferrer" href={APP_SIGNUP_URL}>
                   Sign up
                 </a>
               </>
