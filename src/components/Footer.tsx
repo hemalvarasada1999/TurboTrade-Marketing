@@ -1,8 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
-import { Linkedin, Twitter, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { useBrandLogo } from "@/hooks/use-brand-logo";
 import { LEGAL_NAV } from "@/content/legal/meta";
 import { COMPANY } from "@/lib/company";
+import { SOCIAL_LINKS } from "@/lib/social";
 
 /* ══════════════ FOOTER ══════════════
    Four columns and then the disclosures. Every legal page is reachable from the
@@ -38,22 +39,18 @@ const Footer = () => {
             </div>
 
             <div className="f-social">
-              <a
-                href="https://www.linkedin.com/company/turbotrade"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TurboTrade on LinkedIn"
-              >
-                <Linkedin className="h-4 w-4" aria-hidden="true" />
-              </a>
-              <a
-                href="https://x.com/TradeOnAi"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TurboTrade on X"
-              >
-                <Twitter className="h-4 w-4" aria-hidden="true" />
-              </a>
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`TurboTrade on ${label}`}
+                  title={label}
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ))}
               <a href={`mailto:${COMPANY.email}`} aria-label="Email TurboTrade">
                 <Mail className="h-4 w-4" aria-hidden="true" />
               </a>

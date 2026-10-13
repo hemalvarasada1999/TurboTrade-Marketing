@@ -29,11 +29,15 @@ const ScrollToTopButton = () => {
     focusPageStart();
   };
 
+  /* Sits centred above the floating WhatsApp button (56px, bottom-6/right-6,
+     sm:bottom-8/right-8) with a 12px gap: 24 + 56 + 12 = 92px up, and
+     24 + (56 - 40) / 2 = 32px in. Change both together, z-index included —
+     it must stay under the opening curtain (150) like the WhatsApp button. */
   return (
     <Button
       onClick={scrollToTop}
       size="icon"
-      className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 rounded-full shadow-lg z-50 bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-[opacity,transform] duration-300 ease-out hover:cursor-pointer ${
+      className={`fixed bottom-[92px] right-8 sm:bottom-[100px] sm:right-10 rounded-full shadow-lg z-[140] bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-[opacity,transform] duration-300 ease-out hover:cursor-pointer ${
         isVisible
           ? "opacity-100 translate-y-0 pointer-events-auto hover:-translate-y-0.5 active:scale-95"
           : "opacity-0 translate-y-6 pointer-events-none"

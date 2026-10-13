@@ -143,7 +143,6 @@ export default function HeroStage({ shine = false }: Props) {
                   </span>
                 ))}
               </div>
-              <p className="pnl-cap">App screens shown with sample data.</p>
             </div>
           </div>
         </div>

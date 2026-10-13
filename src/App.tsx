@@ -9,6 +9,7 @@ import Contact from "./components/Contact";
 import { LEGAL_NAV } from "./content/legal/meta";
 import Upcoming from "./pages/Upcoming";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import WhatsAppButton from "./components/WhatsAppButton";
 import BrokerPartnerProgram from "./pages/BrokerPartnerProgram";
 import { focusPageStart } from "@/lib/scroll";
 import { useRouteAnalytics } from "@/lib/analytics";
@@ -57,6 +58,7 @@ const App = () => {
         <BrowserRouter>
           <ScrollToTopRouteReset />
           <ScrollToTopButton />
+          <WhatsAppButton />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/broker-partner-program" element={<BrokerPartnerProgram />} />

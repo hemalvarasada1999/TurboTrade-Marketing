@@ -17,6 +17,15 @@ const REQUIRED_ENV = [
   "VITE_CONTACT_PHONE",
   "VITE_PARTNER_PHONE",
   "VITE_UPI_HANDLE",
+  /* Social profiles and the WhatsApp button (src/lib/social.tsx). */
+  "VITE_SOCIAL_X_URL",
+  "VITE_SOCIAL_X_HANDLE",
+  "VITE_SOCIAL_INSTAGRAM_URL",
+  "VITE_SOCIAL_FACEBOOK_URL",
+  "VITE_SOCIAL_LINKEDIN_URL",
+  "VITE_SOCIAL_TELEGRAM_URL",
+  "VITE_SOCIAL_WHATSAPP_CHANNEL_URL",
+  "VITE_WHATSAPP_NUMBER",
 ];
 
 // https://vitejs.dev/config/

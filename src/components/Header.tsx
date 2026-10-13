@@ -117,9 +117,13 @@ const Header = ({ variant = "site" }: Props) => {
                     {item.label}
                   </a>
                 ))}
-                {/* A route, not a section: the hub that lists every policy. */}
+                {/* Routes, not sections: the hub that lists every policy, and the
+                    contact page. The burger menu renders this same list. */}
                 <Link to="/legal" onClick={() => setMenuOpen(false)}>
                   Legal
+                </Link>
+                <Link to="/contact" onClick={() => setMenuOpen(false)}>
+                  Contact us
                 </Link>
               </nav>
             </>

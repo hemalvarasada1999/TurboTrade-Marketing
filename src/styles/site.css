@@ -867,6 +867,7 @@ footer.site-footer {
 .f-social {
   margin-top: 18px;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 .f-social a {
