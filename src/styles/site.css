@@ -255,6 +255,12 @@ header.nav.scrolled .nav-in {
 }
 /* height snaps rather than animating — a 78px to 40px tween relayouts the
    whole bar every frame, and the swap is invisible at flick speed */
+/* The <picture> that swaps in the symbol on phones. Flex, not `contents`: that
+   would make its <source> a flex item too and add the link's 12px gap before the
+   logo. As a flex box it is exactly the img's size, with no inline line box. */
+.nav-logo picture {
+  display: flex;
+}
 .nav-logo img {
   height: 78px;
   width: auto;
@@ -309,8 +315,9 @@ header.nav.scrolled .nav-logo img {
 /* ── the accessibility trigger, in the capsule's own language ──
    A hairline pill the same height as .btn-sm rather than the shadcn rounded-lg
    it ships with, so the three controls at the right of the capsule read as one
-   set. The label hides below 1100px: at 980px the section links collapse into
-   the burger and the row has to fit logo + a11y + burger + "Log in". */
+   set. The label hides below 1100px, and at 980px the trigger itself moves into
+   the burger menu (.nav-a11y) so the row can carry both Log in and Sign up.
+   The partner capsule has no burger, so its trigger stays put. */
 .a11y-capsule-trigger {
   display: inline-flex;
   align-items: center;
@@ -356,6 +363,10 @@ header.nav.scrolled .nav-logo img {
   color: var(--ink);
   cursor: pointer;
 }
+/* the burger menu's Accessibility row; desktop has the capsule trigger instead */
+.nav-a11y {
+  display: none;
+}
 
 @media (max-width: 980px) {
   .nav-links {
@@ -380,37 +391,88 @@ header.nav.scrolled .nav-logo img {
   .nav-links a {
     padding: 13px 0;
   }
-  .burger {
-    display: block;
-    padding: 11px 14px;
+  /* Same row height, set apart from the section links by a hairline: it opens a
+     panel rather than going anywhere. */
+  .nav-a11y {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 6px;
+    padding: 13px 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    opacity: 0.86;
+    cursor: pointer;
+    transition: 0.15s;
   }
-  /* The row only fits one button here. The hero already leads with "Create
-     account", so the header carries "Log in" for returning users instead. */
-  .nav-cta .nav-signup {
+  .nav-a11y:hover {
+    opacity: 1;
+  }
+  .nav-a11y svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+  .a11y-capsule-trigger.a11y-in-menu {
     display: none;
   }
-  /* the remaining header button on a phone was a 36px target */
+  /* Brand on the left; menu, Log in and Sign up grouped on the right with even
+     8px gaps — the burger's auto margin does the pushing. Every control is a
+     44px tap target, and the burger takes the same hairline-on-glass surface as
+     Log in so that only Sign up carries colour. */
+  .nav-in {
+    gap: 8px;
+  }
+  .burger {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin-left: auto;
+    border: 1.6px solid var(--glass-btn-line);
+    background: var(--glass-btn);
+    transition: 0.17s ease;
+  }
+  .burger:hover {
+    border-color: var(--ink);
+    background: var(--tint-t);
+  }
+  .nav-cta {
+    gap: 8px;
+  }
   .nav-cta .btn-sm {
-    padding: 14px 20px;
+    height: 44px;
+    padding: 0 16px;
   }
 }
-/* ── the header row has to fit five things on a 360px phone ──
-   logo + accessibility + burger + "Log in" + the gaps between them. At
-   48px the logo is 120px wide (the lockup is 2.5:1), which with 26px capsule
-   padding and 24px gaps came to 385px — overflowing every 375px and 360px
-   handset. Most Android phones report 360. Padding, gap and logo all step
-   down together; changing one without the others puts the overflow back. */
+/* ── phones: symbol + burger + "Log in" + "Sign up" on one 320px row ──
+   The full lockup is 2.5:1 and cost a third of the row, so the <picture> in
+   Header.tsx swaps in the square symbol here. The link around it keeps a 44px
+   hit area.
+
+   The capsule's padding is the same scrolled and unscrolled, and so is the
+   symbol: on a phone scrolling only fades the glass, it never resizes the row.
+   5px on the right sets the Sign up pill concentric with the capsule's end. */
 @media (max-width: 760px) {
-  .nav-logo img {
-    height: 42px;
+  .nav-logo {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
   }
+  .nav-logo img,
   header.nav.scrolled .nav-logo img {
-    height: 36px;
+    height: 34px;
   }
-  .nav-in {
-    padding-left: 18px;
-    padding-right: 18px;
-    gap: 14px;
+  .nav-in,
+  header.nav.scrolled .nav-in {
+    padding: 5px 5px 5px 10px;
   }
 }
 @media (max-width: 560px) {
@@ -418,23 +480,15 @@ header.nav.scrolled .nav-logo img {
     display: none;
   }
 }
+/* At 320px the row is about 12px from full. Spacing gives way first — outer
+   gutter, gaps, button padding — and the type size never does. */
 @media (max-width: 400px) {
-  .nav-logo img {
-    height: 36px;
-  }
-  header.nav.scrolled .nav-logo img {
-    height: 32px;
-  }
-  .nav-in {
-    padding-left: 14px;
-    padding-right: 14px;
-    gap: 10px;
+  .nav-in,
+  .nav-cta {
+    gap: 6px;
   }
   .nav-cta .btn-sm {
-    padding: 14px 16px;
-  }
-  .burger {
-    padding: 11px 12px;
+    padding: 0 14px;
   }
 }
 @media (max-width: 900px) {

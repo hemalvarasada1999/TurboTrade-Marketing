@@ -10,6 +10,11 @@ import { COMPANY } from "./company";
 export const LOGO_ON_LIGHT = "/images/Full_white.png";
 export const LOGO_ON_DARK = "/images/Full_dark.png";
 
+/* The symbol on its own — the same file the favicons ship. It carries its own
+   dark tile, so it reads on either surface and needs no theme variant. The
+   header swaps to it on phones, where the full lockup costs a third of the row. */
+export const LOGO_MARK = "/android-chrome-192x192.png";
+
 /* The opening illustration, in the sizes actually served. The 2 MB masters are
    not here on purpose — they are re-export sources, not page assets. */
 export const CURTAIN_WIDE = {

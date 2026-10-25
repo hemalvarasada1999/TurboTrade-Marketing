@@ -102,10 +102,28 @@ type ToolbarProps = {
      bordered rounded-lg sitting inside it reads as a leftover from the old
      header. The panel itself is unchanged — it is a sheet on its own surface. */
   triggerClassName?: string;
+  /* Optional control from outside. On a phone the header hides this trigger and
+     opens the panel from a row in its burger menu instead, so it needs a way in
+     that is not the trigger's own click. Left unset, the toolbar owns its state. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  /* Where focus goes on close when the trigger itself is not rendered — a
+     display:none button cannot take focus, and focus would fall to <body>. */
+  returnFocusRef?: React.RefObject<HTMLElement>;
 };
 
-export function AccessibilityToolbar({ triggerClassName }: ToolbarProps = {}) {
-  const [open, setOpen] = useState(false);
+export function AccessibilityToolbar({
+  triggerClassName,
+  open: openProp,
+  onOpenChange,
+  returnFocusRef,
+}: ToolbarProps = {}) {
+  const [innerOpen, setInnerOpen] = useState(false);
+  const open = openProp ?? innerOpen;
+  const setOpen = (next: boolean) => {
+    setInnerOpen(next);
+    onOpenChange?.(next);
+  };
   const [speaking, setSpeaking] = useState(false);
   const [currentReadingText, setCurrentReadingText] = useState<string>("");
   const [readingSource, setReadingSource] = useState<string>("");
@@ -322,6 +340,11 @@ export function AccessibilityToolbar({ triggerClassName }: ToolbarProps = {}) {
              a coin toss anyway: equal specificity means the compiled stylesheet
              order decides, not the order they appear in this attribute. The
              stacking now lives in one place, sheetVariants in ui/sheet.tsx. */
+          onCloseAutoFocus={(e) => {
+            if (triggerRef.current?.getClientRects().length || !returnFocusRef?.current) return;
+            e.preventDefault();
+            returnFocusRef.current.focus();
+          }}
           className="w-full sm:max-w-[420px] h-[100dvh] max-h-[100dvh] p-0 bg-background border-l border-border flex flex-col gap-0 [&>button.absolute]:hidden"
         >
           <div className="sr-only">

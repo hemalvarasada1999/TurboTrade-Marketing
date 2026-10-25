@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AccessibilityToolbar } from "@/components/site/AccessibilityToolbar";
-import { APP_LOGIN_URL, APP_SIGNUP_URL } from "@/lib/brand";
+import { Accessibility } from "lucide-react";
+import { APP_LOGIN_URL, APP_SIGNUP_URL, LOGO_MARK } from "@/lib/brand";
 import { useBrandLogo } from "@/hooks/use-brand-logo";
 
 /* ══════════════ HEADER ══════════════
@@ -12,7 +13,9 @@ import { useBrandLogo } from "@/hooks/use-brand-logo";
 
    The accessibility control lives inside the capsule rather than in a bar of its
    own. It is a statutory feature (RPwD Act / IS 17802), so it has to be reachable
-   from every route — and this header is the one component every route renders. */
+   from every route — and this header is the one component every route renders.
+   On a phone its trigger moves into the burger menu (see site.css) so the row
+   can carry both Log in and Sign up; the panel itself is the same instance. */
 
 type NavItem = { label: string; hash: string };
 
@@ -34,6 +37,8 @@ type Props = {
 const Header = ({ variant = "site" }: Props) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [a11yOpen, setA11yOpen] = useState(false);
+  const burgerRef = useRef<HTMLButtonElement>(null);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   /* The capsule sits on paper by default, but the dark reading theme flips the
@@ -89,13 +94,20 @@ const Header = ({ variant = "site" }: Props) => {
       <header className={`nav${scrolled ? " scrolled" : ""}`}>
         <div className="nav-in">
           <Link className="nav-logo" to="/" aria-label="TurboTrade.ai home">
-            <img src={logo} alt="TurboTrade.ai" />
+            {/* Phones get the symbol alone; the breakpoint matches the 760px
+                step in site.css that sizes it. */}
+            <picture>
+              <source media="(max-width: 760px)" srcSet={LOGO_MARK} />
+              <img src={logo} alt="TurboTrade.ai" />
+            </picture>
             {variant === "partner" && <span className="brand-tag">Partners</span>}
           </Link>
 
           {variant === "site" && (
             <>
               <button
+                ref={burgerRef}
+                type="button"
                 className="burger"
                 aria-label="Menu"
                 aria-expanded={menuOpen}
@@ -125,12 +137,32 @@ const Header = ({ variant = "site" }: Props) => {
                 <Link to="/contact" onClick={() => setMenuOpen(false)}>
                   Contact us
                 </Link>
+                {/* Phone only: the capsule's own trigger is hidden there, and
+                    this row opens the same panel. */}
+                <button
+                  type="button"
+                  className="nav-a11y"
+                  aria-haspopup="dialog"
+                  aria-controls="a11y-preferences-sheet"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setA11yOpen(true);
+                  }}
+                >
+                  <Accessibility aria-hidden="true" />
+                  Accessibility
+                </button>
               </nav>
             </>
           )}
 
           <div className={`nav-cta${variant === "partner" ? " nav-cta-end" : ""}`}>
-            <AccessibilityToolbar triggerClassName="a11y-capsule-trigger" />
+            <AccessibilityToolbar
+              triggerClassName={`a11y-capsule-trigger${variant === "site" ? " a11y-in-menu" : ""}`}
+              open={a11yOpen}
+              onOpenChange={setA11yOpen}
+              returnFocusRef={burgerRef}
+            />
             {variant === "partner" ? (
               <a className="btn btn-y btn-sm" href="#apply">
                 Apply Now
