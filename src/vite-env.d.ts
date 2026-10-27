@@ -21,4 +21,7 @@ interface ImportMetaEnv {
   readonly VITE_WHATSAPP_NUMBER: string;
   readonly VITE_APP_URL?: string;
   readonly VITE_WHATSAPP_MESSAGE?: string;
+  /* Meta Pixel (src/lib/metaPixel.ts). Optional: unset means no Pixel. */
+  readonly VITE_META_PIXEL_ID?: string;
+  readonly VITE_META_PIXEL_HOSTS?: string;
 }

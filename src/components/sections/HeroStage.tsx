@@ -95,10 +95,10 @@ export default function HeroStage({ shine = false }: Props) {
                 You don't have to be.
               </p>
               <div className="hero-cta">
-                <a className="btn btn-y" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn-y" data-cta="hero" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
                   Create account
                 </a>
-                <a className="btn btn-o" href={APP_STRATEGIES_URL} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn-o" data-cta="hero" href={APP_STRATEGIES_URL} target="_blank" rel="noopener noreferrer">
                   See strategies
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6">
                     <path d="M5 12h14M13 6l6 6-6 6" />
@@ -107,7 +107,7 @@ export default function HeroStage({ shine = false }: Props) {
               </div>
               <p className="hero-fine">
                 See every strategy&rsquo;s numbers before you commit. Already have an account?{" "}
-                <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
+                <a data-cta="hero" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
                   Log in
                 </a>
               </p>

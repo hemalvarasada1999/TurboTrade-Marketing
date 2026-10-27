@@ -17,10 +17,10 @@ export default function GetStarted() {
           </p>
         </div>
         <div className="hero-cta gs-cta">
-          <a className="btn btn-y" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn-y" data-cta="get-started" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
             Create account
           </a>
-          <a className="btn btn-o" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn-o" data-cta="get-started" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
             Log in
           </a>
         </div>

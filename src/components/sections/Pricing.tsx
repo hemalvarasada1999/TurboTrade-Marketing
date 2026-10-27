@@ -62,7 +62,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <a className="btn btn-y" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-y" data-cta="pricing" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
               Create account
             </a>
           </div>
@@ -93,7 +93,7 @@ export default function Pricing() {
               Quiet days aren&rsquo;t a fault. Waiting for the right conditions is part of the plan,
               and you don&rsquo;t pay for it.
             </p>
-            <a className="btn btn-o" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-o" data-cta="pricing" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
               Log in to see prices
             </a>
           </div>

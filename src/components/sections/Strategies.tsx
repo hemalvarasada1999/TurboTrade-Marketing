@@ -171,7 +171,7 @@ function Bars({ bars }: { bars: BarShape[] }) {
 
 function Row({ s }: { s: StrategyRow }) {
   return (
-    <a className="st-row" role="row" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
+    <a className="st-row" role="row" data-cta="strategy-row" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
       <span className="st-name" role="cell">
         <span className="st-ic" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -336,13 +336,13 @@ export default function Strategies() {
         </div>
 
         <div className="st-cta">
-          <a className="btn btn-d" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn-d" data-cta="strategies" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
             Sign up to see every record
             <Arrow />
           </a>
           <span className="st-login">
             Already have an account?{" "}
-            <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
+            <a data-cta="strategies" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
               Log in
             </a>
           </span>
