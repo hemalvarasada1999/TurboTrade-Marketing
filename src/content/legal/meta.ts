@@ -12,7 +12,7 @@ export const LEGAL_NAV: { slug: string; label: string; summary: string }[] = [
   {
     "slug": "terms",
     "label": "Terms & Conditions",
-    "summary": "The rules for using TurboTrade, fees, credits and the MITC."
+    "summary": "The rules for using TurboTrade, plans and fees, and the MITC."
   },
   {
     "slug": "privacy",

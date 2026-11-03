@@ -107,7 +107,7 @@ const Lock = () => (
   </svg>
 );
 
-/* Small marks for the Logic and Hedge cells. */
+/* Small marks for the Logic cell. */
 const TrendUp = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />
@@ -117,20 +117,6 @@ const TrendUp = () => (
 const Wave = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0" />
-  </svg>
-);
-
-const ShieldCheck = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z" />
-    <path d="m8.8 12 2.2 2.2 4.2-4.4" />
-  </svg>
-);
-
-const ShieldOff = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z" />
-    <path d="M4 4l16 16" />
   </svg>
 );
 
@@ -211,17 +197,6 @@ function Row({ s }: { s: StrategyRow }) {
         <span className="st-tag">{s.type}</span>
         <span className="st-side">{s.side}</span>
       </span>
-      <span className="st-c" role="cell">
-        <span className="st-k">Hedge</span>
-        {s.hedged === null ? (
-          <span className="st-dash">—</span>
-        ) : (
-          <span className={`st-hedge ${s.hedged ? "on" : "off"}`}>
-            {s.hedged ? <ShieldCheck /> : <ShieldOff />}
-            {s.hedged ? "Hedged" : "Without hedge"}
-          </span>
-        )}
-      </span>
       <span className="st-fog" role="cell" aria-label="Return, worst drop and win rate available after sign-up">
         <span className="st-fog-v" aria-hidden="true">
           <b>{formatPct(s.roi, true)}</b>
@@ -248,10 +223,9 @@ function SkeletonRow() {
       </span>
       <span className="st-bone st-bone-chart" />
       <span className="st-bone st-bone-chart" />
-      <span className="st-bone" style={{ width: 48, justifySelf: "end" }} />
-      <span className="st-bone" style={{ width: 100 }} />
-      <span className="st-bone" style={{ width: 90 }} />
-      <span className="st-bone" style={{ width: 90 }} />
+      <span className="st-bone st-skel-c" style={{ width: 48, justifySelf: "end" }} />
+      <span className="st-bone st-skel-c" style={{ width: 100 }} />
+      <span className="st-bone st-skel-c" style={{ width: 90 }} />
       <span className="st-fog" />
     </div>
   );
@@ -304,7 +278,6 @@ export default function Strategies() {
             </span>
             <span role="columnheader">Logic</span>
             <span role="columnheader">Position type</span>
-            <span role="columnheader">Hedge</span>
             <span role="columnheader" className="st-lockh">
               <Lock />
               Return · Drop · Win rate

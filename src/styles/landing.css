@@ -898,8 +898,8 @@
 }
 
 /* ══════════════ STRATEGIES ══════════════
-   A live table of every strategy (see Strategies.tsx). Eight columns on a
-   laptop; below 1180px each row becomes a card (four columns, two on phones)
+   A live table of every strategy (see Strategies.tsx). Seven columns on a
+   laptop; below 1180px each row becomes a card (six columns, two on phones)
    and the .st-k labels appear. Built only from tokens, so it follows the
    reading themes. */
 .site section#strategies {
@@ -923,10 +923,10 @@
 .st-row {
   display: grid;
   grid-template-columns:
-    /* name, equity, P&L flex; capital, logic, position and hedge are sized to
-       their longest content (₹3.2L, Non-momentum, Option selling, Without
-       hedge) so a pill never runs into the next column; the fog takes the rest */
-    minmax(136px, 1.3fr) minmax(108px, 1fr) minmax(108px, 1fr) 80px 138px 100px 116px
+    /* name, equity, P&L flex; capital, logic and position are sized to
+       their longest content (₹3.2L, Non-momentum, Option selling)
+       so a pill never runs into the next column; the fog takes the rest */
+    minmax(136px, 1.3fr) minmax(108px, 1fr) minmax(108px, 1fr) 80px 138px 110px
     minmax(180px, 1.3fr);
   align-items: center;
   gap: 14px;
@@ -1063,14 +1063,11 @@ a.st-row:hover {
   stroke: var(--line);
   stroke-width: 1;
 }
-.st-logic,
-.st-hedge {
+.st-logic {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-}
-.st-logic {
   padding: 5px 10px;
   border-radius: 99px;
   font: 500 12.5px/1 var(--ff);
@@ -1082,15 +1079,6 @@ a.st-row:hover {
 .st-logic.nm {
   background: var(--tint-t);
   color: var(--ink-l);
-}
-.st-hedge {
-  font: 500 13.5px/1.2 var(--ff);
-}
-.st-hedge.on {
-  color: var(--green);
-}
-.st-hedge.off {
-  color: var(--yellow-dk);
 }
 .st-pos {
   display: flex;
@@ -1262,15 +1250,15 @@ a.st-row:hover .st-fog-l {
   font: 400 12px/1.6 var(--ff);
   color: var(--body);
 }
-/* Cards. Between 720px and the full table each card is four columns — the two
-   charts side by side, then capital, logic, position and hedge in one line —
+/* Cards. Between 720px and the full table each card is six columns — the two
+   charts side by side (span 3 each), then capital, logic and position in one line (span 2 each) —
    so a row stays short; on phones it drops to two. */
 @media (max-width: 1179px) {
   .st-head {
     display: none;
   }
   .st-row {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     align-items: start;
     gap: 16px 18px;
     padding: 18px 20px;
@@ -1281,7 +1269,7 @@ a.st-row:hover .st-fog-l {
     grid-column: 1 / -1;
   }
   .st-chart {
-    grid-column: span 2;
+    grid-column: span 3;
   }
   .st-spark,
   .st-eq,
@@ -1290,10 +1278,15 @@ a.st-row:hover .st-fog-l {
     height: 34px;
   }
   .st-skel .st-bone-chart {
-    grid-column: span 2;
+    grid-column: span 3;
   }
   .st-num {
     text-align: left;
+    grid-column: span 2;
+  }
+  .st-c:not(.st-chart),
+  .st-skel-c {
+    grid-column: span 2;
   }
   .st-k {
     display: block;
@@ -1317,6 +1310,14 @@ a.st-row:hover .st-fog-l {
   .st-chart,
   .st-skel .st-bone-chart {
     grid-column: auto;
+  }
+  .st-num,
+  .st-c:not(.st-chart),
+  .st-skel-c {
+    grid-column: auto;
+  }
+  .st-pos {
+    grid-column: 1 / -1;
   }
   .st-spark,
   .st-eq,
