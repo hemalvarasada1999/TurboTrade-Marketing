@@ -290,7 +290,7 @@ export default function Strategies() {
             </h2>
           </div>
           <p className="lede">
-            Switch on as many as your capital allows. Each runs at its own size, on its own rules.
+            Switch on as many as your slots and capital allow. Each runs at its own size, on its own rules.
           </p>
         </div>
 

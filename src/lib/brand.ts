@@ -80,6 +80,9 @@ export const APP_LOGIN_URL = appEntry("/dashboard", "/auth/login");
    it lands on the dashboard; everyone else gets the signup form. */
 export const APP_SIGNUP_URL = appEntry("/dashboard", "/auth/signup");
 
+/* "Pricing / Plans" CTA — lands on /plans if signed in, otherwise /auth/signup. */
+export const APP_PLANS_URL = appEntry("/plans", "/auth/signup");
+
 /* "See strategies" / "Browse every strategy" — the only pair whose fallback is
    a public page rather than a form: strategies are browsable without an
    account, so no-session visitors land on the marketplace instead of a wall. */

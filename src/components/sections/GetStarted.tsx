@@ -12,7 +12,7 @@ export default function GetStarted() {
           <span className="eyebrow">Get started</span>
           <h2>Set it up once. Then let it run.</h2>
           <p className="lede">
-            Create your account, go through every strategy and its numbers, and switch one on when
+            Create your account, go through every strategy and its numbers, then pick a plan and switch one on when
             you are ready. Already with us? Log in and pick up where you left off.
           </p>
         </div>

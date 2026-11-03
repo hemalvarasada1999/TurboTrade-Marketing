@@ -16,7 +16,7 @@ import GetStarted from "@/components/sections/GetStarted";
      hero         the claim, the app screens, the three steps
      discipline   what actually happens while you're away
      strategies   every strategy, live from the app, records locked
-     pricing      per strategy, only on the days it trades
+     pricing      plans from ₹2,999/month, no profit share
      partners     the one band not addressed to a retail trader
      faq          the objections, answered candidly
      get-started  one last ask: create an account, or log in

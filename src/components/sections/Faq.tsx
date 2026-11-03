@@ -21,11 +21,15 @@ const QA: { q: string; a: string; open?: boolean }[] = [
   },
   {
     q: "What do I get when I sign up, and how am I charged?",
-    a: "Every strategy page, in full: its record, its worst drawdown, its price and the money it needs to run. Nothing trades until you connect your broker, pick a strategy and set your size. After that you pay per strategy, only on the days it places a trade. Strategies wait for conditions that suit them, so a quiet week costs you nothing. That is by design, not a fault.",
+    a: "Every strategy page, in full: its record, its worst drawdown and the money it needs to run. Nothing trades until you pick a plan, connect your broker, pick a strategy and assign your slots. Plans start from ₹2,999 a month, and you can compare every plan once you sign up. The price doesn’t change with how often a strategy trades. Strategies wait for conditions that suit them, so a quiet week is by design, not a fault. There is no profit share: everything a strategy makes is yours.",
+  },
+  {
+    q: "What is a slot, and how many do I need?",
+    a: "One slot runs one lot of one strategy. Add up the lots you want to run across all your strategies, and that is the number of slots you need: 1 lot of Omega plus 1 lot of Flux is 2 slots. Each lot also needs its own capital in your broker account, from ₹80K for our lowest-capital strategy.",
   },
   {
     q: "I’m new to this. What is a strategy, and what is a lot?",
-    a: "A strategy is a fixed set of rules for when to buy and when to sell. Our research team builds and tests them; you don’t write any code, you just pick one and set your size. A lot is the smallest quantity the exchange lets you trade in options and futures, and every strategy shows how many lots it trades and the money you need. The exact rules stay private, because a rule stops working once everybody knows it. The full record is on every strategy page.",
+    a: "A strategy is a fixed set of rules for when to buy and when to sell. Our research team builds and tests them; you don’t write any code, you just pick one and set your size. A lot is the smallest quantity the exchange lets you trade in options and futures, and every strategy shows how many lots it trades and the money you need. Each lot you run uses one slot in your plan. The exact rules stay private, because a rule stops working once everybody knows it. The full record is on every strategy page.",
   },
   {
     q: "What can TurboTrade do in my account?",

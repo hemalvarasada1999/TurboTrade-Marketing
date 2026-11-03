@@ -18,15 +18,15 @@ type Props = {
 
 /* The floating notes around the phones, one per screen's point. */
 const CHIPS = [
-  { cls: "c1", label: "Charged only on trade days", d: "M20 6L9 17l-5-5" },
-  { cls: "c2", label: "Set lots per strategy", d: "M5 12h14M12 5v14" },
+  { cls: "c1", label: "Plans from ₹2,999/month", d: "M20 6L9 17l-5-5" },
+  { cls: "c2", label: "No profit share", d: "M5 12h14M12 5v14" },
   { cls: "c3", label: "One-tap stop", d: "M18.36 6.64a9 9 0 11-12.73 0M12 2v10" },
 ];
 
 const STEPS = [
   { n: "01", h: "Connect your broker", p: "One login. Revoke any time." },
   { n: "02", h: "Pick a strategy", p: "15+ ready to run." },
-  { n: "03", h: "Set your quantity", p: "Lots per strategy. Change any time." },
+  { n: "03", h: "Assign your slots", p: "One slot per lot. Move any time." },
 ];
 
 export default function HeroStage({ shine = false }: Props) {
@@ -114,23 +114,108 @@ export default function HeroStage({ shine = false }: Props) {
             </div>
 
             <div>
-              {/* Three app screens: the strategy page, My Algos mid-session, and
-                  the emergency stop. Every ₹ figure and the account's margin were
-                  scrubbed from the captures — they came from a real account, so
-                  do not swap in a screenshot that shows either. */}
+              {/* Three app screens: left = HTML "Your plan" screen showing slots in use,
+                  centre = algos.webp with its "Credits a day" line patched to slots,
+                  and right = the emergency stop. */}
               <div
                 className="phones"
                 role="img"
-                aria-label="TurboTrade app screens: a strategy page with credits charged only on trade days, seven strategies running, three of them in a trade at once, with lot controls and a pause button, and the one-tap emergency stop."
+                aria-label="TurboTrade app screens: your plan with seven of nine slots in use, seven strategies running with lot controls and a pause button, and the one-tap emergency stop."
               >
                 <figure className="ph ph-l">
-                  <img src={HERO_SCREENS.detail} alt="" width="585" height="1266" loading="eager" decoding="async" />
+                  <div className="ph-ui" aria-hidden="true">
+                    <div className="u-top">
+                      <span className="u-back">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                      </span>
+                      <span className="u-h">Your plan</span>
+                    </div>
+                    <div className="u-card">
+                      <span className="u-k">Current plan</span>
+                      <div className="u-plan">
+                        <b>9 slots</b>
+                        <span className="u-pill">Monthly</span>
+                      </div>
+                      <div className="u-bar">
+                        <i className="on" />
+                        <i className="on" />
+                        <i className="on" />
+                        <i className="on" />
+                        <i className="on" />
+                        <i className="on" />
+                        <i className="on" />
+                        <i />
+                        <i />
+                      </div>
+                      <div className="u-row">
+                        <span>Slots used</span>
+                        <b>7 of 9</b>
+                      </div>
+                      <div className="u-row">
+                        <span>Renews</span>
+                        <b>3 Dec</b>
+                      </div>
+                    </div>
+                    <span className="u-k">Slots in use</span>
+                    <div className="u-list">
+                      <div className="u-item">
+                        <span className="u-ic">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5.5 18.5 18 6" />
+                            <path d="M11 6h7v7" />
+                            <circle cx="5.5" cy="18.5" r="1.8" />
+                          </svg>
+                        </span>
+                        <span className="u-nm">
+                          Vector<small>SENSEX</small>
+                        </span>
+                        <span className="u-lots">1 lot</span>
+                      </div>
+                      <div className="u-item">
+                        <span className="u-ic">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M8 20.5h8L13.8 5h-3.6z" />
+                            <path d="m12 16.5 4.6-9.5" />
+                            <path d="M14.8 10.4h2.4" />
+                            <path d="M6.5 20.5h11" />
+                          </svg>
+                        </span>
+                        <span className="u-nm">
+                          Cadence<small>NIFTY</small>
+                        </span>
+                        <span className="u-lots">1 lot</span>
+                      </div>
+                      <div className="u-item">
+                        <span className="u-ic">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z" />
+                            <path d="m8.5 12.5 3.5-3.5 3.5 3.5" />
+                            <path d="m8.5 16 3.5-3.5 3.5 3.5" />
+                          </svg>
+                        </span>
+                        <span className="u-nm">
+                          Venguard<small>BANKNIFTY</small>
+                        </span>
+                        <span className="u-lots">1 lot</span>
+                      </div>
+                      <div className="u-item u-free">+ 4 more · 2 slots free</div>
+                    </div>
+                    <div className="u-btn">Change plan</div>
+                  </div>
                 </figure>
                 <figure className="ph ph-r">
                   <img src={HERO_SCREENS.stop} alt="" width="585" height="1266" loading="eager" decoding="async" />
                 </figure>
                 <figure className="ph ph-c">
-                  <img src={HERO_SCREENS.algos} alt="" width="585" height="1266" fetchpriority="high" decoding="async" />
+                  <div className="shot">
+                    <img src={HERO_SCREENS.algos} alt="" width="585" height="1266" fetchpriority="high" decoding="async" />
+                    <span className="ph-patch" aria-hidden="true">
+                      <span>Slots in use</span>
+                      <b>7 of 9</b>
+                    </span>
+                  </div>
                 </figure>
                 {CHIPS.map((c) => (
                   <span className={`ph-chip ${c.cls}`} key={c.cls}>

@@ -8,7 +8,7 @@
      stage        the claim, the app screens, three steps, the trust row
      disc         what happens while you're away
      strategies   every strategy, live from the app, records locked
-     pricing      per strategy, only on the days it trades
+     pricing      plans from ₹2,999/month, no profit share
      partner      the one block not addressed to a retail trader
      faq          candour lives here
      get-started  the closing ask */
@@ -274,6 +274,198 @@
   z-index: 2;
   opacity: 0.96;
 }
+
+/* Hero phones: left = HTML "Your plan" screen (replaces detail.webp, which showed credits per trade day);
+   centre = algos.webp with its "Credits a day" line patched to slots. Replace both with fresh app screenshots when ready. */
+.ph-l,
+.shot {
+  container-type: inline-size;
+}
+.shot {
+  position: relative;
+  border-radius: 31px;
+  overflow: hidden;
+}
+.ph-patch {
+  position: absolute;
+  left: 7.8%;
+  right: 7.6%;
+  top: 21.45%;
+  height: 2.1%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 500 3.15cqw/1 var(--ff);
+  letter-spacing: -0.005em;
+  color: #3a3940;
+}
+.ph-patch b {
+  color: #000;
+  font-weight: 700;
+}
+.ph-ui {
+  aspect-ratio: 585 / 1266;
+  border-radius: 31px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f7f9fa 0%, #edf2f4 100%);
+  color: var(--ink);
+  font-family: var(--ff);
+  line-height: 1.3;
+  padding: 9cqw 6cqw 7cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 4cqw;
+}
+.ph-ui .u-top {
+  display: flex;
+  align-items: center;
+  gap: 3.4cqw;
+}
+.ph-ui .u-back {
+  width: 11cqw;
+  height: 11cqw;
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 1px 3px #0b25301a;
+  flex: none;
+}
+.ph-ui .u-back svg {
+  width: 5cqw;
+  height: 5cqw;
+}
+.ph-ui .u-h {
+  font-size: 7.4cqw;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.ph-ui .u-card {
+  background: #fff;
+  border-radius: 6cqw;
+  padding: 5.4cqw;
+  box-shadow: 0 1px 2px #0b25300d, 0 8px 20px -14px #0b253040;
+  display: grid;
+  gap: 3.2cqw;
+}
+.ph-ui .u-k {
+  font: 700 3cqw/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-ll);
+}
+.ph-ui .u-plan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ph-ui .u-plan b {
+  font-size: 8.4cqw;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.ph-ui .u-pill {
+  font: 700 2.8cqw/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--tint-y);
+  color: var(--yellow-dk);
+  padding: 1.8cqw 2.8cqw;
+  border-radius: 99px;
+}
+.ph-ui .u-bar {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 1.2cqw;
+}
+.ph-ui .u-bar i {
+  height: 2.6cqw;
+  border-radius: 1cqw;
+  background: var(--tint-t-h);
+}
+.ph-ui .u-bar i.on {
+  background: var(--yellow);
+}
+.ph-ui .u-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 3.7cqw;
+  color: var(--body);
+}
+.ph-ui .u-row b {
+  color: var(--ink);
+  font-weight: 700;
+}
+.ph-ui .u-list {
+  display: grid;
+  gap: 2.4cqw;
+}
+.ph-ui .u-item {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  background: #fff;
+  border-radius: 5cqw;
+  padding: 3.4cqw 3.8cqw;
+  box-shadow: 0 1px 2px #0b25300a;
+}
+.ph-ui .u-ic {
+  width: 9cqw;
+  height: 9cqw;
+  border-radius: 2.6cqw;
+  background: var(--tint-y);
+  color: var(--yellow-dk);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.ph-ui .u-ic svg {
+  width: 5cqw;
+  height: 5cqw;
+}
+.ph-ui .u-nm {
+  flex: 1;
+  min-width: 0;
+  font-size: 4.1cqw;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.ph-ui .u-nm small {
+  display: block;
+  font-size: 3cqw;
+  font-weight: 500;
+  color: var(--body);
+  letter-spacing: 0;
+}
+.ph-ui .u-lots {
+  font: 700 3cqw/1 var(--mono);
+  color: var(--ink-l);
+  background: var(--tint-t);
+  padding: 2cqw 2.6cqw;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.ph-ui .u-free {
+  border: 1.5px dashed var(--control-line);
+  background: transparent;
+  box-shadow: none;
+  justify-content: center;
+  color: var(--body);
+  font-size: 3.7cqw;
+  font-weight: 600;
+}
+.ph-ui .u-btn {
+  margin-top: auto;
+  background: #fff;
+  border-radius: 99px;
+  text-align: center;
+  padding: 4cqw;
+  font-size: 4.1cqw;
+  font-weight: 700;
+  box-shadow: 0 1px 3px #0b25301f, inset 0 -1px 0 #0b25300f;
+}
 .ph-chip {
   position: absolute;
   z-index: 4;
@@ -532,7 +724,9 @@
     border-radius: 30px;
     padding: 5px;
   }
-  .ph img {
+  .ph img,
+  .ph-ui,
+  .shot {
     border-radius: 25px;
   }
   .ph-c {
@@ -1145,9 +1339,7 @@ a.st-row:hover .st-fog-l {
 }
 
 /* ══════════════ PRICING ══════════════
-   Pay per strategy, per trade day. The model on the left, an example week on
-   the right. Neither card shows a figure: the price varies per strategy and
-   belongs on the strategy page. */
+   teaser: from-price + no profit share; full plans live behind login */
 .price {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1206,6 +1398,11 @@ a.st-row:hover .st-fog-l {
   color: var(--body);
   letter-spacing: 0;
 }
+.pc .amt.sm {
+  font-size: 1.9rem;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
 .pc ul {
   margin: 0;
   padding: 0;
@@ -1225,88 +1422,23 @@ a.st-row:hover .st-fog-l {
   margin-top: 4px;
   color: var(--green);
 }
+.pc li.key {
+  color: var(--ink);
+  font-weight: 600;
+}
 .pc .btn {
   width: 100%;
 }
-.price-fine {
-  text-align: center;
-  margin-top: 24px;
-  font-size: 0.87rem;
+.pc-fine {
   color: var(--body);
-}
-
-/* ── the example week ── */
-.pr-week .pr-days {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  flex: none;
-}
-.pr-days li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 4px 12px;
-  border-radius: var(--rs);
-  border: 1px solid var(--line);
-  background: var(--paper);
+  font-size: 0.84rem;
   text-align: center;
+  margin-top: -6px;
 }
-.pr-days .d {
-  font: 700 0.66rem/1 var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--body);
-}
-.pr-days .m {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-}
-.pr-days .m svg {
-  margin: 0;
-  color: inherit;
-}
-.pr-days .s {
-  font-size: 0.8rem;
-  font-weight: 600;
+.pc-fine a {
   color: var(--ink);
-}
-.pr-days .c {
-  font: 700 0.62rem/1 var(--mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border-radius: 99px;
-  padding: 4px 8px;
-}
-.pr-days .on {
-  background: var(--tint-g);
-  border-color: var(--tint-g-line);
-}
-.pr-days .on .m {
-  background: var(--green);
-  color: #fff;
-}
-.pr-days .on .c {
-  background: var(--paper);
-  color: var(--green);
-}
-.pr-days .off .m {
-  background: var(--tint-t);
-  color: var(--body-2);
-}
-.pr-days .off .s {
-  color: var(--body);
-}
-.pr-days .off .c {
-  background: var(--tint-t);
-  color: var(--ink-l);
+  font-weight: 600;
+  text-underline-offset: 3px;
 }
 .pr-note {
   margin: 0;
@@ -1315,20 +1447,62 @@ a.st-row:hover .st-fog-l {
   line-height: 1.55;
   color: var(--body);
 }
-@media (max-width: 600px) {
-  .pr-week .pr-days {
-    gap: 5px;
-  }
-  .pr-days li {
-    padding: 11px 2px 10px;
-  }
-  .pr-days .s {
-    font-size: 0.72rem;
-  }
-  .pr-days .c {
-    font-size: 0.56rem;
-    padding: 3px 6px;
-  }
+.sdemo {
+  display: grid;
+  gap: 14px;
+}
+.sdemo .row {
+  display: grid;
+  gap: 7px;
+}
+.sdemo .cap {
+  font: 700 0.64rem/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-ll);
+}
+.sdemo .tiles {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+.sdemo .tiles span {
+  border-radius: 10px;
+  padding: 10px 4px;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  border: 1px solid;
+}
+.sdemo .tiles .a {
+  background: var(--tint-y);
+  border-color: var(--tint-y-line);
+  color: var(--yellow-dk);
+}
+.sdemo .tiles .b {
+  background: var(--tint-b);
+  border-color: #cfdcf5;
+  color: var(--blue);
+}
+.sdemo .tiles span small {
+  display: block;
+  font: 600 0.58rem/1.3 var(--mono);
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+.price-fine {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.87rem;
+  color: var(--body);
+}
+.price-fine a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+  font-weight: 600;
 }
 
 /* ══════════════ GET STARTED ══════════════ */

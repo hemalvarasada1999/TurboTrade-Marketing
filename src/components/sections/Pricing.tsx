@@ -1,15 +1,8 @@
-import { APP_LOGIN_URL, APP_SIGNUP_URL } from "@/lib/brand";
+import { Link } from "react-router-dom";
+import { APP_LOGIN_URL, APP_PLANS_URL } from "@/lib/brand";
 
 /* ══════════════ PRICING ══════════════
-   Pay per strategy, only on the days it places a trade. Two cards: the model,
-   and one example week showing what that means in practice. Neither shows a
-   figure — the price varies per strategy and lives on the strategy page,
-   behind the login.
-
-   Two claims here depend on product facts. "No trade that day, nothing to pay"
-   is only true while there is no fixed annual or platform fee, and positional
-   strategies must not carry a separate per-hold-day charge. If either changes,
-   this section has to say so. */
+   Teaser: from-price + no profit share; full plans live behind sign-up. */
 
 const Check = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.9" aria-hidden="true">
@@ -17,91 +10,112 @@ const Check = () => (
   </svg>
 );
 
-const MODEL = [
-  "Charged only on days a strategy you subscribed to places a trade",
-  "No trade that day, nothing to pay",
-  "Each strategy is billed on its own. Add or remove any time",
-  "No profit share. Everything a strategy makes is yours",
-];
-
-/* Illustrative, and the fine print says so. */
-const WEEK: { d: string; traded: boolean }[] = [
-  { d: "Mon", traded: true },
-  { d: "Tue", traded: false },
-  { d: "Wed", traded: false },
-  { d: "Thu", traded: true },
-  { d: "Fri", traded: false },
+const FEATURES = [
+  { text: "No profit share. Everything a strategy makes is yours", key: true },
+  { text: "One flat price, however often your strategies trade", key: false },
+  { text: "Every plan comes with slots. One slot runs one lot", key: false },
+  { text: "Your money stays in your own broker account", key: false },
 ];
 
 export default function Pricing() {
   return (
-    <section className="tint" id="pricing">
+    <section className="tint" id="pricing" aria-labelledby="pricingTitle">
       <div className="wrap">
         <div className="s-head ctr">
           <span className="eyebrow">Pricing</span>
-          <h2>
-            Pay only on the days <span className="hl">it trades.</span>
+          <h2 id="pricingTitle">
+            Plans from ₹2,999&nbsp;a&nbsp;month.
+            <br />
+            <span className="hl">No profit share.</span>
           </h2>
           <p className="lede">
-            Every strategy is built around market structure and regime, and stays out when
-            conditions don&rsquo;t suit it. It doesn&rsquo;t over-trade, so you don&rsquo;t over-pay.
+            Everything a strategy makes is yours. You pay one flat price for your plan, whether your strategies trade every day or wait out a quiet week.
           </p>
         </div>
 
         <div className="price">
           <div className="pc feat" id="account">
-            <div className="nm">Pay as you use</div>
+            <div className="nm">Plans starting from</div>
             <div className="amt">
-              Per strategy<small> · per trade day</small>
+              ₹2,999<small> /month</small>
             </div>
             <ul>
-              {MODEL.map((li) => (
-                <li key={li}>
+              {FEATURES.map((f) => (
+                <li key={f.text} className={f.key ? "key" : undefined}>
                   <Check />
-                  {li}
+                  {f.text}
                 </li>
               ))}
             </ul>
-            <a className="btn btn-y" data-cta="pricing" href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-y" data-cta="pricing" href={APP_PLANS_URL} target="_blank" rel="noopener noreferrer">
               Create account
             </a>
+            <p className="pc-fine">
+              See every plan after you sign up. Already have an account?{" "}
+              <a data-cta="pricing" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
+                Log in
+              </a>
+            </p>
           </div>
 
-          <div className="pc pr-week">
-            <div className="nm">How a week is billed</div>
-            <div className="amt">
-              2 of 5 days<small> · one strategy</small>
-            </div>
-            <ul
-              className="pr-days"
-              aria-label="Example week: the strategy traded on Monday and Thursday and sat out Tuesday, Wednesday and Friday"
+          <div className="pc">
+            <div className="nm">How slots work</div>
+            <div className="amt sm">One slot runs one lot.</div>
+            <div
+              className="sdemo"
+              role="img"
+              aria-label="Example with 5 slots: all five on Omega to trade it at 5 lots, or two on Omega and three on Flux."
             >
-              {WEEK.map(({ d, traded }) => (
-                <li key={d} className={traded ? "on" : "off"}>
-                  <span className="d">{d}</span>
-                  <span className="m" aria-hidden="true">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={traded ? 2.6 : 2.4} strokeLinecap="round">
-                      <path d={traded ? "M3 17l6-6 4 4 8-8" : "M5 12h14"} />
-                    </svg>
+              <div className="row">
+                <span className="cap">Trade one strategy bigger</span>
+                <div className="tiles">
+                  <span className="a">
+                    Omega<small>lot 1</small>
                   </span>
-                  <span className="s">{traded ? "Traded" : "Sat out"}</span>
-                  <span className="c">{traded ? "Charged" : "₹0"}</span>
-                </li>
-              ))}
-            </ul>
+                  <span className="a">
+                    Omega<small>lot 2</small>
+                  </span>
+                  <span className="a">
+                    Omega<small>lot 3</small>
+                  </span>
+                  <span className="a">
+                    Omega<small>lot 4</small>
+                  </span>
+                  <span className="a">
+                    Omega<small>lot 5</small>
+                  </span>
+                </div>
+              </div>
+              <div className="row">
+                <span className="cap">Or spread them across several</span>
+                <div className="tiles">
+                  <span className="a">
+                    Omega<small>lot 1</small>
+                  </span>
+                  <span className="a">
+                    Omega<small>lot 2</small>
+                  </span>
+                  <span className="b">
+                    Flux<small>lot 1</small>
+                  </span>
+                  <span className="b">
+                    Flux<small>lot 2</small>
+                  </span>
+                  <span className="b">
+                    Flux<small>lot 3</small>
+                  </span>
+                </div>
+              </div>
+            </div>
             <p className="pr-note">
-              Quiet days aren&rsquo;t a fault. Waiting for the right conditions is part of the plan,
-              and you don&rsquo;t pay for it.
+              Five slots, two ways to use them. Move slots between strategies whenever you like. Each lot still needs its own margin in your broker account.
             </p>
-            <a className="btn btn-o" data-cta="pricing" href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer">
-              Log in to see prices
-            </a>
           </div>
         </div>
 
         <p className="price-fine">
-          Example week is illustrative. Each strategy shows its price per trade day inside.
-          Brokerage, exchange charges and GST are separate.
+          Prices in INR, GST included. Brokerage, exchange charges and taxes on your trades are separate and go to your broker. Trading for an institution?{" "}
+          <Link to="/contact">Talk to us</Link>.
         </p>
       </div>
     </section>
