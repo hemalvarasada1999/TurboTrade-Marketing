@@ -13,6 +13,8 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import BrokerPartnerProgram from "./pages/BrokerPartnerProgram";
 import { focusPageStart } from "@/lib/scroll";
 import { useRouteAnalytics } from "@/lib/analytics";
+import { usePosthogPageview } from "@/lib/posthog";
+import AnalyticsConsent from "./components/AnalyticsConsent";
 import { lazy, Suspense, useEffect } from "react";
 
 const queryClient = new QueryClient();
@@ -43,6 +45,7 @@ const App = () => {
   function ScrollToTopRouteReset() {
     const { pathname } = useLocation();
     useRouteAnalytics();
+    usePosthogPageview();
     useEffect(() => {
       window.scrollTo(0, 0);
       focusPageStart();
@@ -59,6 +62,7 @@ const App = () => {
           <ScrollToTopRouteReset />
           <ScrollToTopButton />
           <WhatsAppButton />
+          <AnalyticsConsent />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/broker-partner-program" element={<BrokerPartnerProgram />} />
