@@ -11,6 +11,13 @@ export default defineConfig({
     setupFiles: ["./src/test/setup.ts"],
     env: {
       VITE_META_PIXEL_ID: "",
+      /* Tests must never inherit a developer's local PostHog settings (a .env
+         may hold real keys and enable production). Each test configures its own. */
+      VITE_POSTHOG_ENABLED: "",
+      VITE_POSTHOG_KEY: "",
+      VITE_POSTHOG_HOST: "",
+      VITE_POSTHOG_ENABLED_HOSTS: "",
+      VITE_POSTHOG_ALLOW_PRODUCTION: "",
       /* src/lib/company.ts reads these at import time (vite.config.ts refuses
          to BUILD without them). Synthetic test-only values so the suite runs in
          a fresh checkout or CI without a .env; never shown to anyone. */

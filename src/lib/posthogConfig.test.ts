@@ -38,9 +38,16 @@ describe("key fingerprints", () => {
     expect(APPROVED_KEY_FINGERPRINTS.qa).toEqual(["02237710e53d12e1fe4accbd6babccb78c9c10861ecc391cf010299e8f00d96d"]);
   });
 
-  it("no production fingerprint is registered yet (deployment gate), so production cannot switch on", () => {
-    expect(APPROVED_KEY_FINGERPRINTS.production).toEqual([]);
-    expect(evaluateConfig({ ...prodEnv, key: PROD_KEY }, "www.turbotrade.ai").config).toBeNull();
+  it("matches turbotrade-ui: registers exactly the owner-supplied production fingerprint (project 338008), distinct from QA", () => {
+    expect(APPROVED_KEY_FINGERPRINTS.production).toEqual(["9af7395ca1b204da70d7228bd83d5f91cafd3913eb2f6c780f6d3a7a2504f6ce"]);
+    expect(APPROVED_KEY_FINGERPRINTS.production[0]).toMatch(/^[0-9a-f]{64}$/);
+    expect(APPROVED_KEY_FINGERPRINTS.qa).not.toContain(APPROVED_KEY_FINGERPRINTS.production[0]);
+  });
+
+  it("a key that is not the registered production key still cannot switch production on", () => {
+    for (const host of ["turbotrade.ai", "www.turbotrade.ai"]) {
+      expect(evaluateConfig({ ...prodEnv, key: PROD_KEY }, host)).toEqual({ config: null, reason: "key-not-approved-for-production" });
+    }
   });
 });
 

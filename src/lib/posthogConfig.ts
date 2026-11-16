@@ -26,9 +26,10 @@ export type PosthogEnvironment = "production" | "qa";
    environment variable: the console that holds the key must not also be able
    to declare which environment it belongs to. */
 export const APPROVED_KEY_FINGERPRINTS: Readonly<Record<PosthogEnvironment, readonly string[]>> = {
-  /* Project 338008. DEPLOYMENT GATE: empty until the owner adds the
-     production key's fingerprint; until then www.turbotrade.ai stays off. */
-  production: [],
+  /* Project 338008 (EU Cloud). SHA-256 of the production Project API key,
+     computed locally by the owner and registered 2026-11-16. The key itself
+     is never in source; it is set in the hosting console at activation. */
+  production: ["9af7395ca1b204da70d7228bd83d5f91cafd3913eb2f6c780f6d3a7a2504f6ce"],
   /* Project 348159, "TurboTrade QA Analytics" (full-token match in C1-H2). */
   qa: ["02237710e53d12e1fe4accbd6babccb78c9c10861ecc391cf010299e8f00d96d"],
 };
