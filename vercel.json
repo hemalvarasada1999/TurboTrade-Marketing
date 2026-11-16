@@ -1,4 +1,5 @@
 {
+    "installCommand": "pnpm install --frozen-lockfile",
     "redirects": [
         { "source": "/sebi-compliance", "destination": "/disclosures", "statusCode": 301 },
         { "source": "/risk-disclosure", "destination": "/disclaimer", "statusCode": 301 },
