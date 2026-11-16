@@ -37,10 +37,12 @@ export const DRAFT_COOKIES_AND_TRACKING_HTML = `<p>We use cookies and similar te
 </tbody></table></div>
 <h3>7.4 Your choices</h3>
 <ul><li>You can accept or decline analytics in the analytics notice, and change your choice at any time with <b>Analytics preferences</b> in the website footer, on the app's sign-in pages, or on your Account page.</li>
-<li>If you turn analytics off, collection stops and the analytics cookies and storage listed above are deleted from that site. Data already collected is kept as described in 7.5; you can ask us to delete it by writing to <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>.</li>
+<li>If you turn analytics off, collection stops and the analytics cookies and storage listed above are deleted from that site. Data already collected is kept as described in 7.5. You can ask us to delete it by writing to <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>: we identify your analytics profile from your account (never from information you would have to send us) and delete it, with its events, from PostHog within [CONFIRM: response period, e.g. 30 days].</li>
 <li>If your browser sends a <b>Global Privacy Control</b> signal, we treat it as a refusal and analytics stay off.</li></ul>
 <h3>7.5 Where analytics data is processed and how long it is kept</h3>
-<p>Analytics data is processed by PostHog in [CONFIRM: the European Union (PostHog EU Cloud) — verify the production project's region before publishing]. [CONFIRM after the production project settings are applied and verified: PostHog is configured not to store your IP address and not to derive your location from it.] Analytics events are kept for [CONFIRM: retention period, matching the PostHog plan and project setting] and are then deleted.</p>
+<p>Analytics data is processed by PostHog on its EU Cloud, in the European Union, which is outside India (see section 13).</p>
+<p>Like any online service, PostHog receives your IP address while your browser sends it data. PostHog is configured to <b>discard</b> it: your IP address is not stored with the analytics events, and we have not enabled any lookup of your location from it. Your browser's full identification string (user agent) is not sent; only the browser, operating system and device type are.</p>
+<p>Analytics events are kept for up to one year and then deleted [CONFIRM: production project 338008 uses the organisation's one-year default retention, with no different project-level setting].</p>
 <h3>7.6 Advertising measurement</h3>
 <p>Our website also uses advertising pixels, such as Meta Pixel, to measure marketing campaigns. This is separate from the analytics choice above.</p>
 <p>You can also block or delete cookies in your browser settings. Essential cookies are needed for login and security; blocking them may break parts of the Platform.</p>`;
@@ -55,7 +57,7 @@ export const DRAFT_SECTION_6_ANALYTICS_LINE_HTML = `<li>customer support, ticket
 
 /* Section 13 "Where your data is stored": append this paragraph. It reconciles
    the India-first statement with PostHog's processing location. */
-export const DRAFT_SECTION_13_ADDITION_HTML = `<p>If you accept optional analytics, analytics data described in section 7 is processed by PostHog in [CONFIRM: the European Union (PostHog EU Cloud) — verify the production project's region], outside India. This transfer happens only with your consent, under contractual and security safeguards, and as permitted by Indian law. Declining analytics, or a Global Privacy Control signal, prevents it.</p>`;
+export const DRAFT_SECTION_13_ADDITION_HTML = `<p>If you accept optional analytics, analytics data described in section 7 is processed by PostHog on its EU Cloud, in the European Union, outside India. This transfer happens only with your consent, under contractual and security safeguards, and as permitted by Indian law. Declining analytics, or a Global Privacy Control signal, prevents it.</p>`;
 
 /* Consent notice (both sites: TurboTrade-Marketing src/lib/consentCopy.ts and
    turbotrade-ui lib/analytics/posthog/copy.ts), with a link to /privacy. */

@@ -102,3 +102,29 @@ The release now includes the app's Help Center, so its four analytics events are
 5. Apply `DRAFT_CONSENT_BODY` and a `/privacy` link in `src/components/AnalyticsConsent.tsx` (MK) and `components/analytics/AnalyticsConsentCard.tsx` (app), and update their copy tests.
 6. Delete `privacyAnalyticsDraft{,.test}.ts`.
 7. Narrow the draft-text check in `scripts/check-posthog-release.mjs`.
+
+## 8. Final pre-publication state (2026-11-16)
+
+**Owner-checked in project 338008:**
+- EU Cloud;
+- Discard client IP data **ON**;
+- no GeoIP transformation listed (paused included);
+- Free plan with a 1,000,000 events/month allowance;
+- organisation-default retention 1 year (a project-level override is **not verified**);
+- current usage not visible (unverified, **not** zero).
+
+**Draft text updated accordingly** (still unpublished):
+- EU named without a marker;
+- IP described as *received in transit, discarded, not stored with events, no location lookup*. This deliberately does not claim that no network-level processing happens;
+- retention "up to one year" with `[CONFIRM]` for the project override;
+- a deletion procedure with `[CONFIRM]` for the response period.
+
+Draft tests now check that the IP wording never says the IP is "not received" or "not collected", and that both remaining markers are present.
+
+**Owner approval in principle** is recorded. It is **not** legal sign-off.
+
+Exact publication edits, verified by a temporary apply, test and revert:
+- `docs/analytics/posthog-privacy-publication.patch` (this repo);
+- `docs/analytics/posthog-consent-copy-publication.patch` (turbotrade-ui).
+
+Procedure: turbotrade-ui `docs/analytics/posthog-owner-legal-review-summary.md` §5.

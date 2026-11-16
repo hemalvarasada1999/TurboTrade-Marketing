@@ -35,10 +35,17 @@ describe("privacy analytics draft (unpublished)", () => {
     expect(DRAFT_COOKIES_AND_TRACKING_HTML).toMatch(/\[CONFIRM/);
   });
 
-  it("does not claim production IP or GeoIP settings without a confirmation marker", () => {
-    const sentences = DRAFT_COOKIES_AND_TRACKING_HTML.split(/(?<=\.)\s/);
-    for (const s of sentences.filter((x) => /IP address|location/i.test(x))) {
-      expect(s, s).toMatch(/\[CONFIRM/);
-    }
+  it("describes IP handling accurately: received in transit, discarded, never 'not collected'", () => {
+    const text = DRAFT_COOKIES_AND_TRACKING_HTML;
+    /* Owner-verified for 338008 on 2026-11-16: Discard client IP data ON, no GeoIP transformation. */
+    expect(text).toMatch(/receives your IP address/);
+    expect(text).toMatch(/<b>discard<\/b>/);
+    expect(text).not.toMatch(/never (receive|collect|process)[^.]*IP|do not (receive|collect|process) your IP|no IP address is (received|processed)/i);
+  });
+
+  it("names the EU processing region and keeps the unverified project retention and deletion timing marked", () => {
+    expect(DRAFT_COOKIES_AND_TRACKING_HTML).toMatch(/EU Cloud, in the European Union/);
+    expect(DRAFT_COOKIES_AND_TRACKING_HTML).toMatch(/one year[^<]*\[CONFIRM: production project 338008/);
+    expect(DRAFT_COOKIES_AND_TRACKING_HTML).toMatch(/within \[CONFIRM: response period/);
   });
 });
