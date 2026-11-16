@@ -84,7 +84,8 @@ const AnalyticsConsent = () => {
             {gpc ? CONSENT_COPY.gpcTitle : panel === "manage" && state === "granted" ? CONSENT_COPY.onTitle : CONSENT_COPY.title}
           </h2>
           <p id="tt-consent-body">
-            {gpc ? CONSENT_COPY.gpcBody : panel === "manage" && state === "granted" ? CONSENT_COPY.onBody : CONSENT_COPY.body}
+            {gpc ? CONSENT_COPY.gpcBody : panel === "manage" && state === "granted" ? CONSENT_COPY.onBody : CONSENT_COPY.body}{" "}
+            <a href="/privacy">{CONSENT_COPY.policyLink}</a>
           </p>
           <div className="tt-consent-actions">
             {gpc ? (

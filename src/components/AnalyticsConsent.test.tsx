@@ -41,7 +41,8 @@ describe("consent card", () => {
     expect(card).toHaveAccessibleName(CONSENT_COPY.title);
     expect(card.getAttribute("role")).toBe("region");
     expect(card.getAttribute("aria-modal")).toBeNull();
-    expect(screen.getByText(CONSENT_COPY.body)).toBeTruthy();
+    expect(screen.getByText(CONSENT_COPY.body, { exact: false })).toBeTruthy();
+    expect(screen.getByRole("link", { name: CONSENT_COPY.policyLink }).getAttribute("href")).toBe("/privacy");
     expect(card.querySelectorAll("input[type=checkbox]:checked, input[type=radio]:checked")).toHaveLength(0);
     expect(document.activeElement).toBe(document.body);
     expect(document.body.style.overflow).toBe(""); // no scroll lock

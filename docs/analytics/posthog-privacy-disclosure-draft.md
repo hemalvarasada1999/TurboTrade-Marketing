@@ -128,3 +128,24 @@ Exact publication edits, verified by a temporary apply, test and revert:
 - `docs/analytics/posthog-consent-copy-publication.patch` (turbotrade-ui).
 
 Procedure: turbotrade-ui `docs/analytics/posthog-owner-legal-review-summary.md` §5.
+
+## 9. Publication prepared (2026-11-16): committed to `feat/posthog-analytics`, not yet live
+
+Owner decisions:
+- **Retention:** 1 year, verified for project 338008 with no project-level override.
+- **Deletion response:** within **30 days** of verifying the request.
+- **Legal:** **owner approval suffices**; no independent legal review was required by the owner. Recorded as owner approval, not independent counsel sign-off.
+
+Applied from `posthog-privacy-publication.patch`, with both `[CONFIRM]` markers resolved:
+- section 7 replaced (PostHog, Help Center use, cookies, EU processing, IP discard, 1-year retention, deletion with account-ownership verification, GPC);
+- section 6 processor line;
+- section 13 EU/India paragraph;
+- the privacy page's "Effective" and "Last updated" set to **16 November 2026**. **Update both if the deployment date differs.**
+
+Also applied:
+- the consent notice body and `/privacy` link;
+- the draft module and its tests are deleted;
+- the release guard is narrowed to draft markers and unresolved `[CONFIRM]`;
+- a live-policy regression test: `src/content/legal/privacyPolicy.posthog.test.ts`.
+
+The policy goes live with the next www deployment, which must be **before or with** analytics activation. The deletion procedure and its responsible roles are in turbotrade-ui `docs/analytics/posthog-deletion-request-procedure.md`.

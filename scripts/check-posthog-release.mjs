@@ -28,7 +28,9 @@ const files = walk(dist).map((p) => ({ path: relative(dist, p), text: readFileSy
 const failures = [];
 
 /* 1. The privacy draft is NOT published (legal approval pending). */
-for (const s of ["draft-awaiting-owner-and-legal-approval", "[CONFIRM", "PostHog, Inc.", "Analytics are off unless you choose"]) {
+/* After publication the approved wording ships; only the draft marker and
+   unresolved [CONFIRM] placeholders must never reach the bundle. */
+for (const s of ["draft-awaiting-owner-and-legal-approval", "[CONFIRM"]) {
   for (const f of files) if (f.text.includes(s)) failures.push(`privacy draft text "${s}" in ${f.path}`);
 }
 
@@ -54,4 +56,4 @@ if (failures.length) {
   for (const f of failures.slice(0, 50)) console.error(`  - ${f}`);
   process.exit(1);
 }
-console.log(`[release-guard] PASS: ${files.length} files in ${dist}; privacy draft unpublished, SDK lazy, ${enabled ? "analytics flag on" : "no project key (analytics off)"}`);
+console.log(`[release-guard] PASS: ${files.length} files in ${dist}; no draft marker or unresolved [CONFIRM], SDK lazy, ${enabled ? "analytics flag on" : "no project key (analytics off)"}`);
