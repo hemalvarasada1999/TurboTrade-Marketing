@@ -4,6 +4,7 @@ import { useBrandLogo } from "@/hooks/use-brand-logo";
 import { LEGAL_NAV } from "@/content/legal/meta";
 import { COMPANY } from "@/lib/company";
 import { SOCIAL_LINKS } from "@/lib/social";
+import AnalyticsPreferencesLink from "@/components/AnalyticsPreferencesLink";
 
 /* ══════════════ FOOTER ══════════════
    Four columns and then the disclosures. Every legal page is reachable from the
@@ -139,6 +140,7 @@ const Footer = () => {
                   </NavLink>
                 </li>
               ))}
+              <AnalyticsPreferencesLink />
             </ul>
           </div>
         </div>
