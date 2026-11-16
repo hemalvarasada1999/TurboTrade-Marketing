@@ -21,6 +21,7 @@ export const DRAFT_COOKIES_AND_TRACKING_HTML = `<p>We use cookies and similar te
 <ul><li>pages you view (the address without any query string), and buttons you use to sign up, log in or see plans and strategies;</li>
 <li>steps and outcomes in sign-up, log-in, plan purchase, strategy activation and broker connection (for example "completed" or "failed", and a general reason category);</li>
 <li>use of features such as filters and dashboard panels;</li>
+<li>use of the in-app Help Center: which help articles you open, that you opened the explanation for a screen, and for a help search only the length of what you typed and the number of results (never the words you typed);</li>
 <li>your browser, operating system and device type (for example "Chrome", "Android", "Mobile"); we do not keep the full browser identification string;</li>
 <li>how you reached us: the campaign, source and medium in the link you followed, a partner or influencer code if the link contained one, and the website that referred you.</li></ul>
 <p>Before you sign in you are identified only by a random identifier stored in your browser. When you sign in or create an account, your analytics are linked to a pseudonymous identifier derived from your account on our servers; it is not your name, email address or phone number.</p>
@@ -43,3 +44,24 @@ export const DRAFT_COOKIES_AND_TRACKING_HTML = `<p>We use cookies and similar te
 <h3>7.6 Advertising measurement</h3>
 <p>Our website also uses advertising pixels, such as Meta Pixel, to measure marketing campaigns. This is separate from the analytics choice above.</p>
 <p>You can also block or delete cookies in your browser settings. Essential cookies are needed for login and security; blocking them may break parts of the Platform.</p>`;
+
+/* ── Companion changes for owner/legal review (also unpublished) ──
+   Exact proposed wording for the other places the combined Help Center +
+   PostHog release touches. Apply together with the section above. */
+
+/* Section 6 "Who we share data with": replace the line
+   "customer support, ticketing, analytics and security-monitoring tools;" with: */
+export const DRAFT_SECTION_6_ANALYTICS_LINE_HTML = `<li>customer support, ticketing and security-monitoring tools, and, only if you accept analytics, our product-analytics provider PostHog, Inc. (see section 7);</li>`;
+
+/* Section 13 "Where your data is stored": append this paragraph. It reconciles
+   the India-first statement with PostHog's processing location. */
+export const DRAFT_SECTION_13_ADDITION_HTML = `<p>If you accept optional analytics, analytics data described in section 7 is processed by PostHog in [CONFIRM: the European Union (PostHog EU Cloud) — verify the production project's region], outside India. This transfer happens only with your consent, under contractual and security safeguards, and as permitted by Indian law. Declining analytics, or a Global Privacy Control signal, prevents it.</p>`;
+
+/* Consent notice (both sites: TurboTrade-Marketing src/lib/consentCopy.ts and
+   turbotrade-ui lib/analytics/posthog/copy.ts), with a link to /privacy. */
+export const DRAFT_CONSENT_BODY =
+  "We'd like to use optional analytics to understand how our website and app are used, " +
+  "including which campaign or partner link brought you here. Nothing is collected unless you accept. " +
+  "You can change your choice at any time in Analytics preferences.";
+export const DRAFT_CONSENT_POLICY_LINK_TEXT = "Privacy Policy";
+

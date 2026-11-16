@@ -72,3 +72,33 @@ Applying it needs a link element in both consent components and a copy test upda
 3. Delete `privacyAnalyticsDraft.ts` and its test.
 4. Apply the approved consent copy in both repos (section 4).
 5. Publish the policy **before or with** the first production analytics build.
+
+## 7. Combined Help Center + PostHog release (2026-11-16)
+
+The release now includes the app's Help Center, so its four analytics events are covered. All proposed text is in `src/content/legal/privacyAnalyticsDraft.ts` and is still **unpublished**:
+
+| Change | Constant | Status |
+|---|---|---|
+| Section 7: new list item on Help Center use (articles opened, the screen explanation, search length and result count only, never the words) | `DRAFT_COOKIES_AND_TRACKING_HTML` | Draft |
+| Section 6: names PostHog, consent-only, as the analytics provider | `DRAFT_SECTION_6_ANALYTICS_LINE_HTML` | Draft |
+| Section 13: reconciles "stored in India wherever possible" with PostHog processing outside India, consent-only | `DRAFT_SECTION_13_ADDITION_HTML` (has `[CONFIRM]` region) | Draft |
+| Consent notice body and the Privacy Policy link (both sites) | `DRAFT_CONSENT_BODY`, `DRAFT_CONSENT_POLICY_LINK_TEXT` | Draft |
+
+**What legal approval must cover:**
+1. Production region (EU or US).
+2. The section 13 transfer wording.
+3. IP/GeoIP sentences: only after 338008 is verified.
+4. Retention period.
+5. The deletion procedure: support derives the `u_…` id server-side, then the person is deleted in PostHog.
+6. Consent notice text.
+7. DNT: recommendation unchanged (opt-in plus GPC, no DNT-specific behaviour).
+8. Publication date: before or with the first analytics-ON build.
+
+**Publication procedure** (one Marketing commit, after approval):
+1. Resolve every `[CONFIRM …]`.
+2. Section 7 `html` ← `DRAFT_COOKIES_AND_TRACKING_HTML`.
+3. Replace the section 6 line, and append the section 13 paragraph.
+4. Update the "Last updated" chip.
+5. Apply `DRAFT_CONSENT_BODY` and a `/privacy` link in `src/components/AnalyticsConsent.tsx` (MK) and `components/analytics/AnalyticsConsentCard.tsx` (app), and update their copy tests.
+6. Delete `privacyAnalyticsDraft{,.test}.ts`.
+7. Narrow the draft-text check in `scripts/check-posthog-release.mjs`.
