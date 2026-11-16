@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { describeBuild } from "./src/lib/posthogConfig";
 
 /* Company and regulatory details shown on the legal pages, footer and contact
    page (src/lib/company.ts). A SEBI-registered site must never ship with one of
@@ -29,7 +30,7 @@ const REQUIRED_ENV = [
 ];
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), "VITE_");
   const missing = REQUIRED_ENV.filter((k) => !env[k]?.trim());
   if (missing.length) {
@@ -37,6 +38,28 @@ export default defineConfig(({ mode }) => {
       `Missing env vars: ${missing.join(", ")}. Add them to .env (see .env.example) ` +
         `or to the Vercel project's Environment Variables.`,
     );
+  }
+
+  /* PostHog preflight (docs/analytics/posthog-production-hardening-report.md).
+     One build-log line per enabled hostname: ON, or off and why (flag off, key
+     not approved for that environment, …). The browser applies the same rules
+     at runtime (src/lib/posthogConfig.ts); this only makes the outcome visible
+     in the Vercel log. It never prints the key and never fails a build. */
+  try {
+    for (const line of describeBuild(
+      {
+        enabled: env.VITE_POSTHOG_ENABLED,
+        key: env.VITE_POSTHOG_KEY,
+        host: env.VITE_POSTHOG_HOST,
+        hosts: env.VITE_POSTHOG_ENABLED_HOSTS,
+        allowProduction: env.VITE_POSTHOG_ALLOW_PRODUCTION,
+      },
+      command === "serve",
+    )) {
+      console.log(`[analytics] ${line}`);
+    }
+  } catch {
+    console.log("[analytics] PostHog preflight could not run; the runtime check still applies.");
   }
 
   return {

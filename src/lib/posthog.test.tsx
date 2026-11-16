@@ -110,6 +110,20 @@ describe("configuration (disabled by default)", () => {
     expect(readConfig()).not.toBeNull();
   });
 
+  it("P2 kill switch: a build with VITE_POSTHOG_ENABLED=false never loads the SDK, even for a visitor who accepted, and keeps their choice", async () => {
+    const t = mockTransport();
+    configure({ VITE_POSTHOG_ENABLED: "false" });
+    setAnalyticsConsent(true);
+    setAnalyticsTransport(null);
+    expect(initPosthog()).toBe(false);
+    expect(safeCapture("marketing_cta_clicked", { cta_id: "hero", cta_target: "signup", landing_path: "/" })).toBe(false);
+    onRouteChange("k1", "/");
+    await tick();
+    expect(sdk.init).not.toHaveBeenCalled();
+    expect(t.capture).not.toHaveBeenCalled();
+    expect(getAnalyticsConsent()).toBe("granted"); // the visitor's choice survives a rollback
+  });
+
   it("dev builds refuse a non-local ingestion host", () => {
     configure({ VITE_POSTHOG_HOST: "https://eu.i.posthog.com" });
     expect(readConfig()).toBeNull(); // vitest runs with import.meta.env.DEV
@@ -131,8 +145,9 @@ describe("configuration (disabled by default)", () => {
       disable_surveys: true,
       person_profiles: "identified_only",
       request_batching: false,
-      ip: false,
     });
+    /* P2: the deprecated, no-op `ip` option is not set (IP handling is a project setting) */
+    expect(c).not.toHaveProperty("ip");
   });
 });
 
@@ -452,5 +467,46 @@ describe("Meta identifiers the SDK derives from click ids never leave (C0)", () 
     expect(out?.properties).toMatchObject({ ft_source: "meta" });
     expect(out?.$set).toEqual({ ft_source: "meta" });
     expect(out?.$set_once).toEqual({ ft_medium: "paid" });
+  });
+});
+
+describe("raw user agent never leaves (P2)", () => {
+  const UA = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Instagram 340.0";
+
+  it("drops $raw_user_agent (and any user-agent spelling) from properties, $set and $set_once", () => {
+    const out = sanitizeOutgoing({
+      event: "$pageview",
+      properties: {
+        token: KEY,
+        $raw_user_agent: UA,
+        $initial_raw_user_agent: UA,
+        user_agent: UA,
+        userAgent: UA,
+        $browser: "Mobile Safari",
+        $os: "iOS",
+        $device_type: "Mobile",
+        in_app_browser: true,
+      },
+      $set: { $raw_user_agent: UA, $os: "iOS" },
+      $set_once: { $initial_raw_user_agent: UA, $initial_browser: "Mobile Safari" },
+    });
+    expect(JSON.stringify(out)).not.toMatch(/Mozilla|AppleWebKit|iPhone OS|user_?agent/i);
+    expect(out?.properties).toEqual({
+      token: KEY,
+      $browser: "Mobile Safari",
+      $os: "iOS",
+      $device_type: "Mobile",
+      in_app_browser: true,
+    });
+    expect(out?.$set).toEqual({ $os: "iOS" });
+    expect(out?.$set_once).toEqual({ $initial_browser: "Mobile Safari" });
+  });
+
+  it("the SDK config routes every event through that filter", () => {
+    const c = buildSdkConfig({ key: KEY, host: "http://localhost:9999" });
+    const send = c.before_send as unknown as (e: unknown) => { properties: Record<string, unknown> } | null;
+    expect(send({ event: "$pageview", properties: { $raw_user_agent: UA, $device_type: "Mobile" } })?.properties).toEqual({
+      $device_type: "Mobile",
+    });
   });
 });

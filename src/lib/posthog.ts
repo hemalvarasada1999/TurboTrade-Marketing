@@ -44,6 +44,7 @@ import {
   persistAttribution,
 } from "@/lib/attribution";
 import { canonicalPath } from "@/lib/routePath";
+import { evaluateConfig, type Config } from "@/lib/posthogConfig";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -69,52 +70,21 @@ export function setAnalyticsTransport(t: AnalyticsTransport | null): void {
 
 /* ─── configuration ─── */
 
-const PRODUCTION_HOSTS = ["turbotrade.ai", "www.turbotrade.ai"];
-
-interface Config {
-  key: string;
-  host: string;
-}
-
-function isLocalHost(h: string): boolean {
-  return h === "localhost" || h === "127.0.0.1" || h === "[::1]";
-}
-
-function parseHost(raw: string): string | null {
-  try {
-    const u = new URL(raw);
-    if (u.protocol === "https:") return u.origin;
-    if (u.protocol === "http:" && isLocalHost(u.hostname)) return u.origin;
-  } catch {
-    /* fall through */
-  }
-  return null;
-}
-
-/* Reads the environment at call time (tests change it). Null = disabled. */
+/* Reads the environment at call time (tests change it). Null = disabled. The
+   rules, including the P2 key ↔ environment binding, are in posthogConfig.ts. */
 export function readConfig(hostname = window.location.hostname): Config | null {
   const env = import.meta.env;
-  if (String(env.VITE_POSTHOG_ENABLED ?? "").trim() !== "true") return null;
-  const key = String(env.VITE_POSTHOG_KEY ?? "").trim();
-  if (!/^phc_[A-Za-z0-9]{10,}$/.test(key)) return null;
-  const host = parseHost(String(env.VITE_POSTHOG_HOST ?? "").trim());
-  if (!host) return null;
-
-  const allowed = String(env.VITE_POSTHOG_ENABLED_HOSTS ?? "")
-    .split(",")
-    .map((h) => h.trim().toLowerCase())
-    .filter(Boolean);
-  const h = hostname.toLowerCase();
-  if (!allowed.includes(h)) return null;
-  if (
-    PRODUCTION_HOSTS.includes(h) &&
-    String(env.VITE_POSTHOG_ALLOW_PRODUCTION ?? "").trim() !== "true"
-  ) {
-    return null;
-  }
-  /* `vite dev` may only talk to a local stub, never to a real project. */
-  if (env.DEV && !isLocalHost(new URL(host).hostname)) return null;
-  return { key, host };
+  return evaluateConfig(
+    {
+      enabled: env.VITE_POSTHOG_ENABLED,
+      key: env.VITE_POSTHOG_KEY,
+      host: env.VITE_POSTHOG_HOST,
+      hosts: env.VITE_POSTHOG_ENABLED_HOSTS,
+      allowProduction: env.VITE_POSTHOG_ALLOW_PRODUCTION,
+    },
+    hostname,
+    Boolean(env.DEV),
+  ).config;
 }
 
 export const isPosthogConfigured = () => {
@@ -163,7 +133,10 @@ export function buildSdkConfig(cfg: Config): Partial<PostHogConfig> {
     save_campaign_params: false,
     mask_personal_data_properties: true,
     custom_personal_data_properties: [...SENSITIVE_URL_PARAMS],
-    ip: false,
+    /* No `ip` option: in posthog-js 1.447.12 it has no effect (the SDK only
+       warns when it is set). Whether PostHog stores the client IP, and GeoIP
+       enrichment, are project settings ("Discard client IP data", the GeoIP
+       transformation), applied by the owner, not by this code. */
     /* Send each event at once instead of in a 3-second batch: there is no
        queue of already-captured events to leak out after a withdrawal, and
        nothing is lost when the tab closes. Traffic is a handful of events. */
@@ -205,6 +178,11 @@ const CAMPAIGN_KEY =
 /* Non-$ keys the SDK itself needs for ingestion; removing `token` drops the event. */
 const SDK_KEYS = ["token", "distinct_id"];
 const URL_KEYS = /^\$.*(url|referrer)$/i;
+/* P2 privacy: the SDK adds the whole browser user-agent string as
+   `$raw_user_agent`. It already sends the parsed `$browser`, `$os` and
+   `$device_type` the dashboards use, so the raw string never leaves, under
+   this or any other spelling (a future `$initial_raw_user_agent`, `user_agent`). */
+const USER_AGENT_KEY = /user_?agent/i;
 
 /* Origin + path only: no query string, no fragment. */
 export function stripUrl(v: unknown): string | undefined {
@@ -229,7 +207,7 @@ function scrub(bag: Record<string, unknown> | undefined): Record<string, unknown
       out[k] = v;
       continue;
     }
-    if (CAMPAIGN_KEY.test(k)) continue;
+    if (CAMPAIGN_KEY.test(k) || USER_AGENT_KEY.test(k)) continue;
     /* Any SDK property holding a URL ($current_url, $referrer, $initial_*,
        $session_entry_url, …) is cut to origin + path. A value that is not a
        URL (the SDK's "$direct") passes only if it has no query or fragment. */

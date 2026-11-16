@@ -70,7 +70,7 @@ Differences from PostHog sessions: PostHog caps a session at 24 hours and also c
 ## 6. SDK privacy checks
 
 - posthog-js 1.447.14. Off: autocapture, pageview/pageleave auto-capture, heatmaps, dead clicks, performance, exceptions, session recording, surveys, product tours, conversations, web experiments, flags, external dependency loading.
-- `person_profiles: identified_only`, `ip: false`, `save_referrer: false`, `request_batching: false`.
+- `person_profiles: identified_only`, `save_referrer: false`, `request_batching: false`. (Corrected in P2, 2026-11-16: `ip: false` was listed here but has no effect in posthog-js 1.447.12 and was removed; IP handling is the project setting "Discard client IP data". The SDK version validated in QA is 1.447.12, not 1.447.14.)
 - `before_send` allows only `$pageview` and `marketing_cta_clicked`; URL-like properties cut to origin + path; campaign and click-id keys dropped; identifiers (`token`, `distinct_id`, attribution `ft_*`/`lt_*`) preserved; `$set` / `$set_once` sanitised.
 - No form values, link text or hrefs are sent. No network requests when disabled or denied; withdrawal leaves zero requests.
 - Note: posthog-js drops events from headless browsers; the smoke harness spoofs bot signals only.
