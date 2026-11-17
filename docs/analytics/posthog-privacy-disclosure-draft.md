@@ -149,3 +149,16 @@ Also applied:
 - a live-policy regression test: `src/content/legal/privacyPolicy.posthog.test.ts`.
 
 The policy goes live with the next www deployment, which must be **before or with** analytics activation. The deletion procedure and its responsible roles are in turbotrade-ui `docs/analytics/posthog-deletion-request-procedure.md`.
+
+## 10. Revision 2026-11-17: username on the analytics profile (not yet published)
+
+Committed to `feat/posthog-analytics`, not live. It discloses the app's consent-gated `tt_username` person property (app repo: `docs/analytics/posthog-username-identification.md`).
+
+- Section 4: a new purposes-table row, "Optional product analytics … username", with basis **Consent**.
+- 7.1: after sign-in the TurboTrade username is recorded on the analytics profile so that authorised staff can find it; name, email and phone are never sent. A new paragraph says that without consent, or with GPC, the account is **not added to analytics at all**.
+- 7.3: PostHog's browser storage also holds the username once signed in, and it is removed on sign-out or opt-out (verified against the real SDK).
+- 7.5: the profile (identifier, username, sign-up campaign) is kept until a deletion request; PostHog access is limited to authorised team members with individual accounts.
+- Consent notice (both sites): "If you sign in, analytics are linked to your TurboTrade username."
+- Guards: `privacyPolicy.posthog.test.ts`.
+
+**Before publishing:** legal/privacy review; the owner confirms the 7.5 access statement; update the policy's "last updated" date. Publish **before** the app's `POSTHOG_PERSON_USERNAME` switch is turned on. The 365-day consent and 90-day attribution periods are unchanged.

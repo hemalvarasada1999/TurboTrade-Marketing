@@ -41,4 +41,16 @@ describe("Privacy Policy: PostHog analytics disclosure", () => {
     expect(text("where-your-data-is-stored")).toMatch(/only with your consent/);
     expect(text("who-we-share-data-with")).toMatch(/only if you accept analytics, our product-analytics provider PostHog/);
   });
+
+  it("discloses the username on the analytics profile: consent-only, never name/email/phone, with storage, retention and access", () => {
+    const s7 = text("cookies-and-tracking");
+    expect(s7).toMatch(/record your TurboTrade username[^.]*on your analytics profile/);
+    expect(s7).toMatch(/Your name, email address and phone number are never sent to analytics/);
+    expect(s7).toMatch(/This happens only if you have accepted analytics/);
+    expect(s7).toMatch(/Global Privacy Control signal, your account is not added to analytics at all/);
+    expect(s7).toMatch(/once you sign in, your username\. Set only after you accept; your username is removed from it when you sign out or turn analytics off/);
+    expect(s7).toMatch(/profile, which holds your pseudonymous identifier, your username[^.]*kept until you ask us to delete it/);
+    expect(s7).toMatch(/access to analytics in PostHog is limited to authorised team members/);
+    expect(text("why-we-use-your-data")).toMatch(/Optional product analytics[^]*username[^]*Consent \(optional; you can withdraw it at any time\)/);
+  });
 });
