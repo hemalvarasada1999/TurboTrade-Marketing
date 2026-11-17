@@ -161,4 +161,4 @@ Committed to `feat/posthog-analytics`, not live. It discloses the app's consent-
 - Consent notice (both sites): "If you sign in, analytics are linked to your TurboTrade username."
 - Guards: `privacyPolicy.posthog.test.ts`.
 
-**Before publishing:** legal/privacy review; the owner confirms the 7.5 access statement; update the policy's "last updated" date. Publish **before** the app's `POSTHOG_PERSON_USERNAME` switch is turned on. The 365-day consent and 90-day attribution periods are unchanged.
+**Before publishing:** legal/privacy review; the owner confirms the 7.5 access statement; update the policy's "last updated" date. Publish **before** the app release that records `tt_username` is deployed (the app has no separate switch; deploying it turns the username on). The 365-day consent and 90-day attribution periods are unchanged.
