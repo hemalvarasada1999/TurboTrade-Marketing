@@ -3,7 +3,7 @@
 export const CONSENT_COPY = {
   title: "Help us improve TurboTrade",
   body:
-    "We'd like to use optional analytics to understand how our website and app are used, including which campaign or partner link brought you here. Nothing is collected unless you accept. You can change your choice at any time in Analytics preferences.",
+    "We'd like to use optional analytics to understand how our website and app are used, including which campaign or partner link brought you here. If you sign in, analytics are linked to your TurboTrade username. Nothing is collected unless you accept. You can change your choice at any time in Analytics preferences.",
   policyLink: "Privacy Policy",
   accept: "Accept analytics",
   decline: "Decline",
