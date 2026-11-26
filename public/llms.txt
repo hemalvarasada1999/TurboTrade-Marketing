@@ -1,0 +1,24 @@
+# TurboTrade.ai
+
+> TurboTrade runs ready-made algorithmic trading strategies on auto-pilot inside your own broker account, so your money stays with your broker. SEBI registered. Plans from ₹2,999 a month with no profit share.
+
+## Pages
+
+- [Home](https://turbotrade.ai/): what TurboTrade is, how it works and plans.
+- [Broker Partner Program](https://turbotrade.ai/broker-partner-program): for brokers who want to offer TurboTrade strategies to their clients.
+- [Contact](https://turbotrade.ai/contact): support, partnership and legal contacts.
+
+## Legal and compliance
+
+- [Legal & Compliance](https://turbotrade.ai/legal)
+- [Terms & Conditions](https://turbotrade.ai/terms)
+- [Privacy Policy](https://turbotrade.ai/privacy)
+- [Cancellation & Refund Policy](https://turbotrade.ai/cancellation-refund)
+- [Risk Disclosure & Disclaimer](https://turbotrade.ai/disclaimer)
+- [Grievance Redressal](https://turbotrade.ai/grievance-redressal)
+- [Investor Charter](https://turbotrade.ai/investor-charter)
+- [Disclosures](https://turbotrade.ai/disclosures)
+
+## Product
+
+- [Strategy marketplace](https://app.turbotrade.ai/marketplace): the live catalogue of strategies with required margin and 12-month return.
