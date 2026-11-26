@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./components/Contact";
@@ -32,33 +32,36 @@ const LEGAL_REDIRECTS: Record<string, string> = {
   "/refund-policy": "/cancellation-refund",
 };
 
+/* Land every new route at the top, instantly.
+   This used to smooth-scroll. React Router renders the incoming route at
+   whatever offset the outgoing one was left at, so a visitor who clicked
+   "Privacy policy" from the footer watched a correct page scroll itself upward
+   for half a second before settling. The arrival animation is now the
+   .page-rise transition on the layout instead — see styles/site.css.
+
+   The focus call is what restores the keyboard position (WCAG 2.4.3), and it
+   has to use preventScroll or it fights whatever put us at the top. */
+function ScrollToTopRouteReset() {
+  const { pathname } = useLocation();
+  useRouteAnalytics();
+  usePosthogPageview();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    focusPageStart();
+  }, [pathname]);
+  return null;
+}
+
+
+/* Everything inside the router. main.tsx wraps it in a BrowserRouter; the
+   prerender (src/entry-server.tsx) wraps the same tree in a StaticRouter, so the
+   server HTML and the first client render are the same markup. */
 const App = () => {
-  /* Land every new route at the top, instantly.
-     This used to smooth-scroll. React Router renders the incoming route at
-     whatever offset the outgoing one was left at, so a visitor who clicked
-     "Privacy policy" from the footer watched a correct page scroll itself upward
-     for half a second before settling. The arrival animation is now the
-     .page-rise transition on the layout instead — see styles/site.css.
-
-     The focus call is what restores the keyboard position (WCAG 2.4.3), and it
-     has to use preventScroll or it fights whatever put us at the top. */
-  function ScrollToTopRouteReset() {
-    const { pathname } = useLocation();
-    useRouteAnalytics();
-    usePosthogPageview();
-    useEffect(() => {
-      window.scrollTo(0, 0);
-      focusPageStart();
-    }, [pathname]);
-    return null;
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
           <ScrollToTopRouteReset />
           <ScrollToTopButton />
           <WhatsAppButton />
@@ -87,7 +90,6 @@ const App = () => {
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );

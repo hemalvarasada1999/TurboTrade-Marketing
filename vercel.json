@@ -1,14 +1,23 @@
 {
     "installCommand": "pnpm install --frozen-lockfile",
+    "cleanUrls": true,
     "redirects": [
         { "source": "/sebi-compliance", "destination": "/disclosures", "statusCode": 301 },
         { "source": "/risk-disclosure", "destination": "/disclaimer", "statusCode": 301 },
-        { "source": "/refund-policy", "destination": "/cancellation-refund", "statusCode": 301 }
+        { "source": "/refund-policy", "destination": "/cancellation-refund", "statusCode": 301 },
+        { "source": "/broker-partner", "destination": "/broker-partner-program", "statusCode": 301 },
+        { "source": "/coming-soon", "destination": "/upcoming", "statusCode": 301 }
     ],
-    "rewrites": [
+    "headers": [
         {
             "source": "/(.*)",
-            "destination": "/index.html"
+            "headers": [
+                { "key": "X-Content-Type-Options", "value": "nosniff" },
+                { "key": "X-Frame-Options", "value": "DENY" },
+                { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+                { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+                { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+            ]
         }
     ]
 }

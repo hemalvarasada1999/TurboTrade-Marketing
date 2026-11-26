@@ -1,4 +1,5 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
 import { initMetaPixel } from "@/lib/metaPixel";
@@ -17,4 +18,18 @@ initMetaPixel();
 installCtaTracking();
 initPosthog();
 
-createRoot(document.getElementById("root")!).render(<App />);
+const root = document.getElementById("root")!;
+const app = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+/* A prerendered page (scripts/prerender.mjs) arrives with its markup already in
+   #root: attach to it rather than rebuilding it. The dev server and any route
+   that was not prerendered start empty and render normally. */
+if (root.hasChildNodes()) {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}
