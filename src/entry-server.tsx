@@ -1,3 +1,5 @@
+/* Server-only entry: Fast Refresh never applies, so its non-component exports are fine. */
+/* eslint-disable react-refresh/only-export-components */
 import { PassThrough } from "node:stream";
 import { renderToPipeableStream } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
@@ -27,3 +29,10 @@ export function render(url: string): Promise<string> {
 }
 
 export { ROUTE_META, NOT_FOUND_META } from "./lib/routeMeta";
+export {
+  BLOCK_ALL_ROBOTS_TXT,
+  EMPTY_SITEMAP_XML,
+  NOINDEX_META,
+  isIndexableEnvironment,
+  resolveSiteEnvironment,
+} from "./lib/siteEnvironment";

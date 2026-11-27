@@ -19,11 +19,25 @@ import { pathToFileURL } from "node:url";
 const root = resolve(import.meta.dirname, "..");
 const dist = join(root, "dist");
 const template = readFileSync(join(dist, "index.html"), "utf8");
-const { render, ROUTE_META, NOT_FOUND_META } = await import(
+const {
+  render,
+  ROUTE_META,
+  NOT_FOUND_META,
+  BLOCK_ALL_ROBOTS_TXT,
+  EMPTY_SITEMAP_XML,
+  NOINDEX_META,
+  isIndexableEnvironment,
+  resolveSiteEnvironment,
+} = await import(
   pathToFileURL(join(root, "dist-ssr", "entry-server.js")).href
 );
 
 const ORIGIN = "https://turbotrade.ai";
+
+/* Preview and staging builds are production builds too (NODE_ENV cannot tell
+   them apart): see src/lib/siteEnvironment.ts. They must never be indexed. */
+const INDEXABLE = isIndexableEnvironment(process.env);
+console.log(`[prerender] environment: ${resolveSiteEnvironment(process.env)} (${INDEXABLE ? "indexable" : "noindex"})`);
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 function swap(html, pattern, replacement, what) {
@@ -42,11 +56,22 @@ function page(meta, body) {
     "meta description",
   );
   html = swap(html, /<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`, "canonical");
-  html = swap(html, /(<meta property="og:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`, "og:title");
-  html = swap(html, /(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`, "og:url");
-  html = swap(html, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`, "twitter:title");
-  if (meta.noindex) {
-    html = html.replace("</head>", `    <meta name="robots" content="noindex" />\n  </head>`);
+  // Whole-tag replacements: `swap` inserts its replacement literally, so capture
+  // groups ($1) cannot be used here.
+  const tag = (attr, key, value) => `<meta ${attr}="${key}" content="${esc(value)}" />`;
+  const pattern = (attr, key) => new RegExp(`<meta ${attr}="${key}" content="[^"]*"\\s*/>`);
+  html = swap(html, pattern("property", "og:title"), tag("property", "og:title", meta.title), "og:title");
+  html = swap(html, pattern("property", "og:url"), tag("property", "og:url", url), "og:url");
+  html = swap(html, pattern("name", "twitter:title"), tag("name", "twitter:title", meta.title), "twitter:title");
+  if (meta.path !== "/") {
+    // The home page keeps its own share copy from index.html; every other page
+    // describes itself rather than repeating the home description.
+    html = swap(html, pattern("property", "og:description"), tag("property", "og:description", meta.description), "og:description");
+    html = swap(html, pattern("name", "twitter:description"), tag("name", "twitter:description", meta.description), "twitter:description");
+  }
+  if (meta.noindex || !INDEXABLE) {
+    // One robots tag per page: a non-production build always blocks indexing.
+    html = html.replace("</head>", `    ${meta.noindex && INDEXABLE ? '<meta name="robots" content="noindex" />' : NOINDEX_META}\n  </head>`);
   }
   return swap(html, /<div id="root"><\/div>/, `<div id="root">${body}</div>`, "#root");
 }
@@ -64,3 +89,11 @@ for (const meta of ROUTE_META) {
 }
 write("404.html", page(NOT_FOUND_META, await render("/__not-found__")));
 console.log("[prerender] 404.html");
+
+if (!INDEXABLE) {
+  // A courtesy to well-behaved crawlers and a sitemap that names no page; the
+  // robots meta tag above is what keeps the pages out of the index.
+  write("robots.txt", BLOCK_ALL_ROBOTS_TXT);
+  write("sitemap.xml", EMPTY_SITEMAP_XML);
+  console.log("[prerender] non-production: robots.txt blocks all, sitemap.xml emptied");
+}
