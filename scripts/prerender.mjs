@@ -12,7 +12,7 @@
  * rewrite gone from vercel.json, Vercel answers an unknown URL with this page
  * AND a real 404 status, where it used to send the home shell with a 200.
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -31,6 +31,11 @@ const {
 } = await import(
   pathToFileURL(join(root, "dist-ssr", "entry-server.js")).href
 );
+
+/* Vite's manifest maps a source file to its built chunk. It is only a build
+   input here, so it is removed from dist once read. */
+const manifest = JSON.parse(readFileSync(join(dist, ".vite", "manifest.json"), "utf8"));
+rmSync(join(dist, ".vite"), { recursive: true, force: true });
 
 const ORIGIN = "https://turbotrade.ai";
 
@@ -68,6 +73,11 @@ function page(meta, body) {
     // describes itself rather than repeating the home description.
     html = swap(html, pattern("property", "og:description"), tag("property", "og:description", meta.description), "og:description");
     html = swap(html, pattern("name", "twitter:description"), tag("name", "twitter:description", meta.description), "twitter:description");
+  }
+  if (meta.chunk) {
+    const entry = manifest[meta.chunk];
+    if (!entry) throw new Error(`prerender: no built chunk for ${meta.chunk}`);
+    html = html.replace("</head>", `    <link rel="modulepreload" crossorigin href="/${entry.file}" />\n  </head>`);
   }
   if (meta.noindex || !INDEXABLE) {
     // One robots tag per page: a non-production build always blocks indexing.

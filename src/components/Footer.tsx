@@ -25,7 +25,7 @@ const Footer = () => {
   const logo = useBrandLogo("dark");
 
   return (
-    <footer className="site-footer">
+    <footer className="site-footer defer-paint">
       <div className="wrap">
         <div className="f-top">
           <div>
@@ -85,7 +85,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4>Company</h4>
+            <h2>Company</h2>
             <ul>
               <li>
                 <Link to="/contact">Contact us</Link>
@@ -109,7 +109,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4>Investor help</h4>
+            <h2>Investor help</h2>
             <ul>
               <li>
                 <Link to="/grievance-redressal">Raise a grievance</Link>
@@ -131,7 +131,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4>Legal</h4>
+            <h2>Legal</h2>
             <ul>
               {LEGAL_NAV.map(({ slug, label }) => (
                 <li key={slug}>
@@ -146,7 +146,7 @@ const Footer = () => {
         </div>
 
         <div className="plain">
-          <h4>The risks, in plain words</h4>
+          <h2>The risks, in plain words</h2>
           <ul>
             <li>Trading options and futures is risky. You can lose money.</li>
             <li>On a bad day you can lose more than you put in.</li>

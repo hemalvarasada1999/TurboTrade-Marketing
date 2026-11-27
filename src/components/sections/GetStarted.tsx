@@ -6,7 +6,7 @@ import { APP_LOGIN_URL, APP_SIGNUP_URL } from "@/lib/brand";
 
 export default function GetStarted() {
   return (
-    <section className="tint" id="get-started">
+    <section className="tint defer-paint" id="get-started">
       <div className="wrap">
         <div className="s-head ctr">
           <span className="eyebrow">Get started</span>

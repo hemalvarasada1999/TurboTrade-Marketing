@@ -18,7 +18,7 @@ const Contact = () => {
                 <Mail className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1 text-base">Email</h3>
+                <h2 className="font-semibold text-foreground mb-1 text-base">Email</h2>
                 <a
                   href={`mailto:${COMPANY.email}`}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm break-all"
@@ -38,7 +38,7 @@ const Contact = () => {
                 <Phone className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1 text-base">Phone</h3>
+                <h2 className="font-semibold text-foreground mb-1 text-base">Phone</h2>
                 <a
                   href={`tel:${COMPANY.phoneTel}`}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
@@ -58,7 +58,7 @@ const Contact = () => {
                 <MapPin className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1 text-base">Address</h3>
+                <h2 className="font-semibold text-foreground mb-1 text-base">Address</h2>
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                   {COMPANY.contactAddress}
                 </p>

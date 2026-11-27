@@ -53,7 +53,7 @@ const QA: { q: string; a: string; open?: boolean }[] = [
 
 export default function Faq() {
   return (
-    <section id="faq">
+    <section id="faq" className="defer-paint">
       <div className="wrap">
         <div className="s-head ctr">
           <span className="eyebrow">Fair questions</span>

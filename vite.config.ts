@@ -89,6 +89,9 @@ export default defineConfig(({ mode, command }) => {
     },
     build: {
       outDir: "dist",
+      /* scripts/prerender.mjs reads the manifest to preload a route's lazy chunk
+         from that route's own HTML, then removes it from dist. */
+      manifest: true,
     },
   };
 });

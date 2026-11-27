@@ -19,7 +19,7 @@ const FEATURES = [
 
 export default function Pricing() {
   return (
-    <section className="tint" id="pricing" aria-labelledby="pricingTitle">
+    <section className="tint defer-paint" id="pricing" aria-labelledby="pricingTitle">
       <div className="wrap">
         <div className="s-head ctr">
           <span className="eyebrow">Pricing</span>

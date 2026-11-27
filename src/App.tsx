@@ -1,27 +1,32 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./components/Contact";
 import { LEGAL_NAV } from "./content/legal/meta";
-import Upcoming from "./pages/Upcoming";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import WhatsAppButton from "./components/WhatsAppButton";
-import BrokerPartnerProgram from "./pages/BrokerPartnerProgram";
 import { focusPageStart } from "@/lib/scroll";
 import { useRouteAnalytics } from "@/lib/analytics";
 import { usePosthogPageview } from "@/lib/posthog";
 import AnalyticsConsent from "./components/AnalyticsConsent";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, type ReactNode } from "react";
 
+/* No tooltip or toast providers here: nothing on the public site renders a
+   Radix tooltip or toast, and mounting them put roughly 90 kB of Radix and
+   floating-ui in the entry chunk of every page. The partner form's confirmation
+   toast mounts its own <Toaster /> in BrokerPartnerProgram. */
 const queryClient = new QueryClient();
 
-/* The legal copy is ~120 kB of text that the home page never needs, so it is
-   split out and fetched on the first visit to any legal route. */
+/* Routes the home page never needs are split out and fetched on the first visit
+   to them: the legal copy (~120 kB of text), the broker partner page with its
+   form, and the upcoming page. Each prerendered page preloads its own chunk
+   (scripts/prerender.mjs), so hydration does not wait on a second round trip. */
 const LegalDoc = lazy(() => import("./pages/LegalDoc"));
+const BrokerPartnerProgram = lazy(() => import("./pages/BrokerPartnerProgram"));
+const Upcoming = lazy(() => import("./pages/Upcoming"));
+
+const Lazy = ({ children }: { children: ReactNode }) => <Suspense fallback={null}>{children}</Suspense>;
 
 /* Old or alternative spellings of legal routes. vercel.json answers these with
    a 301 in production; these client-side redirects cover the dev server and any
@@ -59,38 +64,30 @@ function ScrollToTopRouteReset() {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
           <ScrollToTopRouteReset />
           <ScrollToTopButton />
           <WhatsAppButton />
           <AnalyticsConsent />
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/broker-partner-program" element={<BrokerPartnerProgram />} />
-            <Route path="/broker-partner" element={<BrokerPartnerProgram />} />
+            <Route path="/broker-partner-program" element={<Lazy><BrokerPartnerProgram /></Lazy>} />
+            <Route path="/broker-partner" element={<Lazy><BrokerPartnerProgram /></Lazy>} />
             <Route path="/contact" element={<Contact />} />
             {/* /legal, /terms, /privacy, /cancellation-refund, /disclaimer,
                 /grievance-redressal, /investor-charter, /disclosures,
                 /complaint-board and /accessibility-statement */}
             {LEGAL_NAV.map(({ slug }) => (
-              <Route key={slug} path={`/${slug}`} element={
-                  <Suspense fallback={null}>
-                    <LegalDoc slug={slug} />
-                  </Suspense>
-                } />
+              <Route key={slug} path={`/${slug}`} element={<Lazy><LegalDoc slug={slug} /></Lazy>} />
             ))}
             {Object.entries(LEGAL_REDIRECTS).map(([from, to]) => (
               <Route key={from} path={from} element={<Navigate to={to} replace />} />
             ))}
-            <Route path="/upcoming" element={<Upcoming />} />
-            <Route path="/coming-soon" element={<Upcoming />} />
+            <Route path="/upcoming" element={<Lazy><Upcoming /></Lazy>} />
+            <Route path="/coming-soon" element={<Lazy><Upcoming /></Lazy>} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-      </TooltipProvider>
     </QueryClientProvider>
   );
 };

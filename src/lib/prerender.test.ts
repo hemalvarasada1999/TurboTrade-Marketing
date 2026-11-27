@@ -55,4 +55,19 @@ describe.skipIf(!built)("prerendered pages", () => {
     expect(seen((h) => meta(h, "name", "description")).size).toBe(ROUTE_META.length);
     expect(seen((h) => h.match(/rel="canonical" href="([^"]*)"/)?.[1]).size).toBe(ROUTE_META.length);
   });
+  it("preloads a route's lazy chunk from that route's own HTML, and only there", () => {
+    for (const { path, chunk } of pages) {
+      const html = readFileSync(join(dist, file(path)), "utf8");
+      const preloads = html.match(/<link rel="modulepreload"[^>]*>/g) ?? [];
+      expect(preloads.length, path).toBe(chunk ? 1 : 0);
+      for (const tag of preloads) {
+        const href = tag.match(/href="([^"]+)"/)?.[1] ?? "";
+        expect(existsSync(join(dist, href)), `${path}: ${href} must exist in dist`).toBe(true);
+      }
+    }
+  });
+
+  it("does not ship the build manifest", () => {
+    expect(existsSync(join(dist, ".vite"))).toBe(false);
+  });
 });

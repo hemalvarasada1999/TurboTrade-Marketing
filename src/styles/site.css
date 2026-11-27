@@ -719,6 +719,20 @@ html.a11y-reduce-motion .page-rise {
   animation: none;
 }
 
+/* ══════════════ DEFERRED PAINT ══════════════
+   Everything below the hero skips style, layout and paint until it nears the
+   viewport. On a throttled phone the first render of the whole prerendered page
+   was a ~600 ms task before anything painted; skipping the sections nobody can
+   see yet cut main-thread blocking time on the home page by more than half.
+   The content stays in the accessibility tree, in find-in-page and in anchor
+   targets; `auto` in contain-intrinsic-size makes the browser remember each
+   section's real height once it has rendered, so the estimate only ever
+   applies on the way down the first time. */
+.defer-paint {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 /* ══════════════ SECTION RHYTHM ══════════════ */
 /* :where() again — .stage sets padding:0 and must win. See the note above. */
 :where(.site) :where(section) {
@@ -886,7 +900,7 @@ footer.site-footer {
   color: var(--on-dark-4);
   max-width: 32ch;
 }
-.f-top h4 {
+.f-top h2 {
   font-family: var(--mono);
   font-size: 0.63rem;
   font-weight: 700;
@@ -974,7 +988,7 @@ footer.site-footer {
   border-radius: var(--rc);
   padding: 24px 26px;
 }
-.plain h4 {
+.plain h2 {
   font-family: var(--ff);
   font-size: 0.95rem;
   font-weight: 700;

@@ -58,7 +58,7 @@ const Icon = ({ children, size }: { children: React.ReactNode; size: number }) =
 
 export default function Discipline() {
   return (
-    <section id="what" className="disc">
+    <section id="what" className="disc defer-paint">
       <div className="wrap">
         <div className="w-head">
           <div>

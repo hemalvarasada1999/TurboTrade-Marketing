@@ -254,7 +254,7 @@ export default function Strategies() {
   const listed = asOf(rows);
 
   return (
-    <section id="strategies">
+    <section id="strategies" className="defer-paint">
       <div className="wrap">
         <div className="w-head st-headrow">
           <div>

@@ -11,7 +11,13 @@ export interface RouteMeta {
   description: string;
   /* Pages that should not be indexed (the 404). */
   noindex?: boolean;
+  /* Source file of the route's lazy page. The prerender preloads its chunk from
+     this route's HTML, so the browser does not wait for the entry script to run
+     before it discovers the chunk it must hydrate with. */
+  chunk?: string;
 }
+
+const LEGAL_CHUNK = "src/pages/LegalDoc.tsx";
 
 const HOME_TITLE = "TurboTrade.ai · Trading that runs without you";
 const HOME_DESCRIPTION =
@@ -21,6 +27,7 @@ export const ROUTE_META: RouteMeta[] = [
   { path: "/", title: HOME_TITLE, description: HOME_DESCRIPTION },
   {
     path: "/broker-partner-program",
+    chunk: "src/pages/BrokerPartnerProgram.tsx",
     title: "Broker Partner Program · TurboTrade.ai",
     description:
       "Partner with TurboTrade: connect your brokerage with ready-made algorithmic strategies for your clients.",
@@ -32,11 +39,13 @@ export const ROUTE_META: RouteMeta[] = [
   },
   {
     path: "/upcoming",
+    chunk: "src/pages/Upcoming.tsx",
     title: "Coming Soon · TurboTrade.ai",
     description: "What TurboTrade is building next.",
   },
   ...LEGAL_NAV.map(({ slug, label, summary }) => ({
     path: `/${slug}`,
+    chunk: LEGAL_CHUNK,
     title: `${label} · TurboTrade.ai`,
     description: summary,
   })),

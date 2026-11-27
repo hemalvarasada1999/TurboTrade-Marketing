@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/Header";
 import PartnerHero from "@/components/partner/PartnerHero";
 import PartnerModels from "@/components/partner/PartnerModels";
@@ -35,6 +36,8 @@ const BrokerPartnerProgram = () => {
         <PartnerApply />
       </main>
       <PartnerFooter />
+      {/* Host for PartnerApply's submit confirmation (sonner `toast`). */}
+      <Toaster />
     </div>
   );
 };

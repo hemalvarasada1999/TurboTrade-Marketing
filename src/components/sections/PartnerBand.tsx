@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function PartnerBand() {
   return (
-    <section className="partner" id="partners" aria-labelledby="partnerTitle">
+    <section className="partner defer-paint" id="partners" aria-labelledby="partnerTitle">
       <div className="wrap">
         <div className="pt-grid">
           <div>

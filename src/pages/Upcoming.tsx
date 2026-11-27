@@ -208,7 +208,7 @@ const Upcoming = () => {
                 <div className="bg-primary/10 border border-primary/20 text-primary w-10 h-10 rounded-xl flex items-center justify-center mb-4">
                   <f.icon className="h-5 w-5" />
                 </div>
-                <h4 className="font-bold text-lg mb-2 text-foreground">{f.title}</h4>
+                <h2 className="font-bold text-lg mb-2 text-foreground">{f.title}</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
               </div>
             ))}
