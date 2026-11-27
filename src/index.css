@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import "./styles/shadcn-tailwind.css";
 @import "@fontsource-variable/inter";
 
 /* The design system. tokens.css derives --ink/--yellow/--line from the shadcn

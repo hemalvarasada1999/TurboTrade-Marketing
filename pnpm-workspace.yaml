@@ -3,3 +3,24 @@ allowBuilds:
   core-js: false
   esbuild: true
   msw: true
+
+# Security: transitive packages whose parents have not yet moved to a patched
+# release. Each pin stays inside the parent's own major line.
+overrides:
+  vite: ">=6.4.6 <7"
+  postcss: ">=8.5.23"
+  rollup: ">=4.59.0"
+  nanoid@3: ">=3.3.18"
+  lodash: ">=4.17.24"
+  flatted: ">=3.4.2"
+  source-map-js: ">=1.2.2"
+  browserslist: ">=4.28.7"
+  baseline-browser-mapping: ">=2.11.0"
+  postcss-selector-parser@6: ">=6.1.5"
+  "@humanfs/node": ">=0.16.8"
+  "brace-expansion@1": ">=1.1.21 <2"
+  "brace-expansion@2": ">=2.1.7 <3"
+  js-yaml@4: ">=4.3.2"
+  minimatch@3: ">=3.1.4"
+  picomatch@2: ">=2.3.2"
+  ajv@6: ">=6.14.0"
